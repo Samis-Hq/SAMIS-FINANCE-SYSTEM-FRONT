@@ -1,35 +1,30 @@
-@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+.modal-overlay {
+    @apply fixed inset-0 flex justify-center items-center bg-black bg-opacity-50;
   }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+  .my-button {
+    @apply text-white px-4 py-2 rounded hover:bg-blue-700 bg-blue-500;
+  }
+  .table-header{
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+  }
+  .table-data{
+    @apply px-6 py-2 whitespace-nowrap
+  }
+  .table-body{
+    @apply bg-white divide-y divide-gray-200
+  }
+  .my-table{
+    @apply   min-w-full divide-y divide-gray-200
+  }
+  .form-input{
+    @apply block w-full px-3 py-2 mt-2 border
+     border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  .form-labels{
+    @apply block text-sm font-medium text-gray-700 ;
   }
-}
