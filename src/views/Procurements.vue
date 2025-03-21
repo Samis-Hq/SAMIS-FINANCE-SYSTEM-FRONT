@@ -4,7 +4,7 @@
     <div
       class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
     >
-      <div class="flex gap-x-10">
+      <div class="flex gap-x-10 md:justify-around">
         <button
           @click="showInvoicesList"
           :class="{
@@ -32,7 +32,7 @@
             'bg-blue-700': isLsoFormVisible,
             'bg-blue-500': !isLsoFormVisible,
           }"
-          class="text-white px-4 py-2 rounded"
+          class="text-white px-4 py-2 rounded-sm mr-4"
         >
           Add lso
         </button>
@@ -44,7 +44,7 @@
             'bg-red-700': isLsoFormVisible,
             'bg-red-500': !isLsoFormVisible,
           }"
-          class="text-white px-4 py-2 rounded"
+          class="text-white px-4 py-2 rounded-sm "
         >
           close lso
         </button>
@@ -64,16 +64,17 @@
             <div class="mb-4">
               <label
                 for="account"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >School Account *</label
               >
               <select
                 id="account"
                 v-model="invoice.account"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
+              
               >
-                <option value="" disabled>Select Votehead</option>
+                <option value="School Fund" disabled>Select Votehead</option>
                 <option value="SchoolFund">School Fund</option>
                 <option value="Operation">Operation</option>
                 <option value="tuition">Tuition</option>
@@ -83,13 +84,13 @@
             <div class="mb-4">
               <label
                 for="client"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >Client Name *</label
               >
               <select
                 id="client"
                 v-model="invoice.clientName"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Client</option>
@@ -106,13 +107,13 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="vote" class="block text-sm font-medium text-gray-700"
+              <label for="vote" class="form-labels"
                 >Select Votehead *</label
               >
               <select
                 id="vote"
                 v-model="invoice.vote"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Votehead</option>
@@ -123,14 +124,14 @@
             </div>
 
             <div class="mb-4">
-              <label for="date" class="block text-sm font-medium text-gray-700"
+              <label for="date" class="form-labels"
                 >Invoice Date *</label
               >
               <input
                 type="date"
                 id="date"
                 v-model="invoice.date"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
             </div>
@@ -138,13 +139,13 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="vote" class="block text-sm font-medium text-gray-700"
+              <label for="vote" class="form-labels"
                 >Select Terms *</label
               >
               <select
                 id="terms"
                 v-model="invoice.terms"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Terms</option>
@@ -155,21 +156,21 @@
             </div>
 
             <div class="mb-4">
-              <label for="date" class="block text-sm font-medium text-gray-700"
+              <label for="date" class="form-labels"
                 >Invoice Amount *</label
               >
               <input
-                type="date"
-                id="date"
+                type="amount"
+                id="amount"
                 v-model="invoice.amount"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
             </div>
           </div>
 
           <div class="mb-4">
-            <label for="date" class="block text-sm font-medium text-gray-700"
+            <label for="date" class="form-labels"
               >Particulars *</label
             >
             <textarea
@@ -177,7 +178,7 @@
               id="particulars"
               placeholder="Enter Particulars  description"
               v-model="invoice.particulars"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="form-input"
               required
             />
           </div>
@@ -199,31 +200,31 @@
           <thead class="bg-gray-50">
             <tr>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Invoice Number
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Client
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Amount
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="table-body">
             <tr v-for="invoice in invoices" :key="invoice.id">
-              <td class="px-6 py-2 whitespace-nowrap">
+              <td class="table-data">
                 {{ invoice.invoiceNumber }}
               </td>
-              <td class="px-6 py-2 whitespace-nowrap">
+              <td class="table-data">
                 {{ invoice.clientName }}
               </td>
-              <td class="px-6 py-2 whitespace-nowrap">{{ invoice.amount }}</td>
+              <td class="table-data">{{ invoice.amount }}</td>
             </tr>
           </tbody>
         </table>
@@ -241,13 +242,13 @@
             <div class="mb-4">
               <label
                 for="account"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >School Account *</label
               >
               <select
                 id="account"
-                v-model="invoice.account"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                v-model="lpo.account"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Votehead</option>
@@ -260,13 +261,13 @@
             <div class="mb-4">
               <label
                 for="client"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >Client Name *</label
               >
               <select
                 id="client"
-                v-model="invoice.clientName"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                v-model="lpo.clientName"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Client</option>
@@ -283,13 +284,13 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="vote" class="block text-sm font-medium text-gray-700"
+              <label for="vote" class="form-labels"
                 >Select Votehead *</label
               >
               <select
                 id="vote"
-                v-model="invoice.vote"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                v-model="lpo.vote"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Votehead</option>
@@ -300,14 +301,14 @@
             </div>
 
             <div class="mb-4">
-              <label for="date" class="block text-sm font-medium text-gray-700"
+              <label for="date" class="form-labels"
                 >Invoice Date *</label
               >
               <input
                 type="date"
                 id="date"
-                v-model="invoice.date"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                v-model="lpo.date"
+                class="form-input"
                 required
               />
             </div>
@@ -315,13 +316,13 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="terms" class="block text-sm font-medium text-gray-700"
+              <label for="terms" class="form-labels"
                 >Select Terms *</label
               >
               <select
                 id="terms"
-                v-model="invoice.terms"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                v-model="lpo.terms"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Terms</option>
@@ -334,14 +335,14 @@
             <div class="mb-4">
               <label
                 for="amount"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >Invoice Amount *</label
               >
               <input
                 type="number"
                 id="amount"
-                v-model="invoice.amount"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                v-model="lpo.amount"
+                class="form-input"
                 required
               />
             </div>
@@ -350,14 +351,14 @@
           <div class="mb-4">
             <label
               for="particulars"
-              class="block text-sm font-medium text-gray-700"
+              class="form-labels"
               >Particulars *</label
             >
             <textarea
               id="particulars"
               placeholder="Enter Particulars description"
-              v-model="invoice.particulars"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              v-model="lpo.particulars"
+              class="form-input"
               required
             ></textarea>
           </div>
@@ -379,31 +380,31 @@
           <thead class="bg-gray-50">
             <tr>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Invoice Number
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Client
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Amount
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="table-body">
             <tr v-for="invoice in invoices" :key="invoice.id">
-              <td class="px-6 py-2 whitespace-nowrap">
+              <td class="table-data">
                 {{ invoice.invoiceNumber }}
               </td>
-              <td class="px-6 py-2 whitespace-nowrap">
+              <td class="table-data">
                 {{ invoice.clientName }}
               </td>
-              <td class="px-6 py-2 whitespace-nowrap">{{ invoice.amount }}</td>
+              <td class="table-data">{{ invoice.amount }}</td>
             </tr>
           </tbody>
         </table>
@@ -420,13 +421,13 @@
             <div class="mb-4">
               <label
                 for="account"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >School Account *</label
               >
               <select
                 id="account"
                 v-model="invoice.account"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Votehead</option>
@@ -439,13 +440,13 @@
             <div class="mb-4">
               <label
                 for="client"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
                 >Client Name *</label
               >
               <select
                 id="client"
                 v-model="invoice.clientName"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Client</option>
@@ -462,13 +463,13 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="vote" class="block text-sm font-medium text-gray-700"
+              <label for="vote" class="form-labels"
                 >Select Votehead *</label
               >
               <select
                 id="vote"
                 v-model="invoice.vote"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Votehead</option>
@@ -479,14 +480,14 @@
             </div>
 
             <div class="mb-4">
-              <label for="date" class="block text-sm font-medium text-gray-700"
+              <label for="date" class="form-labels"
                 >Invoice Date *</label
               >
               <input
                 type="date"
                 id="date"
                 v-model="invoice.date"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
             </div>
@@ -494,13 +495,13 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="vote" class="block text-sm font-medium text-gray-700"
+              <label for="vote" class="form-labels"
                 >Select Terms *</label
               >
               <select
                 id="terms"
                 v-model="invoice.terms"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Terms</option>
@@ -511,21 +512,21 @@
             </div>
 
             <div class="mb-4">
-              <label for="date" class="block text-sm font-medium text-gray-700"
+              <label for="date" class="form-labels"
                 >Invoice Amount *</label
               >
               <input
                 type="date"
                 id="date"
                 v-model="invoice.amount"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
             </div>
           </div>
 
           <div class="mb-4">
-            <label for="date" class="block text-sm font-medium text-gray-700"
+            <label for="date" class="form-labels"
               >Particulars *</label
             >
             <textarea
@@ -533,7 +534,7 @@
               id="particulars"
               placeholder="Enter Particulars  description"
               v-model="invoice.particulars"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="form-input"
               required
             />
           </div>
@@ -555,31 +556,31 @@
           <thead class="bg-gray-50">
             <tr>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Invoice Number
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Client
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="table-header"
               >
                 Amount
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="table-body">
             <tr v-for="invoice in invoices" :key="invoice.id">
-              <td class="px-6 py-2 whitespace-nowrap">
+              <td class="table-data">
                 {{ invoice.invoiceNumber }}
               </td>
-              <td class="px-6 py-2 whitespace-nowrap">
+              <td class="table-data">
                 {{ invoice.clientName }}
               </td>
-              <td class="px-6 py-2 whitespace-nowrap">{{ invoice.amount }}</td>
+              <td class="table-data">{{ invoice.amount }}</td>
             </tr>
           </tbody>
         </table>
@@ -631,14 +632,14 @@ export default {
 
     const invoice = ref<Invoice>({
       id: "",
-      clientName: "",
-      account: "",
-      amount: 0,
-      particulars: "",
-      date: "",
-      invoiceNumber: 0,
-      terms: "",
-      vote: "",
+      clientName: "keneth korir",
+      account: "School Fund",
+      amount: 10000,
+      particulars: "Payment of Food",
+      date: "03-03-2025",
+      invoiceNumber: 100,
+      terms: "2025/1",
+      vote: "Lunch Programme",
     });
 
     const client = ref<Clients>({
@@ -650,26 +651,26 @@ export default {
 
     const lpo = ref({
       id: "",
-      clientName: "",
-      account: "",
-      amount: 0,
-      particulars: "",
-      date: "",
-      lpoNumber: 0,
-      terms: "",
-      vote: "",
+      clientName: "keneth korir",
+      account: "School Fund",
+      amount: 10000,
+      particulars: "Payment of Food",
+      date: "03-03-2025",
+      lpoNumber: 100,
+      terms: "2025/1",
+      vote: "Lunch Programme",
     });
 
     const lso = ref({
       id: "",
-      clientName: "",
-      account: "",
-      amount: 0,
-      particulars: "",
-      date: "",
-      lsoNumber: 0,
-      terms: "",
-      vote: "",
+      clientName: "keneth korir",
+      account: "School Fund",
+      amount: 10000,
+      particulars: "Payment of Food",
+      date: "03-03-2025",
+      lsoNumber: 100,
+      terms: "2025/1",
+      vote: "Lunch Programme",
     });
 
     const submitInvoiceForm = () => {

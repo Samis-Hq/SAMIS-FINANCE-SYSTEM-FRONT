@@ -128,13 +128,12 @@
       <!-- Students List -->
       <div class="flex-1 rounded-sm shadow-md bg-white p-4">
         <h2 class="text-xl font-bold mb-4">Students List</h2>
-        <div class="items-center justify-center">
+        <div class="flex items-center justify-center">
           <input
             v-model="searchQuery"
             type="search"
             placeholder="Search by Adm No or Name"
-            class="w-1/3 p-2 border-2 border-blue-500 rounded-md shadow-sm mb-4
-             focus:border-blue-700 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+            class="search-input"
           />
         </div>
         <table class="my-table">

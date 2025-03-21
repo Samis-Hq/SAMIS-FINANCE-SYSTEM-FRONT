@@ -26,7 +26,7 @@
     <Transition  name="slide-down" mode="out-in">
       <div
       v-if="isAddClassFormVisible"
-      class="border  rounded-sm shadow-md w-2/5 bg-white p-4 mb-4 transition-all duration-300 ease-in-out transform"
+      class="class-form"
       :class="{
         'opacity-100 translate-y-0': isAddClassFormVisible,
         'opacity-0 -translate-y-4': !isAddClassFormVisible,
@@ -41,7 +41,7 @@
           <div class="mb-4">
             <label
               for="className"
-              class="block text-sm font-medium text-gray-700"
+              class="form-labels"
             >
               Class Name *
             </label>
@@ -49,7 +49,7 @@
               type="text"
               id="className"
               v-model="form.name"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="form-input"
               required
             />
             <p v-if="!form.name" class="text-red-500 text-sm mt-1">
@@ -61,7 +61,7 @@
           <div class="mb-4">
             <label
               for="streams"
-              class="block text-sm font-medium text-gray-700"
+              class="form-labels"
             >
               Streams *
             </label>
@@ -69,10 +69,10 @@
               type="text"
               id="streams"
               v-model="form.streams"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="form-input"
               required
             />
-            <p v-if="!form.streams" class="text-red-500 text-sm mt-1">
+            <p v-if="!form.streams" class="required-text">
               Streams are required
             </p>
           </div>

@@ -29,9 +29,9 @@
     <!-- Add Account Form -->
     <div
       v-if="isAddAccountFormVisible"
-      class="border rounded-sm shadow-md bg-white p-4"
+      class="border rounded-sm shadow-md bg-white p-4 w-full md:w-1/2"
     >
-      <h2 class="text-xl font-bold mb-4"> Manage Accounts</h2>
+      <h2 class="text-xl font-bold mb-4">Manage Accounts</h2>
 
       <!-- Radio Buttons for Input Method -->
       <div class="flex items-center mb-6">
@@ -54,36 +54,59 @@
           <span class="ml-2">Add Votes for Specific Account</span>
         </label>
       </div>
-      
 
       <!-- Key In Account Details Form -->
       <form v-if="inputMethod === 'keyIn'" @submit.prevent="submitForm">
         <div class="grid grid-cols-2 gap-4">
           <!-- Account Name -->
           <div class="mb-4">
-            <label
-              for="accountName"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="accountName" class="form-labels">
               Account Name *
             </label>
             <input
               type="text"
               id="accountName"
               v-model="form.name"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="form-input"
               required
             />
-            <p v-if="!form.name" class="text-red-500 text-sm mt-1">
+            <p v-if="!form.name" class="required-txt">
               Account name is required
             </p>
           </div>
 
-          <!-- Votes -->
+          <label class="flex items-center">
+            <input
+              type="radio"
+              v-model="form.fees"
+              value="votes"
+              class="form-radio h-8 w-8 p-4 text-blue-600"
+            />
+            <span class="ml-2">For fees</span>
+          </label>
+
           <div class="mb-4">
-            <p>Accounts Lists</p>
-            <div class="flex flex-col"></div>
+            <label for="accountName" class="form-labels"> Note R * </label>
+            <input
+              type="number"
+              id="accountName"
+              v-model="form.noteR"
+              class="form-input"
+              required
+            />
           </div>
+
+          <div class="mb-4">
+            <label for="accountName" class="form-labels"> Note P * </label>
+            <input
+              type="number"
+              id="accountName"
+              v-model="form.noteP"
+              class="form-input"
+              required
+            />
+          </div>
+
         </div>
 
         <!-- Submit Button -->
@@ -102,51 +125,55 @@
         <div class="grid grid-cols-2 gap-4">
           <!-- School Account -->
           <div class="mb-4">
-            <label for="stream" class="block text-sm font-medium text-gray-700">
-              School Account *
-            </label>
-            <select
-              id="stream"
-              v-model="form.name"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              required
-            >
+            <label for="stream" class="form-labels"> School Account * </label>
+            <select id="stream" v-model="form.name" class="form-input" required>
               <option value="" disabled>Select Votehead</option>
               <option value="SchoolFund">School Fund</option>
               <option value="Operation">Operation</option>
               <option value="tuition">Tuition</option>
             </select>
-            <p v-if="!form.name" class="text-red-500 text-sm mt-1">
-              Select account
-            </p>
+            <p v-if="!form.name" class="required-txt">Select account</p>
           </div>
 
           <!-- Votehead -->
           <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700">
-              Votehead *
-            </label>
+            <label for="name" class="form-labels"> Votehead * </label>
             <input
               type="text"
               id="name"
               v-model="form.votes"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="form-input"
               required
             />
-            <p v-if="!form.votes" class="text-red-500 text-sm mt-1">
-              Vote is required
-            </p>
+            <p v-if="!form.votes" class="required-txt">Vote is required</p>
+          </div>
+          <div class="mb-4">
+            <label for="name" class="form-labels"> Position(Receipt) * </label>
+            <input
+              type="text"
+              id="name"
+              v-model="form.position"
+              class="form-input"
+              required
+            />
+            <p v-if="!form.votes" class="required-txt">Vote is required</p>
+          </div>
+          <div class="mb-4">
+            <label for="name" class="form-labels"> Priority * </label>
+            <input
+              type="text"
+              id="name"
+              v-model="form.priority"
+              class="form-input"
+              required
+            />
+            <p v-if="!form.votes" class="required-txt">Vote is required</p>
           </div>
         </div>
 
         <!-- Submit Button -->
         <div class="mt-6">
-          <button
-            type="submit"
-            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-          >
-            Submit
-          </button>
+          <button type="submit" class="my-button">Submit</button>
         </div>
       </form>
     </div>
@@ -175,7 +202,12 @@ export default {
     const form = ref<Accounts>({
       id: "",
       name: "",
+      noteP:3,
+      noteR:7,
+      fees:true,
       votes: [],
+      position:6,
+      priority:8
     });
 
     const showAccountList = () => {
@@ -189,9 +221,8 @@ export default {
     };
 
     const submitVotesForm = () => {
-  console.log("Votes Form Submitted:", form.value);
-  
-};
+      console.log("Votes Form Submitted:", form.value);
+    };
 
     const submitForm = () => {
       console.log("Form Submitted:", form.value);

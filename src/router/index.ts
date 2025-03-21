@@ -13,6 +13,7 @@ import Messages from "@/views/Messages.vue";
 import UsersList from "@/views/UsersList.vue";
 import Clients from "@/views/Clients.vue";
 import UserProfile from "@/views/UserProfile.vue";
+import Banks from "@/views/Banks.vue";
 
 
 const router = createRouter({
@@ -98,6 +99,11 @@ const router = createRouter({
           path: "profile",
           name: "User Profile",
           component: UserProfile,
+        },
+        {
+          path: "banks",
+          name: "Manage Banks",
+          component: Banks,
         },
       
       ],

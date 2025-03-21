@@ -148,6 +148,7 @@ import {
   CurrencyPoundIcon,
   CurrencyYenIcon,
   MapIcon,
+  BanknotesIcon,
 } from "@heroicons/vue/24/outline";
 import IconCommunity from "@/components/icons/IconCommunity.vue";
 
@@ -171,7 +172,7 @@ export default {
     CurrencyPoundIcon,
     CurrencyYenIcon,
     MapIcon,
-    IconCommunity,
+    IconCommunity,BanknotesIcon
   },
   setup() {
     const isSidebarCollapsed = ref(false);
@@ -212,6 +213,12 @@ export default {
         label: "Accounts",
         icon: "CurrencyDollarIcon",
         route: "/account",
+        isOpen: false,
+      },
+      {
+        label: "Banks",
+        icon: "BanknotesIcon",
+        route: "/banks",
         isOpen: false,
       },
 

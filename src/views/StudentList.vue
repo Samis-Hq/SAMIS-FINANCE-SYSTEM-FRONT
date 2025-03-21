@@ -41,7 +41,7 @@
     <div>
       <div
         v-if="isAddStudentFormVisible"
-        class="border rounded-sm shadow-md bg-white items-start p-4 w-1/2 mx-auto"
+        class="border rounded-sm shadow-md bg-white items-start p-4 w-full md:w-5/6 mx-auto"
       >
         <h2 class="text-xl font-bold mb-4">Add Student</h2>
 
@@ -71,7 +71,7 @@
             <div class="mb-4">
               <label
                 for="admissionNumber"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
               >
                 Admission Number *
               </label>
@@ -79,7 +79,7 @@
                 type="text"
                 id="admissionNumber"
                 v-model="form.admissionNumber"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!form.admissionNumber" class="text-red-500 text-sm mt-1">
@@ -88,14 +88,14 @@
             </div>
 
             <div class="mb-4">
-              <label for="name" class="block text-sm font-medium text-gray-700">
+              <label for="name" class="form-labels">
                 Name *
               </label>
               <input
                 type="text"
                 id="name"
                 v-model="form.name"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!form.name" class="text-red-500 text-sm mt-1">
@@ -112,10 +112,10 @@
               <select
                 id="form"
                 v-model="form.form"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
-                <option value="" disabled>Select Form</option>
+                <option value="Form 1" disabled>Select Form</option>
                 <option value="Form 1">Form 1</option>
                 <option value="Form 2">Form 2</option>
                 <option value="Form 3">Form 3</option>
@@ -136,7 +136,7 @@
               <select
                 id="stream"
                 v-model="form.stream"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               >
                 <option value="" disabled>Select Stream</option>
@@ -161,13 +161,13 @@
                     <input
                       type="radio"
                       v-model="form.gender"
-                      value="Female"
+                      value="Male"
                       class="form-radio h-4 w-4 text-blue-600"
                       required
                     />
                     <span class="ml-2">Female</span>
                   </label>
-                  <label class="inline-flex items-center ml-6">
+                  <label class="form-labels">
                     <input
                       type="radio"
                       v-model="form.gender"
@@ -183,7 +183,7 @@
               <div>
                 <label
                   for="phone"
-                  class="block text-sm font-medium text-gray-700"
+                  class="form-labels"
                 >
                   Phone Number
                 </label>
@@ -191,7 +191,7 @@
                   type="tel"
                   id="phone"
                   v-model="form.phone"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  class="form-input"
                   placeholder="+254 712 3## ###"
                 />
               </div>
@@ -201,29 +201,29 @@
             <div class="mb-4">
               <label
                 for="residence"
-                class="block text-sm font-medium text-gray-700"
+                class="form-labels"
               >
                 Residence
               </label>
               <select
                 id="residence"
                 v-model="form.residence"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
               >
                 <option value="" disabled>Select Residence</option>
-                <option value="Hostel">Hostel</option>
+                <option value="Hostel">Boarding</option>
                 <option value="Day">Day</option>
               </select>
             </div>
 
             <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">
+              <label class="form-labels">
                 Upload Student Image
               </label>
               <input
                 type="file"
-                @change="handleImageUpload"
-                class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                @change="handleFileUpload"
+                class="form-input"
               />
             </div>
           </div>
@@ -231,7 +231,7 @@
           <div class="mt-6">
             <button
               type="submit"
-              class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              class="my-button"
             >
               Submit
             </button>
@@ -258,16 +258,16 @@
       v-if="isStudentListVisible"
       class="border rounded-sm shadow-md bg-white p-4"
     >
-      <div class="flex justify-between mb-4">
+     
         <h2 class="text-xl font-bold mb-4">Student List</h2>
         <input
           type="search"
           name="search"
           id="search"
-          class="w-1/3 md:w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-300 transition-all"
-          placeholder="Search Student"
+          class="search-input"
+          placeholder="Search Student by name ,AdmNo"
         />
-      </div>
+      
 
       <p>List of students will be displayed here.</p>
     </div>
@@ -294,12 +294,7 @@ export default {
       residence: "",
       image: null,
     });
-    const handleImageUpload = (event: Event) => {
-      const target = event.target as HTMLInputElement;
-      if (target.files && target.files[0]) {
-        form.value.image = target.files[0];
-      }
-    };
+
 
     const handleFileUpload = (event: Event) => {
       const target = event.target as HTMLInputElement;
@@ -332,7 +327,7 @@ export default {
       handleFileUpload,
       showStudentList,
       showAddStudentForm,
-      handleImageUpload,
+      
       submitForm,
     };
   },
