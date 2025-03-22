@@ -115,14 +115,13 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 
 import type { UserProfile } from "@/model/UserProfile";
 import { PencilIcon } from "@heroicons/vue/24/outline";
 
-export default {
-  setup() {
+
     const user = ref<UserProfile>({
       id: "",
       name: "KENETH KIPYEGON",
@@ -148,11 +147,5 @@ export default {
       console.log("Form Submitted:", {});
     };
 
-    return {
-      user,
-
-      submitForm,
-    };
-  },
-};
+  
 </script>

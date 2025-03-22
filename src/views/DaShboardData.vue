@@ -72,7 +72,7 @@ const openBusinessOverView = () => {
     <div class="mt-4 p-4">
       <div v-if="selectedSection === 'gettingStarted'">
         <h2 class="text-xl font-semibold">Quick Shortcuts </h2>
-        <p>Find items here Easily...</p>
+        <p>Navigate through this application  easily......</p>
         <div class="flex flex-col   ">
         <div class="grid grid-cols-2 w-full  md:w-3/5 sm:grid-cols-3 lg:grid-cols-3 gap-4 py-2">
           <RouterLink
@@ -97,7 +97,7 @@ const openBusinessOverView = () => {
         >
           <div class="flex flex-col border rounded-sm shadow-md bg-white p-4">
             <h3 class="text-lg text-center justify-center font-semibold mb-4">
-              Population
+              School Population
             </h3>
             <!-- Students Section -->
             <div class="mb-8 flex items-center">

@@ -201,13 +201,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 
 import type { SchoolProfile } from "@/model/SchoolProfile";
 
-export default {
-  setup() {
     const isSchoolProfileVisible = ref(true);
     const isOtherSettingsVisible = ref(false);
     const inputMethod = ref("keyIn");
@@ -250,15 +248,5 @@ export default {
       isOtherSettingsVisible.value = true;
     };
 
-    return {
-      isSchoolProfileVisible,
-      isOtherSettingsVisible,
-      inputMethod,
-      school,
-      showSchoolSettings,
-      showotherSettingsForm,
-      submitForm,
-    };
-  },
-};
+  
 </script>

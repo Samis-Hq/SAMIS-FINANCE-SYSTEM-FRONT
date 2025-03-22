@@ -54,16 +54,12 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 import AddClient from "./AddClient.vue";
 import type { Clients } from "@/model/Clients";
 
-export default {
-  components: {
-    AddClient,
-  },
-  setup() {
+
     const showAddClientPopup = ref(false);
 
     const clients = ref<Clients[]>([
@@ -95,15 +91,9 @@ export default {
       closeAddClientForm();
     };
 
-    return {
-      clients,
-      showAddClientPopup,
-      openAddClientForm,
-      closeAddClientForm,
-      handleSaveClient,
-    };
-  },
-};
+   
+ 
+
 </script>
 
 <style scoped>

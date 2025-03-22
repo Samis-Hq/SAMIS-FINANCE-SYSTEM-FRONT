@@ -106,7 +106,6 @@
               required
             />
           </div>
-
         </div>
 
         <!-- Submit Button -->
@@ -189,55 +188,40 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 import type { Accounts } from "@/model/Accounts";
 
-export default {
-  setup() {
-    const isAccountListVisible = ref(true);
-    const isAddAccountFormVisible = ref(false);
-    const inputMethod = ref("votes");
+const isAccountListVisible = ref(true);
+const isAddAccountFormVisible = ref(false);
+const inputMethod = ref("votes");
 
-    const form = ref<Accounts>({
-      id: "",
-      name: "",
-      noteP:3,
-      noteR:7,
-      fees:true,
-      votes: [],
-      position:6,
-      priority:8
-    });
+const form = ref<Accounts>({
+  id: "",
+  name: "",
+  noteP: 3,
+  noteR: 7,
+  fees: true,
+  votes: [],
+  position: 6,
+  priority: 8,
+});
 
-    const showAccountList = () => {
-      isAccountListVisible.value = true;
-      isAddAccountFormVisible.value = false;
-    };
+const showAccountList = () => {
+  isAccountListVisible.value = true;
+  isAddAccountFormVisible.value = false;
+};
 
-    const showAddAccountForm = () => {
-      isAccountListVisible.value = false;
-      isAddAccountFormVisible.value = true;
-    };
+const showAddAccountForm = () => {
+  isAccountListVisible.value = false;
+  isAddAccountFormVisible.value = true;
+};
 
-    const submitVotesForm = () => {
-      console.log("Votes Form Submitted:", form.value);
-    };
+const submitVotesForm = () => {
+  console.log("Votes Form Submitted:", form.value);
+};
 
-    const submitForm = () => {
-      console.log("Form Submitted:", form.value);
-      // Add logic to submit the form data
-    };
-
-    return {
-      isAccountListVisible,
-      isAddAccountFormVisible,
-      form,
-      inputMethod,
-      showAccountList,
-      showAddAccountForm,
-      submitForm,
-    };
-  },
+const submitForm = () => {
+  console.log("Form Submitted:", form.value);
 };
 </script>

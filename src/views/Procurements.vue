@@ -588,14 +588,12 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 
 import type { Invoice } from "@/model/Invoices";
 import type { Clients } from "@/model/Clients";
 
-export default {
-  setup() {
     const isInvoicesListVisible = ref(true);
 
     const isLpoListVisible = ref(false);
@@ -732,26 +730,5 @@ export default {
       };
     };
 
-    return {
-      isInvoicesListVisible,
-
-      showInvoicesList,
-      showAddClientForm,
-      invoices,
-      clients,
-      invoice,
-      client,
-      submitInvoiceForm,
-      submitClientForm,
-      showAddLpoForm,
-      showAddLsoForm,
-      isLpoListVisible,
-      isLsoFormVisible,
-      lpo,
-      lso,
-      submitLpoForm,
-      submitLsoForm,
-    };
-  },
-};
+   
 </script>

@@ -13,7 +13,6 @@
         <div class="mb-4">
           <label class="form-labels">Phone</label>
           <input v-model="newClient.phone" class="form-input" required />
-       
         </div>
         <div class="mb-4">
           <label class="form-labels">Address</label>
@@ -42,9 +41,7 @@
 import { ref } from "vue";
 import type { Clients } from "@/model/Clients";
 
-
 const emit = defineEmits(["close", "save"]);
-
 
 const newClient = ref<Clients>({
   id: "",
@@ -53,15 +50,8 @@ const newClient = ref<Clients>({
   address: "",
 });
 
-
 const saveClient = () => {
-  if (!newClient.value.name || !newClient.value.phone) return;
-  newClient.value.id = Date.now().toString();
-  
-  emit("save", { ...newClient.value }); 
-  
-  
-  Object.assign(newClient.value, { id: "", name: "", phone: "", address: "" });
+  console.log("saving client");
 
   emit("close");
 };
@@ -69,6 +59,4 @@ const saveClient = () => {
 const close = () => {
   emit("close");
 };
-
 </script>
-
