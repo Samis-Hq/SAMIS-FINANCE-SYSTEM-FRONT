@@ -1,8 +1,8 @@
 <template>
-  <div class="h-full mt-10">
+  <div class="h-full ">
     <!-- Button Container -->
     <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
+      class="card-header"
     >
       <div class="flex gap-x-10 md:justify-around">
         <button
@@ -26,7 +26,7 @@
           Generate Lpo
         </button>
         <button
-          v-if="!isLsoFormVisible"
+         
           @click="showAddLsoForm"
           :class="{
             'bg-blue-700': isLsoFormVisible,
@@ -37,17 +37,7 @@
           Add lso
         </button>
 
-        <button
-          v-if="isLsoFormVisible"
-          @click="showAddClientForm"
-          :class="{
-            'bg-red-700': isLsoFormVisible,
-            'bg-red-500': !isLsoFormVisible,
-          }"
-          class="text-white px-4 py-2 rounded-sm "
-        >
-          close lso
-        </button>
+       
       </div>
 
       <router-link to="/clients" class="my-button"> Add Client </router-link>
@@ -55,9 +45,9 @@
 
     <div
       v-if="isInvoicesListVisible"
-      class="flex flex-col md:flex-row gap-4 border rounded-sm shadow-md bg-white p-4"
+      class="flex flex-col md:flex-row gap-4 m-4 bg-white p-4"
     >
-      <div class="rounded-sm shadow-md bg-white p-4">
+      <div class="rounded-sm shadow-md bg-white p-4 ">
         <h2 class="text-xl font-bold mb-4">Generate Invoice</h2>
         <form @submit.prevent="submitInvoiceForm">
           <div class="grid grid-cols-2 gap-4">
@@ -194,7 +184,7 @@
         </form>
       </div>
 
-      <div class="rounded-sm shadow-md bg-white p-4">
+      <div class="rounded-sm shadow-md bg-white p-4 flex-1">
         <h2 class="text-xl font-bold mb-4">Invoices List</h2>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -233,7 +223,7 @@
 
     <div
       v-if="isLpoListVisible"
-      class="flex flex-col md:flex-row gap-4 border rounded-sm shadow-md bg-white p-4"
+      class="flex flex-col md:flex-row gap-4 m-4 bg-white p-4"
     >
       <div class="rounded-sm shadow-md bg-white p-4">
         <h2 class="text-xl font-bold mb-4">Generate LPO</h2>
@@ -374,7 +364,7 @@
         </form>
       </div>
 
-      <div class="rounded-sm shadow-md bg-white p-4">
+      <div class="rounded-sm shadow-md bg-white p-4 flex-1">
         <h2 class="text-xl font-bold mb-4">lPO List</h2>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -412,7 +402,7 @@
     </div>
     <div
       v-if="isLsoFormVisible"
-      class="flex flex-col md:flex-row gap-4 border rounded-sm shadow-md bg-white p-4"
+      class="flex flex-col md:flex-row gap-4 m-4 bg-white p-4"
     >
       <div class="rounded-sm shadow-md bg-white p-4">
         <h2 class="text-xl font-bold mb-4">Generate LSO</h2>
@@ -550,7 +540,7 @@
         </form>
       </div>
 
-      <div class="rounded-sm shadow-md bg-white p-4">
+      <div class="rounded-sm shadow-md bg-white p-4 flex-1">
         <h2 class="text-xl font-bold mb-4">LSO Lists</h2>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">

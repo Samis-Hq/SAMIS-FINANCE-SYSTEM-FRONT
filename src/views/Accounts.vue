@@ -1,8 +1,8 @@
 <template>
-  <div class="h-full mt-20">
+  <div class="h-full">
     <!-- Button Container -->
     <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
+      class="card-header"
     >
       <button
         @click="showAccountList"
@@ -29,7 +29,7 @@
     <!-- Add Account Form -->
     <div
       v-if="isAddAccountFormVisible"
-      class="border rounded-sm shadow-md bg-white p-4 w-full md:w-1/2"
+      class="border rounded-sm shadow-md bg-white m-4 p-4 w-full md:w-1/2"
     >
       <h2 class="text-xl font-bold mb-4">Manage Accounts</h2>
 
@@ -180,7 +180,7 @@
     <!-- Account List -->
     <div
       v-if="isAccountListVisible"
-      class="border rounded-sm shadow-md bg-white p-4"
+      class="border rounded-sm shadow-md bg-white p-4 m-4"
     >
       <h2 class="text-xl font-bold mb-4">Account List</h2>
       <p>List of accounts will be displayed here.</p>

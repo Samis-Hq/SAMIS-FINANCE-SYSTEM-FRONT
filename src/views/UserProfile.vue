@@ -1,8 +1,9 @@
 <template>
-  <div class="h-full mt-20 px-10">
+  <div class="h-full ">
     <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
-    ></div>
+      class="flex justify-between border rounded-sm shadow-md bg-blue-200 p-2 mb-4 items-center"
+    >
+  <h1 class="text-blue-500 text-center font-bold">User Profile</h1></div>
 
     <div class="flex flex-col md:flex-row gap-4 p-4">
       <div class="rounded-sm shadow-md bg-white p-6 relative">
@@ -106,8 +107,9 @@
           </div>
 
           <!-- Submit Button -->
-          <div class="mt-6">
-            <button type="submit" class="my-button">Update Details</button>
+          <div class="mt-6 flex justify-end">
+            <button type="submit" class="rounded-md shadow-sm p-2 text-white gap-6 mr-8 bg-red-400 hover:bg-red-700">Cancel</button>
+            <button type="submit" class="my-button">Save</button>
           </div>
         </form>
       </div>

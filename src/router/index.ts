@@ -14,16 +14,24 @@ import UsersList from "@/views/UsersList.vue";
 import Clients from "@/views/Clients.vue";
 import UserProfile from "@/views/UserProfile.vue";
 import Banks from "@/views/Banks.vue";
+import Test from "@/views/Test.vue";
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/home",
       name: "home",
       component: HomeView,
     },
+
+    {
+      path: "/tedst",
+      name: "Test",
+      component: Test,
+    },
+
     {
       path: "/about",
       name: "about",

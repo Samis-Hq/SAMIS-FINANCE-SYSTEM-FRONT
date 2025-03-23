@@ -1,44 +1,39 @@
 <template>
-  <div class="h-full mt-20">
+  <div class="h-full">
     <!-- Header Buttons -->
     <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
+      class="card-header"
     >
-      <button
+      <h1
         @click="showStudentList"
         :class="{
-          'bg-blue-700': isStudentListVisible,
-          'bg-blue-500': !isStudentListVisible,
+          'bg-blue-700 text-white': isStudentListVisible ,
+          'bg-blue-300': !isStudentListVisible && loading && isAddStudentFormVisible,
         }"
-        class="text-white px-4 py-2 rounded"
+        class="text-black px-4 py-2 mr-2 cursor-pointer "
       >
         Student List
-      </button>
+      </h1>
 
-      <button @click="fetchStudents" class="my-button">Reload Students</button>
+      <h1 @click="fetchStudents" 
+     v-if="isStudentListVisible"
+      :class="{
+          'bg-blue-700 text-white': loading,
+          'bg-blue-300': !loading,
+        }" class="text-black px-4 mr-2 py-2 cursor-pointer">Reload Students</h1>
 
-      <button
-        v-if="isStudentListVisible"
+      <h1
+       
         @click="showAddStudentForm"
         :class="{
-          'bg-blue-700': isAddStudentFormVisible,
-          'bg-blue-500': !isAddStudentFormVisible,
+          'bg-blue-300': isStudentListVisible,
+          'bg-blue-700 text-white': isAddStudentFormVisible,
         }"
-        class="text-white px-4 py-2 rounded"
+        class="text-black px-4 py-2 cursor-pointer"
       >
         Add Student
-      </button>
-      <button
-        v-if="isAddStudentFormVisible"
-        @click="showStudentList"
-        :class="{
-          'bg-red-700': isAddStudentFormVisible,
-          'bg-red-500': !isAddStudentFormVisible,
-        }"
-        class="text-white px-4 py-2 rounded"
-      >
-        Close
-      </button>
+      </h1>
+     
     </div>
 
     <!-- Add Student Form -->
@@ -227,7 +222,7 @@
     <!-- Student List -->
     <div
       v-if="isStudentListVisible"
-      class="border rounded-sm shadow-md bg-white p-4"
+      class="border rounded-sm shadow-md bg-white p-4 m-4"
     >
       <h2 class="text-xl font-bold mb-4">Student List</h2>
 
@@ -243,6 +238,7 @@
         <table class="my-table">
           <thead class="bg-gray-50">
             <tr>
+              <th class="table-header">##</th>
               <th class="table-header">Adm No</th>
               <th class="table-header">Name</th>
               <th class="table-header">Class</th>
@@ -263,7 +259,12 @@
               <td colspan="3" class="table-data">No students found.</td>
             </tr>
 
-            <tr v-for="student in paginatedStudents" :key="student.id">
+            <tr v-for="(student,index) in paginatedStudents" :key="student.id">
+              <td class="table-data">
+                <div class="text-sm text-gray-900">
+                  {{ (currentPage - 1) * itemsPerPage + index + 1 }}
+                </div>
+              </td>
               <td class="table-data">
                 <div class="text-sm text-gray-900">
                   {{ student.admissionNumber }}

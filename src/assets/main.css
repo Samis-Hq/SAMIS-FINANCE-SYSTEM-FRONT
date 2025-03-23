@@ -68,3 +68,46 @@
     @apply px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300
   }
   
+  .user-profile-dropdown{
+   @apply absolute right-0 top-full mt-2
+    text-black rounded bg-blue-200 bg-opacity-100 shadow-md py-2 w-40 
+    transition-all duration-300 ease-out overflow-hidden ;
+  }
+
+  .sidebar-content{
+    @apply transition-all duration-300 outline-none border-none cursor-pointer bg-blue-200 
+    shadow-md h-full fixed top-0 left-0 z-40 font-serif overflow-y-auto
+  }
+
+  .sidebar-lists{
+    @apply space-y-4 mt-10 w-full ml-4 mb-10 text-black
+  }
+  .sidebar-links{
+    @apply flex items-center cursor-pointer hover:text-blue-900
+  }
+
+  .main-content{
+    @apply flex-1 min-h-screen  transition-all duration-300 font-serif bg-gray-100 rounded-sm shadow-sm overflow-y-auto
+  }
+  .user-profile{
+    @apply w-8 h-8 rounded-full mr-2 cursor-pointer border-2 border-white bg-white
+  }
+  .hover-button{
+    @apply bg-blue-500 text-white rounded-md shadow-md p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300
+  }
+  .delete-button{
+    @apply text-white px-3 bg-red-500 rounded-sm
+
+  }
+
+  .edit-button{
+    @apply text-white px-3 bg-yellow-500 gap-x-4  mr-4 rounded-sm
+    
+  }
+
+  .card-header{
+    @apply flex justify-between  bg-blue-200 p-2 mb-4
+  }
+  .card-header-text{
+   @apply text-xl text-blue-500 font-bold 
+  }

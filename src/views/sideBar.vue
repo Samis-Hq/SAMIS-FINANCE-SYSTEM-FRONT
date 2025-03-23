@@ -1,7 +1,10 @@
 <template>
-  <div class="min-h-screen flex">
-    <!-- Sidebar -->
-    <div :class="isSidebarCollapsed ? 'w-16' : 'w-60'" class="sidebar-content">
+
+     <!-- Sidebar -->
+     <div
+      :class="isSidebarCollapsed ? 'w-16' : 'w-60'"
+      class="sidebar-content"
+    >
       <div class="mt-20">
         <hr class="border-0 border-t border-white" />
       </div>
@@ -10,10 +13,13 @@
         <li
           v-for="link in links"
           :key="link.label"
-          class="flex flex-col"
+          class="text-xl flex flex-col"
           @click="handleLinkClick(link)"
         >
-          <div class="sidebar-links" :class="{ active: isLinkActive(link) }">
+          <div
+            class="sidebar-links"
+            :class="{ active: isLinkActive(link) }"
+          >
             <component :is="link.icon" class="h-6 w-6 mr-4" />
 
             <span v-if="!isSidebarCollapsed">{{ link.label }}</span>
@@ -46,107 +52,6 @@
         </li>
       </ul>
     </div>
-
-    <div
-      class="flex-1 flex flex-col transition-all duration-300"
-      :class="isSidebarCollapsed ? 'ml-16' : 'ml-60'"
-    >
-      <header
-        class="bg-gray-200 h-16 fixed z-10"
-        :class="isSidebarCollapsed ? 'left-16' : 'left-60'"
-        :style="{
-          width: isSidebarCollapsed
-            ? 'calc(100% - 4rem)'
-            : 'calc(100% - 15rem)',
-        }"
-      >
-        <div class="container flex items-center justify-between h-full px-4">
-          <div
-            class="text-2xl text-black cursor-pointer"
-            @click="toggleSidebar"
-          >
-            <Bars3Icon class="h-6 w-6 text-black cursor-pointer" />
-          </div>
-
-          <div class="text-black flex-1 text-center">
-            <p class="text-xl font-bold capitalize sm:block hidden">
-              School Name
-            </p>
-          </div>
-
-          <!-- User Dropdown -->
-          <div
-            class="text-black flex items-center cursor-pointer relative"
-            @click="toggleUserDropdown"
-          >
-            <img
-              src="../assets/user.png"
-              alt="User avatar"
-              class="user-profile"
-            />
-            <ChevronDownIcon
-              class="h-4 w-4 text-black cursor-pointer mr-2"
-              :class="{ 'rotate-180': isUserDropdownOpen }"
-            />
-            <p class="uppercase">Keneth korir</p>
-
-            <ul
-              :class="{
-                'max-h-0 opacity-0': !isUserDropdownOpen,
-                'max-h-80 opacity-200': isUserDropdownOpen,
-              }"
-              class="user-profile-dropdown"
-            >
-              <li
-                class="block px-4 py-2 hover:bg-gray-200"
-                @click="navigateTo('/profile')"
-              >
-                Profile
-              </li>
-              <li
-                class="block px-4 py-2 hover:bg-gray-200"
-                @click="navigateTo('/dash/setting')"
-              >
-                Settings
-              </li>
-              <div class="mt-2">
-                <hr class="border-0 border-t border-gray-500" />
-              </div>
-
-              <li
-                class="block px-4 py-2 hover:bg-gray-200"
-                @click="navigateTo('/dash/setting')"
-              >
-                Terms Of Service
-              </li>
-              <li
-                class="block px-4 py-2 hover:bg-gray-200"
-                @click="navigateTo('/dash/setting')"
-              >
-                Privacy and Policy
-              </li>
-
-              <div class="mt-2">
-                <hr class="border-0 border-t border-gray-500" />
-              </div>
-
-              <li class="block px-4 py-2 hover:bg-gray-200" @click="logout">
-                Logout
-              </li>
-            </ul>
-          </div>
-        </div>
-      </header>
-
-      <!-- Main Content -->
-      <div class="main-content " :style="{ paddingTop: '4rem' }">
-        <div class="mt-0">
-          <hr class="border-0 border-t border-gray-300" />
-        </div>
-        <router-view></router-view>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script lang="ts">

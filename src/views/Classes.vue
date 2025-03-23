@@ -1,7 +1,7 @@
 <template>
-  <div class="h-full mt-10">
+  <div class="h-full ">
     <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
+      class="card-header"
     >
       <!-- Class List Button -->
       <button
@@ -10,7 +10,7 @@
           'bg-blue-700': isClassListVisible,
           'bg-blue-500': !isClassListVisible,
         }"
-        class="text-white px-2 py-2 rounded"
+        class="text-white px-4 py-2 rounded-sm"
       >
         Class List
       </button>
@@ -19,11 +19,7 @@
         @click="toggleAddClassForm"
         class="cursor-pointer flex items-center gap-2 group"
       >
-        <span
-          class="bg-blue-500 text-white rounded-md shadow-md p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        >
-          Add Class
-        </span>
+        <span class="hover-button"> Add Class </span>
 
         <ChevronDoubleDownIcon
           class="h-6 w-6 text-blue-500 transform transition-transform duration-300"
@@ -32,7 +28,7 @@
       </div>
     </div>
 
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center m-4">
       <Transition name="slide-down" mode="out-in">
         <div
           v-if="isAddClassFormVisible"
@@ -42,7 +38,26 @@
             'opacity-0 -translate-y-4': !isAddClassFormVisible,
           }"
         >
-          <h2 class="text-xl font-bold mb-4">Add Class</h2>
+          <div class="flex items-center mb-6">
+            <label class="flex items-center mr-6">
+              <input
+                type="radio"
+                v-model="inputMethod"
+                value="keyIn"
+                class="form-radio h-4 w-4 text-blue-600"
+              />
+              <span class="ml-2">Add Class/Form</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                type="radio"
+                v-model="inputMethod"
+                value="streams"
+                class="form-radio h-4 w-4 text-blue-600"
+              />
+              <span class="ml-2">Add Class/Forms Streams</span>
+            </label>
+          </div>
 
           <!-- Key In Class Details -->
           <form v-if="inputMethod === 'keyIn'" @submit.prevent="submitForm">
@@ -63,6 +78,42 @@
                   Class name is required
                 </p>
               </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-6">
+              <button
+                type="submit"
+                class="my-button"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+
+          <form v-if="inputMethod === 'streams'" @submit.prevent="submitForm">
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Class Name -->
+              <div class="mb-4">
+                <label for="className" class="form-labels">
+                  Class Name *
+                </label>
+                <select
+                  id="account"
+                  v-model="form.name"
+                  class="form-input"
+                  required
+                >
+                  <option value="" disabled>Select Class</option>
+                  <option value="Form 1">Form 1</option>
+                  <option value="Form 2">Form 2</option>
+                  <option value="Form 3">Form 3</option>
+                  <option value="Form 4">Form 4</option>
+                </select>
+                <p v-if="!form.name" class="text-red-500 text-sm mt-1">
+                  Class name is required
+                </p>
+              </div>
 
               <!-- Streams -->
               <div class="mb-4">
@@ -72,6 +123,7 @@
                   id="streams"
                   v-model="form.streams"
                   class="form-input"
+                  placeholder="South,West,East,North"
                   required
                 />
                 <p v-if="!form.streams" class="required-text">
@@ -96,36 +148,46 @@
     <!-- Class List -->
     <div
       v-if="isClassListVisible"
-      class="border rounded-sm shadow-md bg-white p-4"
+      class="border rounded-sm shadow-md bg-white p-4 m-4"
     >
       <h2 class="text-xl font-bold mb-4">Class List</h2>
 
       <!-- Table to Display Classes -->
-      <table class="min-w-full divide-y divide-gray-200">
+      <table class="my-table">
         <thead class="bg-gray-50">
           <tr>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="table-header"
+            >
+              ##
+            </th>
+            <th
+              scope="col"
+              class="table-header"
             >
               Class Name
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="table-header"
             >
               Streams
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="table-header"
             >
               Population
             </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="classItem in classList" :key="classItem.id">
+          <tr v-for="(classItem ,index) in classList" :key="classItem.id">
+
+            <td class="px-6 py-2 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{ index + 1 }}</div>
+            </td>
             <td class="px-6 py-2 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ classItem.name }}</div>
             </td>

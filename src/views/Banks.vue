@@ -1,12 +1,12 @@
 <template>
-    <div class="h-full mt-10">
-      <div class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4">
-        <h1 class="text-xl text-blue-500 font-bold mb-4">
+    <div class="h-full">
+      <div class="card-header">
+        <h1 class="card-header-text">
           Manage School Bank Accounts
         </h1>
       </div>
   
-      <div class="flex flex-col md:flex-row gap-4 w-full">
+      <div class="flex flex-col md:flex-row gap-4 w-full m-4">
        
         <div class="rounded-sm shadow-md bg-white p-4 w-full md:w-1/3">
           <h2 class="text-xl font-bold mb-4">Add Bank Account</h2>
@@ -113,8 +113,8 @@
                 <td class="table-data">{{ bank.accountNumber }}</td>
                 <td class="table-data">{{ bank.accountName }}</td>
                 <td class="table-data">
-                    <button class="text-white px-2 bg-yellow-500 gap-x-4  mr-4 rounded-sm">Edit</button>
-                    <button class="text-white px-2 bg-red-500 rounded-sm">Delete</button>
+                    <button class="edit-button">Edit</button>
+                    <button class="delete-button">Delete</button>
                 </td>
               </tr>
             </tbody>

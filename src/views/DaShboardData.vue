@@ -42,9 +42,9 @@ const openBusinessOverView = () => {
 </script>
 
 <template>
-  <div class="container mt-10 mx-auto p-4">
+  <div class="container  mx-auto p-4">
     <!-- Tabs -->
-    <div class="flex flex-row space-x-4 border-b border-gray-300 pb-2">
+    <div class="flex flex-row space-x-4 border-b border-gray-300 rounded-sm shadow-sm pb-2">
       <div
         @click="openGetStarted"
         :class="[
