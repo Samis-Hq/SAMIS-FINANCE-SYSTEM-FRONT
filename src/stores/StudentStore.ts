@@ -15,7 +15,7 @@ export const useStudentsStore = defineStore('students', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await apiClient.get<Student[]>('/students'); 
+        const response = await apiClient.get<Student[]>('/active'); 
         this.students = response.data;
       } catch (error) {
         this.error = error as Error; 

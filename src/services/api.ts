@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
   //  baseURL: process.env.VUE_APP_API_BASE_URL,
- baseURL: "http://localhost:8080/api",
+ baseURL: "http://192.168.40.166:8080/api/",
   headers: {
     "Content-Type": "application/json",
   },

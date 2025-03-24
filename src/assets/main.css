@@ -24,13 +24,13 @@
 
 
 .modal-overlay {
-    @apply fixed inset-0 flex justify-center items-center bg-black bg-opacity-50;
+    @apply fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 w-full;
   }
   .my-button {
-    @apply text-white px-4 py-2 rounded hover:bg-blue-700 bg-blue-500;
+    @apply text-white px-4 py-2 rounded hover:bg-blue-700 bg-blue-500  cursor-pointer;
   }
   .table-header{
-    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-tighter;
 
     
   }
@@ -93,7 +93,7 @@
     @apply w-8 h-8 rounded-full mr-2 cursor-pointer border-2 border-white bg-white
   }
   .hover-button{
-    @apply bg-blue-500 text-white rounded-md shadow-md p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300
+    @apply bg-blue-500 text-white rounded-md shadow-md  p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300
   }
   .delete-button{
     @apply text-white px-3 bg-red-500 rounded-sm
@@ -106,7 +106,7 @@
   }
 
   .card-header{
-    @apply flex justify-between  bg-blue-200 p-2 mb-4
+    @apply flex justify-start  bg-blue-200 p-2 mb-4
   }
   .card-header-text{
    @apply text-xl text-blue-500 font-bold 
