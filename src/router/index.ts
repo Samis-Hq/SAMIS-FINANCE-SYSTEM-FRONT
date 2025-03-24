@@ -15,6 +15,7 @@ import Clients from "@/views/Clients.vue";
 import UserProfile from "@/views/UserProfile.vue";
 import Banks from "@/views/Banks.vue";
 import Test from "@/views/Test.vue";
+import Uploads from "@/views/Uploads.vue";
 
 
 const router = createRouter({
@@ -41,7 +42,7 @@ const router = createRouter({
     {
       path: "/",
       name: "dashboard",
-      component: Dashboard,
+      component: ()=>import("../views/Dashboard.vue"),
       children: [
         {
           path: "",
@@ -112,6 +113,12 @@ const router = createRouter({
           path: "banks",
           name: "Manage Banks",
           component: Banks,
+        },
+
+        {
+          path: "uploads",
+          name: "Upload Exceternal Data",
+          component: Uploads,
         },
       
       ],

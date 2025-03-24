@@ -20,9 +20,6 @@
     color: transparent;
   }
 }
-
-
-
 .modal-overlay {
     @apply fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 w-full;
   }
@@ -110,4 +107,7 @@
   }
   .card-header-text{
    @apply text-xl text-blue-500 font-bold 
+  }
+  .profile-list{
+    @apply block px-4 py-2 hover:bg-gray-200
   }

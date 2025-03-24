@@ -1,9 +1,15 @@
 <template>
-  <div class="h-full mt-10">
+  <div class="h-full">
     <!-- Header -->
-    <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
-    >
+    <div class="card-header">
+      <button class="my-button mr-3 ml-2" @click="openOtherReceipts">Other Receipts</button>
+      <button class="my-button mr-3" @click="openAddBursary">Bursary</button>
+      <button class="my-button mr-3" @click="openBAnking">Banking</button>
+      <button class="my-button mr-3" @click="openBalanceBf">Bal Bf</button>
+      <button class="my-button mr-3" @click="openDiscount">Discount</button>
+    </div>
+
+    <div class="p-4 mx-auto">
       <h1 class="text-blue-600 font-bold">Student Fees Collection</h1>
     </div>
 
@@ -154,13 +160,63 @@
         </table>
       </div>
     </div>
+
+    <Transition name="slide-down" mode="out-in">
+      <Bursary
+        v-if="showAddBursaryPopup"
+        @close="closeBursary"
+        @save="handleSaveFees"
+      />
+    </Transition>
+
+    <Transition name="slide-down" mode="out-in">
+      <OtherReceipts
+        v-if="showOtherReceiptsPopup"
+        @close="closeReceiptsPopUP"
+        @save="handleSaveFees"
+      />
+    </Transition>
+
+    <Transition name="slide-down" mode="out-in">
+      <Banking
+        v-if="showBAnkingPopup"
+        @close="closeBanking"
+        @save="handleSaveFees"
+      />
+    </Transition>
+
+    <Transition name="slide-down" mode="out-in">
+      <Discount
+        v-if="showDiscountPopup"
+        @close="closeDiscount"
+        @save="handleSaveFees"
+      />
+    </Transition>
+
+    <Transition name="slide-down" mode="out-in">
+      <BalanceBf
+        v-if="showBalanceBfPopup"
+        @close="closeBAlBf"
+        @save="handleSaveFees"
+      />
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Fees } from "@/model/fees";
+import Bursary from "./Bursary.vue";
+import OtherReceipts from "./OtherReceipts.vue";
+import Banking from "./Banking.vue";
+import Discount from "./Discount.vue";
+import BalanceBf from "./BalanceBf.vue";
 const searchQuery = ref("Sharon");
+const showAddBursaryPopup = ref(false);
+const showOtherReceiptsPopup = ref(false);
+const showBalanceBfPopup = ref(false);
+const showDiscountPopup = ref(false);
+const showBAnkingPopup = ref(false);
 const fees = ref<Fees>({
   id: "",
   studentName: "Sharon",
@@ -176,8 +232,61 @@ const fees = ref<Fees>({
   totalPaid: 4000,
 });
 
-// Function to handle saving fees
+const openAddBursary = () => {
+  showAddBursaryPopup.value = true;
+};
+const openOtherReceipts = () => {
+  showOtherReceiptsPopup.value = true;
+};
+const openBalanceBf = () => {
+  showBalanceBfPopup.value = true;
+};
+
+const openDiscount=()=>{
+  showDiscountPopup.value=true
+}
+
+
+const openBAnking=()=>{
+  showBAnkingPopup.value=true
+}
+const closeReceiptsPopUP=()=>{
+  showOtherReceiptsPopup.value=false
+}
+const closeBursary=()=>{
+  showAddBursaryPopup.value=false
+}
+const closeBAlBf=()=>{
+  showBalanceBfPopup.value=false
+}
+const closeBanking=()=>{
+  showBAnkingPopup.value=false
+}
+
+const closeDiscount=()=>{
+  showDiscountPopup.value=false
+}
+
+
 const handleSaveFees = () => {
   console.log("Fees", fees.value);
 };
 </script>
+<style scoped>
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-down-enter-from,
+.slide-down-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.slide-down-enter-to,
+.slide-down-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+</style>

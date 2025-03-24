@@ -4,26 +4,26 @@
     <div
       class="card-header"
     >
-      <button
+      <h1
         @click="showAccountList"
         :class="{
-          'bg-blue-700': isAccountListVisible,
-          'bg-blue-500': !isAccountListVisible,
+          'bg-blue-300': isAccountListVisible,
+          'bg-blue-700': !isAccountListVisible,
         }"
-        class="text-white px-4 py-2 rounded"
+        class="text-white px-4 py-2 rounded-sm mx-4 cursor-pointer"
       >
         Account List
-      </button>
-      <button
+      </h1>
+      <h1
         @click="showAddAccountForm"
         :class="{
-          'bg-blue-700': isAddAccountFormVisible,
-          'bg-blue-500': !isAddAccountFormVisible,
+          'bg-blue-300': isAddAccountFormVisible,
+          'bg-blue-700': !isAddAccountFormVisible,
         }"
-        class="text-white px-4 py-2 rounded"
+        class="text-white px-4 py-2 rounded-sm cursor-pointer"
       >
         Add Account
-      </button>
+      </h1>
     </div>
 
     <!-- Add Account Form -->

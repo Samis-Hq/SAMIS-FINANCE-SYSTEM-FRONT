@@ -11,7 +11,8 @@ import {
   
   AcademicCapIcon,
   UserGroupIcon,
-  CurrencyBangladeshiIcon,MapIcon
+  CurrencyBangladeshiIcon,MapIcon,
+  PlusIcon
 } from "@heroicons/vue/24/outline";
 
 const shortcuts = ref([
@@ -21,6 +22,7 @@ const shortcuts = ref([
   { name: " Fee Statements", link: "/statements", icon: MapIcon },
   { name: "Reports", link: "/library", icon: BriefcaseIcon },
   { name: "Settings", link: "/settings", icon: CogIcon },
+  { name: "Uploads", link: "/uploads", icon: PlusIcon },
 ]);
 // State
 const selectedSection = ref("gettingStarted");
@@ -79,10 +81,10 @@ const openBusinessOverView = () => {
             v-for="item in shortcuts"
             :key="item.name"
             :to="item.link"
-            class="flex flex-col bg-blue-500 items-center mt-10 rounded-sm hover:bg-blue-700 transition"
+            class="flex flex-col bg-blue-300 items-center mt-10 rounded-sm hover:bg-blue-500 transition hover:text-white"
           >
             <component :is="item.icon" class="h-16 w-16 text-white" />
-            <p class="mt-2 text-sm font-medium">{{ item.name }}</p>
+            <p class="m-2 text-sm font-medium">{{ item.name }}</p>
           </RouterLink>
         </div>
       </div>

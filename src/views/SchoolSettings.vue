@@ -1,7 +1,7 @@
 <template>
-  <div class="h-full mt-20">
+  <div class="h-full">
     <div
-      class="flex justify-between border rounded-sm shadow-md bg-white p-2 mb-4"
+      class="card-header"
     >
       <button
         @click="showSchoolSettings"
@@ -19,7 +19,7 @@
           'bg-blue-700': isOtherSettingsVisible,
           'bg-blue-500': !isOtherSettingsVisible,
         }"
-        class="text-white px-4 py-2 rounded"
+        class="text-white px-4 py-2 rounded-sm ml-4"
       >
         other Settings
       </button>
@@ -86,7 +86,7 @@
                 type="file"
                 id="schoolLogo"
                 @change=""
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class=""
               />
             </div>
             <div class="mb-4">
@@ -100,7 +100,7 @@
                 type="text"
                 id="schoolName"
                 v-model="school.schoolName"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!school.schoolName" class="text-red-500 text-sm mt-1">
@@ -121,7 +121,7 @@
                 type="text"
                 id="schoolAddress"
                 v-model="school.schoolAddress"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!school.schoolAddress" class="text-red-500 text-sm mt-1">
@@ -140,7 +140,7 @@
                 type="email"
                 id="schoolEmail"
                 v-model="school.schoolEmail"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!school.schoolEmail" class="text-red-500 text-sm mt-1">
@@ -160,7 +160,7 @@
                 type="tel"
                 id="schoolPhone"
                 v-model="school.schoolPhone"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!school.schoolPhone" class="text-red-500 text-sm mt-1">
@@ -179,7 +179,7 @@
                 type="text"
                 id="schoolMotto"
                 v-model="school.schoolMotto"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                class="form-input"
                 required
               />
               <p v-if="!school.schoolMotto" class="text-red-500 text-sm mt-1">

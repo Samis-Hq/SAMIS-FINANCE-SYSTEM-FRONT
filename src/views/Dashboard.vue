@@ -98,13 +98,13 @@
               class="user-profile-dropdown"
             >
               <li
-                class="block px-4 py-2 hover:bg-gray-200"
+                class="profile-list"
                 @click="navigateTo('/profile')"
               >
                 Profile
               </li>
               <li
-                class="block px-4 py-2 hover:bg-gray-200"
+                class="profile-list"
                 @click="navigateTo('/dash/setting')"
               >
                 Settings
@@ -114,13 +114,13 @@
               </div>
 
               <li
-                class="block px-4 py-2 hover:bg-gray-200"
+                class="profile-list"
                 @click="navigateTo('/dash/setting')"
               >
                 Terms Of Service
               </li>
               <li
-                class="block px-4 py-2 hover:bg-gray-200"
+                class="profile-list"
                 @click="navigateTo('/dash/setting')"
               >
                 Privacy and Policy
@@ -130,7 +130,7 @@
                 <hr class="border-0 border-t border-gray-500" />
               </div>
 
-              <li class="block px-4 py-2 hover:bg-gray-200" @click="logout">
+              <li class="profile-list" @click="logout">
                 Logout
               </li>
             </ul>

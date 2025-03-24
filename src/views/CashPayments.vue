@@ -3,7 +3,7 @@
     <div class="bg-gray-100 p-6 rounded-lg shadow-lg w-2/3 md:w-1/3">
       <h2 class="text-xl font-bold mb-4">Cash Payments</h2>
       <form @submit.prevent="submitCashForm">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div class="mb-4">
             <label for="account" class="form-labels">School Account *</label>
             <select
@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
           <div class="mb-4">
             <label for="particulars" class="form-labels">Particulars *</label>
             <input
@@ -81,6 +81,9 @@
               required
             />
           </div>
+         
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div class="mb-4">
             <label for="date" class="form-labels">Slip/cheque N0.*</label>
             <input
@@ -91,8 +94,6 @@
               required
             />
           </div>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="mb-4">
             <label for="date" class="form-labels">Payment Mode *</label>
             <input
@@ -120,7 +121,7 @@
         </div>
         <button type="button" class="my-button">Add Item</button>
       </form>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <table class="my-table">
           <thead class="bg-gray-50">
             <tr>

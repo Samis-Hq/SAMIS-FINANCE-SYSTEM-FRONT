@@ -6,12 +6,9 @@ export default {
   ],
   theme: {
     extend: {
-
       fontFamily: {
         custom: ['YourFont', 'sans-serif'],
       },
-
-      
     },
   },
   plugins: [],

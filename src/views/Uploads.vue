@@ -1,0 +1,1 @@
+<template>Uploads page</template>

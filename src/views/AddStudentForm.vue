@@ -202,43 +202,15 @@ const studentsStore = useStudentsStore();
 const { students, loading, error } = storeToRefs(studentsStore);
 const { fetchStudents, addStudent } = studentsStore;
 const uploadProgress = ref(0);
-const isStudentListVisible = ref(true);
-const isAddStudentFormVisible = ref(false);
+
 const inputMethod = ref("keyIn");
-const searchQuery = ref("");
-const currentPage = ref(1);
-const itemsPerPage = ref(20);
+
 
 onMounted(() => {
   fetchStudents();
 });
-const paginatedStudents = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value;
-  const end = start + itemsPerPage.value;
-  return filteredStudents.value.slice(start, end);
-});
 
-const totalPages = computed(() => {
-  console.log("total pages:", filteredStudents.value.length);
-  return Math.ceil(filteredStudents.value.length / itemsPerPage.value);
-});
 
-// Filtered students
-const filteredStudents = computed(() => {
-  if (!searchQuery.value) {
-    return students.value;
-  }
-
-  const query = searchQuery.value.toLowerCase();
-
-  return students.value.filter((student) => {
-    return (
-      student.admissionNumber.toLowerCase().includes(query) ||
-      student.name.toLowerCase().includes(query) ||
-      student.form.toLowerCase().includes(query)
-    );
-  });
-});
 
 // Form data
 const form = ref<Student>({
@@ -267,15 +239,6 @@ const handleBulkUpload = (event: Event) => {
   }
 };
 
-const showStudentList = () => {
-  isStudentListVisible.value = true;
-  isAddStudentFormVisible.value = false;
-};
-
-const showAddStudentForm = () => {
-  isStudentListVisible.value = false;
-  isAddStudentFormVisible.value = true;
-};
 
 const close = () => {
   emit("close");
@@ -296,7 +259,7 @@ const submitForm = async () => {
   try {
     await addStudent(form.value);
     alert("Student added successfully!");
-    showStudentList();
+    fetchStudents()
   } catch (err) {
     console.error("Error adding student:", err);
     alert("Failed to add student.");
