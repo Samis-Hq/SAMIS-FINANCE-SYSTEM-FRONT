@@ -187,7 +187,7 @@
           >
             Cancel
           </button>
-          <button type="submit" class="my-button">Save Receipt</button>
+          <button type="submit" class="my-button">save</button>
         </div>
       </div>
     </div>

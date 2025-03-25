@@ -3,7 +3,7 @@
     <div class="bg-gray-100 p-6 rounded-lg shadow-lg w-2/3 md:w-1/3">
       <h2 class="text-xl font-bold mb-4">Manage Balance Bf</h2>
       <form @submit.prevent="submitCashForm">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="mb-4">
             <label for="account" class="form-labels">Student Adm *</label>
             <input
@@ -36,8 +36,7 @@
               <option value="tuition">2025/3</option>
             </select>
           </div>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+       
           <div class="mb-4">
             <label for="particulars" class="form-labels">Class *</label>
             <input

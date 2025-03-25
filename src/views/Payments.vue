@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <!-- Button Container -->
+
     <div class="card-header">
       <div class="flex gap-x-10 md:justify-around">
         <h1
@@ -187,7 +187,7 @@
 
     <Transition name="slide-down" mode="out-in">
       <CashPayments
-        v-if="showcashPaymentPopUp"
+        v-if="showCashPaymentPopUp"
         @close="closeCashPaymentForm"
         @save="handleSaveCashVoucher"
       />
@@ -196,7 +196,7 @@
     <Transition name="slide-down" mode="out-in">
       <AccountTransfer
         v-if="showAccountTransferForm"
-        @close="closeAccountTrasferPopUP"
+        @close="closeAccountTransferPopUP"
         @save="handleSaveAccountTransfer"
       />
     </Transition>
@@ -209,47 +209,24 @@ import type { Invoice } from "@/model/Invoices";
 import type { Clients } from "@/model/Clients";
 import CashPayments from "./CashPayments.vue";
 import AccountTransfer from "./AccountTransfer.vue";
-
 const isInvoicesListVisible = ref(true);
-
 const isLpoListVisible = ref(false);
 const isLsoFormVisible = ref(false);
-const showcashPaymentPopUp = ref(true);
+const showCashPaymentPopUp = ref(false);
 const showAccountTransferForm = ref(false);
-
 const showInvoicesList = () => {
   isInvoicesListVisible.value = true;
-
   isLpoListVisible.value = false;
   isLsoFormVisible.value = false;
 };
-
-const openAddCashPaymentForm = () => {
-  showcashPaymentPopUp.value = true;
-  console.log("showing pop up to add client");
-};
-
-const closeCashPaymentForm = () => {
-  showcashPaymentPopUp.value = false;
-};
-
+const openAddCashPaymentForm = () => {showCashPaymentPopUp.value = true;};
+const closeCashPaymentForm = () => {showCashPaymentPopUp.value = false;};
 const openAccountTransferForm = () => (showAccountTransferForm.value = true);
-
-const handleSaveCashVoucher = () => {
-  closeCashPaymentForm();
-};
-
-const closeAccountTrasferPopUP = () => {
-  showAccountTransferForm.value = false;
-};
-
-const handleSaveAccountTransfer = () => {
-  closeCashPaymentForm();
-};
-
+const handleSaveCashVoucher = () => {closeCashPaymentForm();};
+const closeAccountTransferPopUP = () => {showAccountTransferForm.value = false;};
+const handleSaveAccountTransfer = () => {closeCashPaymentForm();};
 const invoices = ref<Invoice[]>([]);
 const clients = ref<Clients[]>([]);
-
 const invoice = ref<Invoice>({
   id: "",
   clientName: "keneth korir",

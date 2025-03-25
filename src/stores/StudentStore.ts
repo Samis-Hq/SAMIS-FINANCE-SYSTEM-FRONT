@@ -28,13 +28,12 @@ export const useStudentsStore = defineStore('students', {
         this.loading = true;
         this.error = null;
         try {
-          // Ensure the API client is correctly typed
+
           const response = await apiClient.post<Student>('/students', student);
-          
-          // Add the new student to the store's state
+
           this.students.push(response.data);
         } catch (error) {
-          // Properly handle the error type
+
           if (error instanceof Error) {
             this.error = error as Error
           } else {
