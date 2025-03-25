@@ -16,6 +16,7 @@ import UserProfile from "@/views/UserProfile.vue";
 import Banks from "@/views/Banks.vue";
 import Test from "@/views/Test.vue";
 import Uploads from "@/views/Uploads.vue";
+import FeeStructure from "@/views/FeeStructure.vue";
 
 
 const router = createRouter({
@@ -119,6 +120,12 @@ const router = createRouter({
           path: "uploads",
           name: "Upload Exceternal Data",
           component: Uploads,
+        },
+
+        {
+          path: "structure",
+          name: "Fee structure",
+          component: FeeStructure,
         },
       
       ],

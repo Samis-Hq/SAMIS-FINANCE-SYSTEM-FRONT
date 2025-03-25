@@ -37,8 +37,6 @@
         Add Student
       </button>
     </div>
-
-    <!-- Student List -->
     <div
       v-if="isStudentListVisible"
       class="border rounded-sm shadow-md bg-white p-4 m-4"
@@ -160,21 +158,13 @@ const inputMethod = ref("keyIn");
 const searchQuery = ref("");
 const currentPage = ref(1);
 const itemsPerPage = ref(20);
-
 const showAddStudentForm = ref(false);
-
-const openAddStudentForm = () => {
-  showAddStudentForm.value = true;
+const openAddStudentForm = () => {showAddStudentForm.value = true;
   console.log("clicked to open student form");
 };
+const closeStudentForm = () => {showAddStudentForm.value = false;};
 
-const closeStudentForm = () => {
-  showAddStudentForm.value = false;
-};
-
-onMounted(() => {
-  fetchStudents();
-});
+onMounted(() => {fetchStudents();});
 const paginatedStudents = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
@@ -221,7 +211,6 @@ const handleFileUpload = (event: Event) => {
     form.value.image = target.files[0];
   }
 };
-
 const handleBulkUpload = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files[0]) {
@@ -229,7 +218,6 @@ const handleBulkUpload = (event: Event) => {
     console.log("Uploaded file:", file);
   }
 };
-
 const showStudentList = () => {
   isStudentListVisible.value = true;
   isAddStudentFormVisible.value = false;

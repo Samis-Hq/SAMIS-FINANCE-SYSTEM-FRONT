@@ -139,7 +139,6 @@
               />
             </div>
           </div>
-
           <div class="mb-4">
             <label for="date" class="form-labels">Particulars *</label>
             <textarea
@@ -151,13 +150,11 @@
               required
             />
           </div>
-
           <div class="mt-6">
             <button type="submit" class="my-button">Generate Voucher</button>
           </div>
         </form>
       </div>
-
       <div class="rounded-sm shadow-md bg-white p-4 flex-1">
         <h2 class="text-xl font-bold mb-4">Invoices List</h2>
         <table class="my-table">
@@ -184,7 +181,6 @@
         </table>
       </div>
     </div>
-
     <Transition name="slide-down" mode="out-in">
       <CashPayments
         v-if="showCashPaymentPopUp"
@@ -245,7 +241,6 @@ const client = ref<Clients>({
   phone: "0700000000",
   address: "28, Lagos Street",
 });
-
 const submitInvoiceForm = () => {};
 </script>
 
@@ -254,13 +249,11 @@ const submitInvoiceForm = () => {};
 .slide-down-leave-active {
   transition: all 0.5s ease;
 }
-
 .slide-down-enter-from,
 .slide-down-leave-to {
   transform: translateY(-100%);
   opacity: 0;
 }
-
 .slide-down-enter-to,
 .slide-down-leave-from {
   transform: translateY(0);

@@ -1,20 +1,8 @@
 <template>
   <div class="h-full ">
-    <div
-      class="card-header"
-    >
-      <!-- Class List Button -->
-      <button
-        @click="showClassList"
-        :class="{
-          'bg-blue-700': isClassListVisible,
-          'bg-blue-500': !isClassListVisible,
-        }"
-        class="text-white px-4 py-2 rounded-sm"
-      >
-        Class List
-      </button>
+    <div class="flex justify-around  bg-blue-200 p-2 mb-4">
 
+      <h1 class=" text-center">Manage Classes</h1>
       <div
         @click="toggleAddClassForm"
         class="cursor-pointer flex items-center gap-2 group"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import {ref, onMounted, computed, onUnmounted} from "vue";
 
 import PieChart from "./PieChart.vue";
 
@@ -8,7 +8,7 @@ import {
   PlusCircleIcon,
   BriefcaseIcon,
   CogIcon,
-  
+  BookOpenIcon,
   AcademicCapIcon,
   UserGroupIcon,
   CurrencyBangladeshiIcon,MapIcon,
@@ -18,18 +18,39 @@ import {
 const shortcuts = ref([
   { name: "Students", link: "/students", icon: PlusCircleIcon },
   { name: "Classes", link: "/dashboard", icon: AcademicCapIcon },
+
+  { name: "Fee Structure", link: "/structure", icon: BookOpenIcon },
   { name: "Invoices", link: "/teachers", icon: CurrencyBangladeshiIcon },
   { name: " Fee Statements", link: "/statements", icon: MapIcon },
   { name: "Reports", link: "/library", icon: BriefcaseIcon },
   { name: "Settings", link: "/settings", icon: CogIcon },
-  { name: "Uploads", link: "/uploads", icon: PlusIcon },
+  { name: "Import Excels", link: "/uploads", icon: PlusIcon },
 ]);
 // State
 const selectedSection = ref("gettingStarted");
 const isGetStartedClosed = ref(false);
 const isOverviewClosed = ref(false);
 
-// Methods
+const currentTime = ref("");
+
+const hour = computed(() => new Date().getHours());
+const greetings = computed(() => {
+  if (hour.value >= 5 && hour.value < 12) return "Good morning";
+  if (hour.value >= 12 && hour.value < 17) return "Good afternoon";
+  if (hour.value >= 17 && hour.value < 21) return "Good evening";
+  return "Good night";
+});
+
+function updateTime() {
+  currentTime.value = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+onMounted(() => {
+  updateTime();
+  const timer = setInterval(updateTime, 1000);
+  onUnmounted(() => clearInterval(timer));
+});
+
 const openGetStarted = () => {
   selectedSection.value = "gettingStarted";
   isGetStartedClosed.value = false;
@@ -45,14 +66,23 @@ const openBusinessOverView = () => {
 
 <template>
   <div class="container  mx-auto p-4">
+    <div class="flex justify-start items-center">
+      <h1 class="text-blue-400 text-xl font-bold">
+        {{ greetings }}.
+      </h1>
+    </div>
+
     <!-- Tabs -->
     <div class="flex flex-row space-x-4 border-b border-gray-300 rounded-sm shadow-sm pb-2">
+
       <div
         @click="openGetStarted"
         :class="[
           'cursor-pointer px-4 py-2 relative',
           selectedSection === 'gettingStarted'
-            ? 'text-blue-600 font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-md'
+            ? 'text-blue-600 font-bold after:absolute' +
+             ' after:bottom-0 after:left-0 after:w-full after:h-[3px] ' +
+              'after:bg-blue-600 after:rounded-md'
             : 'text-gray-600',
         ]"
       >

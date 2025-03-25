@@ -1,6 +1,6 @@
 <template>
     <div class="modal-overlay z-50">
-      <div class="bg-gray-100 p-6 rounded-lg shadow-lg w-2/3 md:w-1/3">
+      <div class="bg-gray-100 p-6 rounded-lg shadow-lg w-2/3 ">
         <h2 class="text-xl font-bold mb-4">Other Receipts</h2>
         <form @submit.prevent="submitCashForm">
           <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
