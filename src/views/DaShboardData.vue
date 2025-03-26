@@ -6,6 +6,7 @@ import PieChart from "./PieChart.vue";
 import BarChart from "./BarChart.vue";
 import {
   PlusCircleIcon,
+  BeakerIcon,BanknotesIcon,
   BriefcaseIcon,
   CogIcon,
   BookOpenIcon,
@@ -21,6 +22,7 @@ const shortcuts = ref([
 
   { name: "Fee Structure", link: "/structure", icon: BookOpenIcon },
   { name: "Invoices", link: "/teachers", icon: CurrencyBangladeshiIcon },
+  { name: "Fees", link: "/fees", icon: BanknotesIcon },
   { name: " Fee Statements", link: "/statements", icon: MapIcon },
   { name: "Reports", link: "/library", icon: BriefcaseIcon },
   { name: "Settings", link: "/settings", icon: CogIcon },
@@ -71,10 +73,7 @@ const openBusinessOverView = () => {
         {{ greetings }}.
       </h1>
     </div>
-
-    <!-- Tabs -->
     <div class="flex flex-row space-x-4 border-b border-gray-300 rounded-sm shadow-sm pb-2">
-
       <div
         @click="openGetStarted"
         :class="[
@@ -106,24 +105,24 @@ const openBusinessOverView = () => {
         <h2 class="text-xl font-semibold">Quick Shortcuts </h2>
         <p>Navigate through this application  easily......</p>
         <div class="flex flex-col   ">
-        <div class="grid grid-cols-2 w-full  md:w-3/5 sm:grid-cols-3 lg:grid-cols-3 gap-4 py-2">
-          <RouterLink
-            v-for="item in shortcuts"
-            :key="item.name"
-            :to="item.link"
-            class="flex flex-col bg-blue-300 items-center mt-10 rounded-sm hover:bg-blue-500 transition hover:text-white"
-          >
-            <component :is="item.icon" class="h-16 w-16 text-white" />
-            <p class="m-2 text-sm font-medium">{{ item.name }}</p>
-          </RouterLink>
-        </div>
+          <div class="grid grid-cols-2 w-full md:w-3/5 sm:grid-cols-3 lg:grid-cols-3 gap-4 py-2">
+            <RouterLink
+                v-for="item in shortcuts"
+                :key="item.name"
+                :to="item.link"
+                class="flex flex-col items-center">
+              <div class="rounded-full bg-blue-300 p-2  mb-2 hover:bg-blue-500 transition-colors">
+                <component :is="item.icon" class="h-10 w-10 text-black hover:text-white" />
+              </div>
+              <p class="text-xs sm:text-sm font-medium text-center">{{ item.name }}</p>
+            </RouterLink>
+          </div>
       </div>
       </div>
 
       <div v-if="selectedSection === 'businessOverview'">
         <h2 class="text-xl font-semibold">School Statistics</h2>
         <p>School financial Statistics at a glance....</p>
-
         <div
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 py-2"
         >

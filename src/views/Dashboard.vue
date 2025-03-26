@@ -3,42 +3,42 @@
     <!-- Sidebar -->
     <div :class="isSidebarCollapsed ? 'w-16' : 'w-60'" class="sidebar-content">
       <div class="mt-20">
-        <hr class="border-0 border-t border-white" />
+        <hr class="border-0 border-t border-white"/>
       </div>
 
       <ul class="sidebar-lists">
         <li
-          v-for="link in links"
-          :key="link.label"
-          class="flex flex-col"
-          @click="handleLinkClick(link)"
+            v-for="link in links"
+            :key="link.label"
+            class="flex flex-col"
+            @click="handleLinkClick(link)"
         >
           <div class="sidebar-links" :class="{ active: isLinkActive(link) }">
-            <component :is="link.icon" class="h-6 w-6 mr-4" />
+            <component :is="link.icon" class="h-6 w-6 mr-4"/>
 
             <span v-if="!isSidebarCollapsed">{{ link.label }}</span>
 
             <ChevronDownIcon
-              v-if="link.children"
-              class="h-4 w-4 ml-20"
-              :class="{ 'rotate-180': link.isOpen }"
+                v-if="link.children"
+                class="h-4 w-4 ml-20"
+                :class="{ 'rotate-180': link.isOpen }"
             />
           </div>
           <ul
-            v-if="link.children"
-            :class="{
+              v-if="link.children"
+              :class="{
               'max-h-0 opacity-0': !link.isOpen,
               'max-h-40 opacity-100': link.isOpen,
             }"
-            class="transition-all duration-300 ease-out overflow-auto"
+              class="transition-all duration-300 ease-out overflow-auto"
           >
             <li
-              v-for="child in link.children"
-              :key="child.label"
-              class="text-sm pl-8 py-2 hover:bg-gray-400 cursor-pointer flex items-center"
-              @click="navigateTo(child.route)"
+                v-for="child in link.children"
+                :key="child.label"
+                class="text-sm pl-8 py-2 hover:bg-gray-400 cursor-pointer flex items-center"
+                @click="navigateTo(child.route)"
             >
-              <component :is="child.icon" class="h-4 w-4 mr-2" />
+              <component :is="child.icon" class="h-4 w-4 mr-2"/>
 
               <span v-if="!isSidebarCollapsed">{{ child.label }}</span>
             </li>
@@ -48,92 +48,64 @@
     </div>
 
     <div
-      class="flex-1 flex flex-col transition-all duration-300"
-      :class="isSidebarCollapsed ? 'ml-16' : 'ml-60'"
+        class="flex-1 flex flex-col transition-all duration-300"
+        :class="isSidebarCollapsed ? 'ml-16' : 'ml-60'"
     >
       <header
-        class="bg-gray-200 h-16 fixed z-10"
-        :class="isSidebarCollapsed ? 'left-16' : 'left-60'"
-        :style="{
+          class="bg-gray-200 h-16 fixed z-10"
+          :class="isSidebarCollapsed ? 'left-16' : 'left-60'"
+          :style="{
           width: isSidebarCollapsed
             ? 'calc(100% - 4rem)'
             : 'calc(100% - 15rem)',
         }"
       >
         <div class="container flex items-center justify-between h-full px-4">
-          <div
-            class="text-2xl text-black cursor-pointer"
-            @click="toggleSidebar"
-          >
-            <Bars3Icon class="h-6 w-6 text-black cursor-pointer" />
-          </div>
 
-          <div class="text-black flex-1 text-center">
-            <p class="text-xl font-bold capitalize sm:block hidden">
+          <div class="flex items-center gap-4">
+            <div class="text-2xl text-black cursor-pointer" @click="toggleSidebar">
+              <Bars3Icon class="h-6 w-6 mr-8  text-black cursor-pointer"/>
+            </div>
+            <p class="text-xl  text-center capitalize hidden sm:block">
               School Name
             </p>
           </div>
-
-          <!-- User Dropdown -->
-          <div
-            class="text-black flex items-center cursor-pointer relative"
-            @click="toggleUserDropdown"
-          >
-            <img
-              src="../assets/user.png"
-              alt="User avatar"
-              class="user-profile"
-            />
-            <ChevronDownIcon
-              class="h-4 w-4 text-black cursor-pointer mr-2"
-              :class="{ 'rotate-180': isUserDropdownOpen }"
-            />
-            <p class="uppercase">Keneth korir</p>
-
-            <ul
-              :class="{
-                'max-h-0 opacity-0': !isUserDropdownOpen,
-                'max-h-80 opacity-200': isUserDropdownOpen,
-              }"
-              class="user-profile-dropdown"
-            >
-              <li
-                class="profile-list"
-                @click="navigateTo('/profile')"
-              >
-                Profile
-              </li>
-              <li
-                class="profile-list"
-                @click="navigateTo('/dash/setting')"
-              >
-                Settings
-              </li>
-              <div class="mt-2">
-                <hr class="border-0 border-t border-gray-500" />
-              </div>
-
-              <li
-                class="profile-list"
-                @click="navigateTo('/dash/setting')"
-              >
-                Terms Of Service
-              </li>
-              <li
-                class="profile-list"
-                @click="navigateTo('/dash/setting')"
-              >
-                Privacy and Policy
-              </li>
-
-              <div class="mt-2">
-                <hr class="border-0 border-t border-gray-500" />
-              </div>
-
-              <li class="profile-list" @click="logout">
-                Logout
-              </li>
-            </ul>
+          <div class="flex items-center">
+            <div class="text-black flex items-center cursor-pointer relative"
+                 @click="toggleUserDropdown"
+            ><img src="../assets/user.png" alt="User avatar" class="user-profile"/>
+              <ChevronDownIcon
+                  class="h-4 w-4 text-black cursor-pointer mr-2"
+                  :class="{ 'rotate-180': isUserDropdownOpen }"/>
+              <p class="uppercase hidden sm:inline">Keneth Korir</p>
+              <ul
+                  :class="{
+          'max-h-0 opacity-0': !isUserDropdownOpen,
+          'max-h-80 opacity-200': isUserDropdownOpen,
+        }" class="user-profile-dropdown">
+                <li class="profile-list" @click="navigateTo('/profile')">
+                  Profile
+                </li>
+                <li class="profile-list" @click="navigateTo('/dash/setting')">
+                  Settings
+                </li>
+                <div class="mt-2">
+                  <hr class="border-0 border-t border-gray-500"/>
+                </div>
+                <li class="profile-list" @click="navigateTo('/dash/setting')">
+                  Terms Of Service
+                </li>
+                <li class="profile-list" @click="navigateTo('/dash/setting')">
+                  Privacy and Policy
+                </li>
+                <div class="mt-2">
+                  <hr class="border-0 border-t border-gray-500"/>
+                </div>
+                <li class="profile-list" @click="logout">
+                  Logout
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </header>
@@ -141,7 +113,7 @@
       <!-- Main Content -->
       <div class="main-content " :style="{ paddingTop: '4rem' }">
         <div class="mt-0">
-          <hr class="border-0 border-t border-gray-300" />
+          <hr class="border-0 border-t border-gray-300"/>
         </div>
         <router-view></router-view>
       </div>
@@ -150,8 +122,8 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter, useRoute, RouterView } from "vue-router";
+import {ref, onMounted} from "vue";
+import {useRouter, useRoute, RouterView} from "vue-router";
 import {
   Bars3Icon,
   HomeIcon,
@@ -224,26 +196,8 @@ export default {
       },
       {
         label: "Students",
-        icon: "UserGroupIcon",
-        route: "/students",
-        isOpen: false,
-      },
-      {
-        label: "Classes",
         icon: "AcademicCapIcon",
-        route: "/class",
-        isOpen: false,
-      },
-      {
-        label: "Accounts",
-        icon: "CurrencyDollarIcon",
-        route: "/account",
-        isOpen: false,
-      },
-      {
-        label: "Banks",
-        icon: "BanknotesIcon",
-        route: "/banks",
+        route: "/students",
         isOpen: false,
       },
 
@@ -253,22 +207,52 @@ export default {
         route: "/fees",
         isOpen: false,
       },
+
       {
-        label: "Procurements",
+        label: "Accounting",
+        icon: "CurrencyDollarIcon",
+        route: "/account",
+        isOpen: false,
+      },
+
+
+      {
+        label: "Other Incomes",
+        icon: "CurrencyDollarIcon",
+        route: "/fees",
+        isOpen: false,
+      },
+
+      {
+        label: "Invoicing",
         icon: "CurrencyDollarIcon",
         route: "/procurements",
         isOpen: false,
       },
       {
-        label: "Payments",
+        label: "Expenses",
         icon: "MapIcon",
         route: "/payments",
         isOpen: false,
       },
+
       {
-        label: "Messages",
+        label: "Payroll",
+        icon: "MapIcon",
+        route: "/payroll",
+        isOpen: false,
+      },
+      {
+        label: "Messaging",
         icon: "IconCommunity",
         route: "/messages",
+        isOpen: false,
+      },
+
+      {
+        label: "PocketMoney",
+        icon: "MapIcon",
+        route: "/pocket",
         isOpen: false,
       },
       {

@@ -3,19 +3,19 @@
     <!-- Header -->
     <header
       ref="header"
-      class="fixed top-0 left-0 w-full bg-blue-600 text-white p-4 z-50 transition-transform duration-300"
+      class="fixed top-0 left-0 w-full bg-blue-300 text-black p-4 z-50 transition-transform duration-300"
       :class="{ '-translate-y-full': !isHeaderVisible }"
     >
       <div class="container mx-auto flex justify-around items-center">
         <!-- Logo -->
-        <div class="text-3xl font-custom tracking-[.25em]">SAMIS FINANCE</div>
+        <div class="text-3xl font-custom tracking-[.1em]">SAMIS ACCOUNTING</div>
 
         <!-- Links -->
         <nav class="flex gap-4">
-          <button @click="scrollToSection('home')" class="text-xl uppercase hover:text-blue-300">
+          <button @click="scrollToSection('home')" class="text-xl uppercase hover:text-white">
             Home
           </button>
-          <button @click="scrollToSection('about')" class="text-xl uppercase hover:text-blue-300">
+          <button @click="scrollToSection('about')" class="text-xl uppercase hover:text-white">
             About
           </button>
           <!-- <router-link to="/dash" class="text-2xl uppercase bg-white text-blue-500 rounded-sm px-4 hover:text-white hover:bg-blue-500">
@@ -39,7 +39,7 @@
 
         <!-- Blur Overlay -->
         <div
-          class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent backdrop-blur-sm"
+          class="absolute inset-0 bg-gradient-to-r from-black to-transparent backdrop-blur-sm"
         ></div>
 
         <!-- Content -->
@@ -48,7 +48,7 @@
           <p class="text-xl">Manage financial activities easily.</p>
 
           <div class="mt-10">
-            <router-link to="/dash" class="my-button">LOGIN HERE</router-link>
+            <router-link to="/" class="my-button">LOGIN HERE</router-link>
           </div>
         </div>
       </section>
@@ -87,9 +87,9 @@
     </main>
 
     <!-- Footer -->
-    <footer id="footer" class="bg-white text-black py-8">
+    <footer id="footer"  class=" text-black py-8 bg-blue-300">
       <div class="container mx-auto px-4 text-center">
-        <p>&copy; 2023 My Website. All rights reserved.</p>
+        <p>SAMIS    &copy;{{ new Date().getFullYear() }} . All rights reserved.</p>
         <p class="mt-2">Contact: info@mywebsite.com</p>
       </div>
     </footer>

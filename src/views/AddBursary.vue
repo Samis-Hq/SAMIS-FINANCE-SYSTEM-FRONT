@@ -1,9 +1,6 @@
 <template>
-  <div class="h-full">
-    <div class="flex justify-around  bg-blue-200 p-2 mb-4">
-      <h1 class=" text-xl text-black text-center">Manage School Bursaries</h1>
-    </div>
-    <div class="bg-white p-6 rounded-md shadow-md w-2/3 md:w-full m-4 ">
+  <div class="modal-overlay z-50">
+    <div class="bg-white p-6 rounded-md shadow-md w-2/3 md:w-full">
       <div class="flex items-center mb-6">
         <label class="flex items-center mr-6">
           <input
@@ -24,10 +21,10 @@
           <span class="ml-2">Distribute Bursary</span>
         </label>
       </div>
-      <div v-if="inputMethod === 'keyIn'" class="bg-white p-6 rounded-sm shadow-sm w-2/3 md:w-full border border-blue-500">
+      <div v-if="inputMethod === 'keyIn'" class="bg-white p-6 rounded-sm shadow-sm w-2/3 md:w-full">
         <h2 class="text-xl font-bold mb-4">Receive Bursary</h2>
         <form @submit.prevent="submitCashForm">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
               <label for="account" class="form-labels">Select Clients *</label>
               <select
@@ -66,6 +63,7 @@
               </select>
             </div>
           </div>
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="mb-4">
               <label for="date" class="form-labels">Bursary Amount *</label>
@@ -98,6 +96,7 @@
               />
             </div>
           </div>
+
           <div class="mt-6">
             <button
                 type="button"
@@ -120,7 +119,7 @@
                 <thead class="bg-gray-50">
                 <tr>
                   <th class="table-header">Donor</th>
-                  <th class="table-header">RCTNo</th>
+                  <th class="table-header">Receipt No</th>
                   <th class="table-header">Cheque</th>
                   <th class="table-header">Students</th>
                   <th class="table-header">Amount</th>
@@ -235,7 +234,6 @@ import {ref} from "vue";
 
 import type {Vouchers} from "@/model/Vouchers";
 import type {Clients} from "@/model/Clients";
-import {ChevronDoubleDownIcon} from "@heroicons/vue/24/outline";
 
 const emit = defineEmits(["close", "save"]);
 const inputMethod = ref("keyIn");
@@ -276,4 +274,3 @@ const close = () => {
 const submitCashForm = () => {
 };
 </script>
-  

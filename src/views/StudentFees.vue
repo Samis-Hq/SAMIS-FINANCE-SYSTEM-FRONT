@@ -41,7 +41,7 @@
                 type="number"
                 disabled
                 class="form-input disabled:bg-blue-200"
-                s
+
               />
             </div>
 
@@ -162,7 +162,7 @@
     </div>
 
     <Transition name="slide-down" mode="out-in">
-      <Bursary
+      <AddBursary
         v-if="showAddBursaryPopup"
         @close="closeBursary"
         @save="handleSaveFees"
@@ -211,6 +211,7 @@ import OtherReceipts from "./OtherReceipts.vue";
 import Banking from "./Banking.vue";
 import Discount from "./Discount.vue";
 import BalanceBf from "./BalanceBf.vue";
+import AddBursary from "@/views/AddBursary.vue";
 const searchQuery = ref("Sharon");
 const showAddBursaryPopup = ref(false);
 const showOtherReceiptsPopup = ref(false);

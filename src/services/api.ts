@@ -5,6 +5,7 @@ const apiClient = axios.create({
  baseURL: "http://192.168.40.166:8080/api/students",
   headers: {
     "Content-Type": "application/json",
+      "tenant-id":""
   },
 });
 export default apiClient;

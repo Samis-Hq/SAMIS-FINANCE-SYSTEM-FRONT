@@ -24,6 +24,7 @@
       >
         Add Account
       </h1>
+      <router-link to="/banks" class=" ml-4 my-button"> My BAnks </router-link>
     </div>
 
     <!-- Add Account Form -->
@@ -126,7 +127,7 @@
           <div class="mb-4">
             <label for="stream" class="form-labels"> School Account * </label>
             <select id="stream" v-model="form.name" class="form-input" required>
-              <option value="" disabled>Select Votehead</option>
+              <option value="" disabled >Select Account</option>
               <option value="SchoolFund">School Fund</option>
               <option value="Operation">Operation</option>
               <option value="tuition">Tuition</option>
@@ -134,9 +135,9 @@
             <p v-if="!form.name" class="required-txt">Select account</p>
           </div>
 
-          <!-- Votehead -->
+
           <div class="mb-4">
-            <label for="name" class="form-labels"> Votehead * </label>
+            <label for="name" class="form-labels"> Vote head * </label>
             <input
               type="text"
               id="name"
@@ -149,7 +150,7 @@
           <div class="mb-4">
             <label for="name" class="form-labels"> Position(Receipt) * </label>
             <input
-              type="text"
+              type="number"
               id="name"
               v-model="form.position"
               class="form-input"
@@ -160,7 +161,7 @@
           <div class="mb-4">
             <label for="name" class="form-labels"> Priority * </label>
             <input
-              type="text"
+              type="number"
               id="name"
               v-model="form.priority"
               class="form-input"
@@ -169,15 +170,27 @@
             <p v-if="!form.votes" class="required-txt">Vote is required</p>
           </div>
         </div>
-
-        <!-- Submit Button -->
-        <div class="mt-6">
-          <button type="submit" class="my-button">Submit</button>
+        <div class="mt-6 flex gap-4">
+          <button
+              @click="showAccountList"
+              type="button"
+              class="cancel-button"
+          >
+            <XMarkIcon class="button-icon" />
+            <span>Cancel</span>
+          </button>
+          <button
+              type="submit"
+              class="submit-button"
+          >
+            <CheckIcon  class="button-icon" />
+            <span>Save</span>
+          </button>
         </div>
+
       </form>
     </div>
 
-    <!-- Account List -->
     <div
       v-if="isAccountListVisible"
       class="border rounded-sm shadow-md bg-white p-4 m-4"
@@ -191,7 +204,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Accounts } from "@/model/Accounts";
-
+import { XMarkIcon, CheckIcon  } from '@heroicons/vue/24/outline';
 const isAccountListVisible = ref(true);
 const isAddAccountFormVisible = ref(false);
 const inputMethod = ref("votes");

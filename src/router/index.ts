@@ -17,6 +17,8 @@ import Banks from "@/views/Banks.vue";
 import Test from "@/views/Test.vue";
 import Uploads from "@/views/Uploads.vue";
 import FeeStructure from "@/views/FeeStructure.vue";
+import ReportsView from "@/views/ReportsView.vue";
+import Bursary from "@/views/Bursary.vue";
 
 
 const router = createRouter({
@@ -115,17 +117,25 @@ const router = createRouter({
           name: "Manage Banks",
           component: Banks,
         },
-
         {
           path: "uploads",
-          name: "Upload Exceternal Data",
+          name: "Upload External Data",
           component: Uploads,
         },
-
+        {
+          path: "bursary",
+          name: "Manage Bursaries",
+          component: Bursary,
+        },
         {
           path: "structure",
           name: "Fee structure",
           component: FeeStructure,
+        },
+        {
+          path: "reports",
+          name: "School Reports",
+          component: ReportsView  ,
         },
       
       ],
