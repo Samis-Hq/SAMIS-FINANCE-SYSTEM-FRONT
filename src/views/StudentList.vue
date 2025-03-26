@@ -27,7 +27,6 @@
     </div>
 
 
-
     <div v-if="isStudentListVisible" class="border rounded-sm shadow-md bg-white p-4 m-4">
       <h2 class="text-xl font-bold mb-4">Student List</h2>
       <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -40,14 +39,25 @@
         />
 
         <div class="w-full flex justify-end">
-
           <DataExporterView
               :data="filteredStudents"
-              :columns="['admissionNumber', 'name', 'form']"
-              title="Students List"
-              fileName="students_list"
-              class="ml-2"
+              :columns="['admissionNumber', 'name', 'stream', 'contacts', 'kcpe']"
+              title="Form 3 Class List"
+              :schoolDetails="{
+                      name: 'SAMIS SAMPLE SECONDARY SCHOOL-NAKURU',
+                      address: 'P.O. BOX 237-30705, Nakuru',
+                      phone: '0711111111',
+                      email: 'K@gmail.com'
+                         }"
+              :classDetails="{
+                            name: 'Form 3',
+                            year: '2025',
+                           teacher: 'KENETH'
+                          }"
+              logoUrl=""
+              fileName="form3_class_list"
           />
+
         </div>
       </div>
       <div>
@@ -99,7 +109,7 @@
             </td>
             <td class="table-data">
               <button @click="viewStudent(student)" class="action-btn">
-                <EyeIcon class="h-4 w-4" />
+                <EyeIcon class="h-4 w-4"/>
               </button>
             </td>
           </tr>
@@ -130,8 +140,6 @@
     </div>
 
 
-
-
     <Transition name="slide-down" mode="out-in">
       <AddStudentForm
           v-if="showAddStudentForm"
@@ -143,9 +151,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useStudentsStore } from "@/stores/StudentStore";
-import { storeToRefs } from "pinia";
+import {computed, onMounted, ref} from "vue";
+import {useStudentsStore} from "@/stores/StudentStore";
+import {storeToRefs} from "pinia";
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
@@ -156,8 +164,8 @@ import AddStudentForm from "./AddStudentForm.vue";
 import DataExporterView from "@/views/DataExporterView.vue";
 
 const studentsStore = useStudentsStore();
-const { students, loading, error } = storeToRefs(studentsStore);
-const { fetchStudents, addStudent } = studentsStore;
+const {students, loading, error} = storeToRefs(studentsStore);
+const {fetchStudents, addStudent} = studentsStore;
 
 const isStudentListVisible = ref(true);
 const isAddStudentFormVisible = ref(false);

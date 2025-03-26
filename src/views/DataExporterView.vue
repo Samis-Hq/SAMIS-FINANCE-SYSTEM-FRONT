@@ -2,19 +2,19 @@
   <div class="export-container">
     <div class="export-buttons-top">
       <button @click="previewPDF" class="export-btn preview-btn">
-        <EyeIcon class="button-icon" />
+        <EyeIcon class="button-icon"/>
         <span>Preview PDF</span>
       </button>
       <button @click="exportToPDF" class="export-btn pdf-btn">
-        <PrinterIcon class="button-icon" />
+        <PrinterIcon class="button-icon"/>
         <span>Download PDF</span>
       </button>
       <button @click="exportToCSV" class="export-btn csv-btn">
-        <PrinterIcon class="button-icon" />
+        <PrinterIcon class="button-icon"/>
         <span>Export CSV</span>
       </button>
       <button @click="printPDF" class="export-btn print-btn">
-        <PrinterIcon class="button-icon" />
+        <PrinterIcon class="button-icon"/>
         <span>Print</span>
       </button>
     </div>
@@ -23,21 +23,21 @@
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title">
-            <DocumentTextIcon class="modal-icon" />
+            <DocumentTextIcon class="modal-icon"/>
             PDF Preview (A4 Format)
           </h3>
           <button @click="showPreview = false" class="close-btn">
-            <XMarkIcon class="close-icon" />
+            <XMarkIcon class="close-icon"/>
           </button>
         </div>
         <iframe :src="pdfPreviewUrl" class="pdf-iframe"></iframe>
         <div class="modal-footer">
           <button @click="printPDF" class="export-btn print-btn">
-            <PrinterIcon class="button-icon" />
+            <PrinterIcon class="button-icon"/>
             <span>Print</span>
           </button>
           <button @click="exportToPDF" class="export-btn pdf-btn">
-            <PrinterIcon class="button-icon" />
+            <PrinterIcon class="button-icon"/>
             <span>Download</span>
           </button>
         </div>
@@ -69,11 +69,32 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: 'Data Export'
+    default: 'Class List'
   },
   fileName: {
     type: String,
-    default: 'data_export'
+    default: 'class_list'
+  },
+  schoolDetails: {
+    type: Object,
+    default: () => ({
+      name: 'SAMIS SAMPLE SECONDARY SCHOOL-NAKURU',
+      address: 'P.O. BOX 237-30705, NAKURU',
+      phone: '071111',
+      email: 'k@gmail.com'
+    })
+  },
+  classDetails: {
+    type: Object,
+    default: () => ({
+      name: '',
+      year: '',
+      teacher: ''
+    })
+  },
+  logoUrl: {
+    type: String,
+    default: ''
   }
 });
 
@@ -87,62 +108,96 @@ const generatePDF = () => {
     format: 'a4'
   });
 
+  // Add school logo if provided
+  if (props.logoUrl) {
+    // Add logo to right side (position X: 150mm, Y: 10mm)
+    doc.addImage(props.logoUrl, 'JPEG', 150, 10, 20, 20);
+  }
+
+  // School header - left aligned details
   doc.setFontSize(16);
   doc.setTextColor(40, 40, 40);
-  doc.text(props.title, 105, 15, { align: 'center' });
+  doc.setFont('helvetica', 'bold');
+  doc.text(props.schoolDetails.name, 20, 15);
 
+  // Document title - centered
+  doc.setFontSize(14);
+  doc.text(props.title, 105, 22, { align: 'center' });
+
+  // School details - left aligned
   doc.setFontSize(10);
-  doc.setTextColor(100, 100, 100);
-  doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 105, 22, { align: 'center' });
+  doc.setFont('helvetica', 'normal');
+  doc.text(props.schoolDetails.address, 20, 28);
+  doc.text(`${props.schoolDetails.phone} | ${props.schoolDetails.email}`, 20, 32);
 
-  const body = props.data.map(item => {
-    return props.columns.map(col => {
-      if (col.includes('.')) {
-        return col.split('.').reduce((o, i) => o[i], item);
-      }
-      return item[col];
-    });
+  // Class details if provided - centered
+  if (props.classDetails.name) {
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${props.classDetails.name} - ${props.classDetails.year} - Class list`, 105, 40, { align: 'center' });
+    doc.setFont('sans-serif', 'normal');
+    doc.text(`Teacher: ${props.classDetails.teacher}`, 105, 46, { align: 'center' });
+  }
+
+  // Prepare table data without image column
+  const body = props.data.map((item, index) => {
+    return [
+      index + 1, // Add # column
+      ...props.columns.map(col => {
+        if (col.includes('.')) {
+          return col.split('.').reduce((o, i) => o[i], item);
+        }
+        return item[col];
+      })
+    ];
   });
 
-  const columnStyles = {};
-  props.columns.forEach((_, index) => {
-    columnStyles[index] = { cellWidth: 'auto' };
-  });
+  // Prepare table headers without image column
+  const headers = ['#', ...props.columns.map(col => col.toUpperCase())];
 
+  // Add table to PDF
   autoTable(doc, {
-    head: [props.columns],
+    head: [headers],
     body: body,
-    startY: 30,
-    margin: { top: 25, left: 10, right: 10 },
+    startY: props.classDetails.name ? 50 : 40,
+    margin: { top: 10, left: 10, right: 10 },
     styles: {
       fontSize: 10,
       cellPadding: 3,
       valign: 'middle',
-      halign: 'left',
-      textColor: [40, 40, 40]
+      halign: 'center',
+      textColor: [40, 40, 40],
+      lineColor: [0, 0, 0],
+      lineWidth: 0.1
     },
     headStyles: {
       fillColor: [51, 102, 153],
       textColor: 255,
-      fontStyle: 'bold'
+      fontStyle: 'bold',
+      halign: 'center'
     },
     bodyStyles: {
-      fontSize: 10
+      fontSize: 10,
+      halign: 'center'
     },
     alternateRowStyles: {
       fillColor: [240, 240, 240]
     },
-    columnStyles: columnStyles,
+    columnStyles: {
+      0: { cellWidth: 10 } // # column
+    },
     tableWidth: 'auto',
     showHead: 'everyPage',
     pageBreak: 'auto',
     rowPageBreak: 'avoid'
   });
 
+  // Footer with page numbers
   const pageCount = doc.internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
     doc.setFontSize(8);
+    doc.setFillColor(240, 240, 240);
     doc.text(
         `Page ${i} of ${pageCount}`,
         doc.internal.pageSize.width - 15,
@@ -176,8 +231,8 @@ const exportToPDF = () => {
 };
 
 const exportToCSV = () => {
-  const csvData = props.data.map(item => {
-    const row = {};
+  const csvData = props.data.map((item, index) => {
+    const row = { '#': index + 1 };
     props.columns.forEach(col => {
       if (col.includes('.')) {
         row[col] = col.split('.').reduce((o, i) => o[i], item);
@@ -190,7 +245,7 @@ const exportToCSV = () => {
 
   const worksheet = XLSX.utils.json_to_sheet(csvData);
   const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Exported Data");
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Class List");
   XLSX.writeFile(workbook, `${props.fileName}.csv`, { bookType: 'csv' });
 };
 </script>
@@ -202,34 +257,6 @@ const exportToCSV = () => {
 
 .export-buttons-top {
   @apply flex flex-wrap gap-3 mb-4 justify-end;
-}
-
-.table-wrapper {
-  @apply overflow-x-auto border rounded-lg;
-}
-
-.data-table {
-  @apply min-w-full divide-y divide-gray-200 text-sm;
-}
-
-.data-table th {
-  @apply px-3 py-2 bg-gray-100 text-left font-medium text-gray-700 uppercase tracking-wider;
-}
-
-.data-table td {
-  @apply px-3 py-1 whitespace-nowrap;
-}
-
-.status-active {
-  @apply text-green-600 font-medium;
-}
-
-.status-on-leave {
-  @apply text-yellow-600 font-medium;
-}
-
-.status-terminated {
-  @apply text-red-600 font-medium;
 }
 
 .export-btn {
