@@ -34,16 +34,16 @@
       >
         <!-- Background Image -->
         <div
-          class="absolute inset-0 bg-[url('../assets/niger.jpg')] bg-cover bg-center"
+            class="absolute inset-0 bg-[url('../assets/acc.jpg')] bg-cover bg-center bg-no-repeat z-0"
         ></div>
 
         <!-- Blur Overlay -->
         <div
-          class="absolute inset-0 bg-gradient-to-r from-black to-transparent backdrop-blur-sm"
+          class="absolute inset-0 bg-gradient-to-br from-black to-transparent backdrop-blur-sm"
         ></div>
 
         <!-- Content -->
-        <div class="relative z-10 text-left  mt-10 font-serif pl-32 pt-32">
+        <div class="relative justify-end z-10 text-left  mt-10 font-serif pl-32 pt-32">
           <h1 class="text-4xl font-bold mb-4 text-white">SAMIS FINANCE SYSTEM</h1>
           <p class="text-xl">Manage financial activities easily.</p>
 

@@ -53,6 +53,7 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import {
   EyeIcon,
+    EyeSlashIcon,
   PrinterIcon,
   DocumentTextIcon,
   XMarkIcon
@@ -108,29 +109,27 @@ const generatePDF = () => {
     format: 'a4'
   });
 
-  // Add school logo if provided
+
   if (props.logoUrl) {
     // Add logo to right side (position X: 150mm, Y: 10mm)
     doc.addImage(props.logoUrl, 'JPEG', 150, 10, 20, 20);
   }
 
-  // School header - left aligned details
   doc.setFontSize(16);
   doc.setTextColor(40, 40, 40);
   doc.setFont('helvetica', 'bold');
   doc.text(props.schoolDetails.name, 20, 15);
 
-  // Document title - centered
+
   doc.setFontSize(14);
   doc.text(props.title, 105, 22, { align: 'center' });
 
-  // School details - left aligned
+
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.text(props.schoolDetails.address, 20, 28);
   doc.text(`${props.schoolDetails.phone} | ${props.schoolDetails.email}`, 20, 32);
 
-  // Class details if provided - centered
   if (props.classDetails.name) {
     doc.setFontSize(12);
     doc.setFont('helvetica', 'bold');
@@ -139,7 +138,6 @@ const generatePDF = () => {
     doc.text(`Teacher: ${props.classDetails.teacher}`, 105, 46, { align: 'center' });
   }
 
-  // Prepare table data without image column
   const body = props.data.map((item, index) => {
     return [
       index + 1, // Add # column
@@ -152,10 +150,8 @@ const generatePDF = () => {
     ];
   });
 
-  // Prepare table headers without image column
   const headers = ['#', ...props.columns.map(col => col.toUpperCase())];
 
-  // Add table to PDF
   autoTable(doc, {
     head: [headers],
     body: body,
@@ -184,7 +180,7 @@ const generatePDF = () => {
       fillColor: [240, 240, 240]
     },
     columnStyles: {
-      0: { cellWidth: 10 } // # column
+      0: { cellWidth: 10 }
     },
     tableWidth: 'auto',
     showHead: 'everyPage',
@@ -192,7 +188,6 @@ const generatePDF = () => {
     rowPageBreak: 'avoid'
   });
 
-  // Footer with page numbers
   const pageCount = doc.internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);

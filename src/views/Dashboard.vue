@@ -73,11 +73,14 @@
           <div class="flex items-center">
             <div class="text-black flex items-center cursor-pointer relative"
                  @click="toggleUserDropdown"
-            ><img src="../assets/user.png" alt="User avatar" class="user-profile"/>
-              <ChevronDownIcon
-                  class="h-4 w-4 text-black cursor-pointer mr-2"
+            >
+              <!--              <img src="../assets/user.png" alt="User avatar" class="user-profile"/>-->
+
+              <p class="capitalize text-sm hidden sm:inline">Keneth Korir</p>
+              <ChevronDoubleDownIcon
+                  class="h-4 w-4 text-blue-900 cursor-pointer mr-2 text-bold font-bold ml-2"
                   :class="{ 'rotate-180': isUserDropdownOpen }"/>
-              <p class="uppercase hidden sm:inline">Keneth Korir</p>
+
               <ul
                   :class="{
           'max-h-0 opacity-0': !isUserDropdownOpen,
@@ -110,8 +113,8 @@
         </div>
       </header>
 
-      <!-- Main Content -->
-      <div class="main-content " :style="{ paddingTop: '4rem' }">
+
+      <div class="main-content font-serif" :style="{ paddingTop: '4rem' }">
         <div class="mt-0">
           <hr class="border-0 border-t border-gray-300"/>
         </div>
@@ -219,7 +222,7 @@ export default {
       {
         label: "Other Incomes",
         icon: "CurrencyDollarIcon",
-        route: "/fees",
+        route: "/others",
         isOpen: false,
       },
 

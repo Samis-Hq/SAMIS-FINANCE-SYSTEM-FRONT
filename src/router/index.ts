@@ -5,8 +5,8 @@ import StudentList from "@/views/StudentList.vue";
 import Classes from "@/views/Classes.vue";
 import Accounts from "@/views/Accounts.vue";
 import SchoolSettings from "@/views/SchoolSettings.vue";
-import Payments from "@/views/Payments.vue";
-import Procurements from "@/views/Procurements.vue";
+import SchoolExpenses from "@/views/SchoolExpenses.vue";
+import SchoolInvoices from "@/views/SchoolInvoices.vue";
 import DaShboarddata from "@/views/DaShboardData.vue";
 import StudentFees from "@/views/StudentFees.vue";
 import Messages from "@/views/Messages.vue";
@@ -16,9 +16,13 @@ import UserProfile from "@/views/UserProfile.vue";
 import Banks from "@/views/Banks.vue";
 import Test from "@/views/Test.vue";
 import Uploads from "@/views/Uploads.vue";
-import FeeStructure from "@/views/FeeStructure.vue";
 import ReportsView from "@/views/ReportsView.vue";
 import Bursary from "@/views/Bursary.vue";
+import OtherIncomes from "@/views/OtherIncomes.vue";
+import FeeStructure from "@/views/FeeStructure.vue";
+import PocketMoney from "@/views/PocketMoney.vue";
+import NotFound from "@/views/NotFound.vue";
+import Logins from "@/views/Logins.vue";
 
 
 const router = createRouter({
@@ -29,19 +33,21 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-
     {
-      path: "/tedst",
+      path: "/test",
       name: "Test",
       component: Test,
     },
-
+    {
+      path: "/auth",
+      name: "Authenticate",
+      component: Logins  ,
+    },
     {
       path: "/about",
       name: "about",
       component: () => import("../views/AboutView.vue"),
     },
-
     {
       path: "/",
       name: "dashboard",
@@ -52,7 +58,6 @@ const router = createRouter({
           name: "Dashboard",
           component: DaShboarddata,
         },
-
         {
           path: "students",
           name: "Students",
@@ -63,7 +68,6 @@ const router = createRouter({
           name: "Accounts",
           component: Accounts,
         },
-
         {
           path: "fees",
           name: "Fees",
@@ -74,7 +78,6 @@ const router = createRouter({
           name: "Classes",
           component: Classes,
         },
-
         {
           path: "users",
           name: "Users",
@@ -92,25 +95,28 @@ const router = createRouter({
         },
         {
           path: "payments",
-          name: "Payments",
-          component: Payments,
+          name: "SchoolExpenses",
+          component: SchoolExpenses,
         },
         {
           path: "procurements",
-          name: "Procurements",
-          component: Procurements,
+          name: "SchoolInvoices",
+          component: SchoolInvoices,
         },
-
         {
           path: "clients",
           name: "Clients",
           component: Clients,
         },
-
         {
           path: "profile",
           name: "User Profile",
           component: UserProfile,
+        },
+        {
+          path: "others",
+          name: "School Incomes",
+          component: OtherIncomes,
         },
         {
           path: "banks",
@@ -137,10 +143,16 @@ const router = createRouter({
           name: "School Reports",
           component: ReportsView  ,
         },
+        {
+          path: "pocket",
+          name: "Students Pocket Money",
+          component: PocketMoney  ,
+        },
       
       ],
     },
+
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
   ],
 });
-
 export default router;
