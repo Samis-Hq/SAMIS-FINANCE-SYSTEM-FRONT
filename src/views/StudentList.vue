@@ -7,26 +7,22 @@
           'bg-blue-700 text-white': isStudentListVisible,
           'bg-blue-300': !isStudentListVisible && loading && isAddStudentFormVisible,
         }"
-          class="text-black px-4 py-2 mr-2 cursor-pointer"
-      >
+          class="text-black px-4 py-2 mr-2 cursor-pointer">
         Student List
       </h1>
-
       <button
           @click="openAddStudentForm"
           :class="{
-          'bg-blue-300': isStudentListVisible,
-          'bg-blue-700 text-white': isAddStudentFormVisible,
-        }"
-          class="text-black px-4 py-2 cursor-pointer"
-      >
-        Add Student
+    'bg-blue-300': isStudentListVisible,
+    'bg-blue-700 text-white': isAddStudentFormVisible,
+  }" class="flex items-center gap-2 text-black px-4 py-2 cursor-pointer">
+        <UserPlusIcon class="button-icon w-10 h-10 text-white"/>
+        <span>Add</span>
       </button>
-
-      <router-link to="/class" class="ml-4 my-button">Classes</router-link>
+      <router-link to="/class" class="ml-4 my-button flex items-center gap-2 text-black px-4 py-2 cursor-pointer">
+        <AcademicCapIcon class="button-icon w-10 h-10 text-white"/>
+        <span> Classes</span></router-link>
     </div>
-
-
     <div v-if="isStudentListVisible" class="border rounded-sm shadow-md bg-white p-4 m-4">
       <h2 class="text-xl font-bold mb-4">Student List</h2>
       <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -157,8 +153,8 @@ import {storeToRefs} from "pinia";
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-  EyeIcon,
-  PrinterIcon,
+  EyeIcon, UserPlusIcon,
+  PrinterIcon, PlusIcon, AcademicCapIcon
 } from "@heroicons/vue/24/outline";
 import AddStudentForm from "./AddStudentForm.vue";
 import DataExporterView from "@/views/DataExporterView.vue";

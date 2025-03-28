@@ -10,7 +10,7 @@ export const useAuthenticationStore = defineStore('authenticationStore', {
         isAuthenticated: false
     }),
     actions: {
-        async login(credentials: { username: string; password: string }) {
+        async login(credentials: { username: string; password: string, schoolCode: string }) {
             this.isLoading = true;
             this.error = null;
             try {
@@ -18,28 +18,16 @@ export const useAuthenticationStore = defineStore('authenticationStore', {
                     user: Users;
                     token: string;
                 }>('/login', credentials);
-
-
                 localStorage.removeItem('authToken');
                 localStorage.removeItem('user');
-                sessionStorage.removeItem('authToken');
-
-
                 const {user, token} = response.data;
-
-
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('authToken', token);
-
-
                 this.currentUser = user;
                 this.isAuthenticated = true;
-
                 return true;
             } catch (error: unknown) {
                 this.clearAuthData();
-
-
                 if (error instanceof Error) {
                     this.error = error;
                     console.error('Login failed:', error.message);
@@ -47,7 +35,6 @@ export const useAuthenticationStore = defineStore('authenticationStore', {
                     this.error = new Error('An unknown error occurred during login');
                     console.error('Unknown login error:', error);
                 }
-
                 this.isAuthenticated = false;
                 return false;
             } finally {
@@ -62,13 +49,11 @@ export const useAuthenticationStore = defineStore('authenticationStore', {
             this.currentUser = null;
             this.isAuthenticated = false;
         },
-
         logout() {
             this.clearAuthData()
         },
     },
     getters: {
-
         userName(): string | null {
             return this.currentUser
                 ? `${this.currentUser.username} ${this.currentUser.username}`

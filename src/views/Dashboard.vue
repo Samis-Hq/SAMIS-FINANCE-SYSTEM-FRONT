@@ -71,7 +71,7 @@
             </p>
           </div>
           <div class="flex items-center">
-            <div class="text-black flex items-center cursor-pointer relative"
+            <div class="text-black flex items-center cursor-pointer relative  mr-20"
                  @click="toggleUserDropdown"
             >
               <!--              <img src="../assets/user.png" alt="User avatar" class="user-profile"/>-->
@@ -112,13 +112,22 @@
           </div>
         </div>
       </header>
-
-
       <div class="main-content font-serif" :style="{ paddingTop: '4rem' }">
         <div class="mt-0">
           <hr class="border-0 border-t border-gray-300"/>
         </div>
         <router-view></router-view>
+        <a
+            href="https://wa.me/254711082779"
+            target="_blank"
+            class="fixed bottom-5 right-5 bg-green-500 p-3 rounded-full shadow-lg transform transition-transform hover:scale-110 z-50"
+        >
+          <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              alt="WhatsApp"
+              class="w-12 h-12"
+          />
+        </a>
       </div>
     </div>
   </div>

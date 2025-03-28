@@ -13,7 +13,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex flex-col md:flex-row gap-4 bg-white p-4">
+    <div class="flex flex-col md:flex-row gap-4 bg-white m-4 p-4">
       <div class="bg-white p-6 rounded-sm shadow-md w-2/3 ">
         <h2 class="text-xl font-bold mb-4">Other Receipts</h2>
         <form @submit.prevent="submitCashForm">
@@ -26,7 +26,7 @@
                   class="form-input"
                   required
               >
-                <option value="School Fund" disabled>Select Vote Account</option>
+                <option value="School Fund" disabled>Select  Account</option>
                 <option value="SchoolFund">School Fund</option>
                 <option value="Operation">Operation</option>
                 <option value="tuition">Tuition</option>
@@ -51,9 +51,9 @@
                   required
               >
                 <option value="" disabled>Select Terms</option>
-                <option value="lunch">2025/1</option>
-                <option value="others">2025/2</option>
-                <option value="tuition">2025/3</option>
+                <option value="2025/1">2025/1</option>
+                <option value="2025/2">2025/2</option>
+                <option value="2025/3">2025/3</option>
               </select>
             </div>
           </div>

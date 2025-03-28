@@ -70,29 +70,23 @@
                 <option value="tuition">Tuition</option>
               </select>
             </div>
-
             <div class="mb-4">
-              <label
-                for="client"
-                class="form-labels"
-                >Client Name *</label
-              >
-              <select
-                id="client"
-                v-model="invoice.clientName"
-                class="form-input"
-                required
-              >
-                <option value="" disabled>Select Client</option>
-                <option
-                  v-for="client in clients"
-                  :key="client.id"
-                  :value="client.name"
-                >
+              <label for="client" class="form-labels">Client Name *</label>
+              <input
+                  list="clientOptions"
+                  id="client"
+                  v-model="invoice.clientName"
+                  class="form-input"
+                  placeholder="Type to search clients..."
+                  required
+              />
+              <datalist id="clientOptions">
+                <option v-for="client in clients" :key="client.id" :value="client.name">
                   {{ client.name }}
                 </option>
-              </select>
+              </datalist>
             </div>
+
           </div>
 
           <div class="grid grid-cols-2 gap-4">
@@ -189,21 +183,9 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th
-                class="table-header"
-              >
-                Invoice Number
-              </th>
-              <th
-                class="table-header"
-              >
-                Client
-              </th>
-              <th
-                class="table-header"
-              >
-                Amount
-              </th>
+              <th class="table-header">Invoice Number</th>
+              <th class="table-header">Client</th>
+              <th class="table-header">Amount</th>
             </tr>
           </thead>
           <tbody class="table-body">

@@ -1,6 +1,6 @@
 <template>
   <div class="export-container">
-    <div class="export-buttons-top">
+    <div class=" export-buttons-top">
       <button @click="previewPDF" class="export-btn preview-btn">
         <EyeIcon class="button-icon"/>
         <span>Preview PDF</span>
@@ -18,6 +18,17 @@
         <span>Print</span>
       </button>
     </div>
+    <div class="flex md:hidden gap-6">
+      <button @click="printPDF" class="export-btn print-btn">
+        <PrinterIcon class="button-icon"/>
+        <span>Print</span>
+      </button>
+      <button @click="exportToCSV" class="export-btn csv-btn">
+        <PrinterIcon class="button-icon"/>
+        <span>Export CSV</span>
+      </button>
+    </div>
+
 
     <div v-if="showPreview" class="preview-modal">
       <div class="modal-content">
@@ -47,13 +58,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import * as XLSX from 'xlsx';
-import { jsPDF } from 'jspdf';
+import {jsPDF} from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import {
   EyeIcon,
-    EyeSlashIcon,
+  EyeSlashIcon,
   PrinterIcon,
   DocumentTextIcon,
   XMarkIcon
@@ -111,7 +122,7 @@ const generatePDF = () => {
 
 
   if (props.logoUrl) {
-    // Add logo to right side (position X: 150mm, Y: 10mm)
+
     doc.addImage(props.logoUrl, 'JPEG', 150, 10, 20, 20);
   }
 
@@ -122,7 +133,7 @@ const generatePDF = () => {
 
 
   doc.setFontSize(14);
-  doc.text(props.title, 105, 22, { align: 'center' });
+  doc.text(props.title, 105, 22, {align: 'center'});
 
 
   doc.setFontSize(10);
@@ -133,9 +144,9 @@ const generatePDF = () => {
   if (props.classDetails.name) {
     doc.setFontSize(12);
     doc.setFont('helvetica', 'bold');
-    doc.text(`${props.classDetails.name} - ${props.classDetails.year} - Class list`, 105, 40, { align: 'center' });
+    doc.text(`${props.classDetails.name} - ${props.classDetails.year} - Class list`, 105, 40, {align: 'center'});
     doc.setFont('sans-serif', 'normal');
-    doc.text(`Teacher: ${props.classDetails.teacher}`, 105, 46, { align: 'center' });
+    doc.text(`Teacher: ${props.classDetails.teacher}`, 105, 46, {align: 'center'});
   }
 
   const body = props.data.map((item, index) => {
@@ -156,7 +167,7 @@ const generatePDF = () => {
     head: [headers],
     body: body,
     startY: props.classDetails.name ? 50 : 40,
-    margin: { top: 10, left: 10, right: 10 },
+    margin: {top: 10, left: 10, right: 10},
     styles: {
       fontSize: 10,
       cellPadding: 3,
@@ -180,7 +191,7 @@ const generatePDF = () => {
       fillColor: [240, 240, 240]
     },
     columnStyles: {
-      0: { cellWidth: 10 }
+      0: {cellWidth: 10}
     },
     tableWidth: 'auto',
     showHead: 'everyPage',
@@ -213,7 +224,7 @@ const printPDF = () => {
   const doc = generatePDF();
   const pdfUrl = doc.output('bloburl');
   const printWindow = window.open(pdfUrl);
-  printWindow.onload = function() {
+  printWindow.onload = function () {
     setTimeout(() => {
       printWindow.print();
     }, 500);
@@ -227,7 +238,7 @@ const exportToPDF = () => {
 
 const exportToCSV = () => {
   const csvData = props.data.map((item, index) => {
-    const row = { '#': index + 1 };
+    const row = {'#': index + 1};
     props.columns.forEach(col => {
       if (col.includes('.')) {
         row[col] = col.split('.').reduce((o, i) => o[i], item);
@@ -241,18 +252,15 @@ const exportToCSV = () => {
   const worksheet = XLSX.utils.json_to_sheet(csvData);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Class List");
-  XLSX.writeFile(workbook, `${props.fileName}.csv`, { bookType: 'csv' });
+  XLSX.writeFile(workbook, `${props.fileName}.csv`, {bookType: 'csv'});
 };
 </script>
 
 <style scoped>
 .export-container {
-  @apply max-w-full mx-auto p-4 bg-white rounded-lg shadow;
+  @apply max-w-full mx-auto p-4 bg-white;
 }
 
-.export-buttons-top {
-  @apply flex flex-wrap gap-3 mb-4 justify-end;
-}
 
 .export-btn {
   @apply inline-flex items-center gap-2 px-3 py-2 rounded-md text-white font-medium transition-colors text-sm;
