@@ -23,6 +23,7 @@ import FeeStructure from "@/views/FeeStructure.vue";
 import PocketMoney from "@/views/PocketMoney.vue";
 import NotFound from "@/views/NotFound.vue";
 import Logins from "@/views/Logins.vue";
+import FessStructure from "@/views/FessStructure.vue";
 
 
 const router = createRouter({
@@ -136,7 +137,7 @@ const router = createRouter({
         {
           path: "structure",
           name: "Fee structure",
-          component: FeeStructure,
+          component: FessStructure,
         },
         {
           path: "reports",
