@@ -25,6 +25,7 @@ import Logins from "@/views/Logins.vue";
 import FessStructure from "@/views/FessStructure.vue";
 import ClassListReports from "@/views/Reports/ClassListReports.vue";
 import FeeStatementReports from "@/views/Reports/FeeStatementReports.vue";
+import ReceiptsReports from "@/views/Reports/ReceiptsReports.vue";
 
 
 const router = createRouter({
@@ -155,6 +156,12 @@ const router = createRouter({
               path: "statement",
               name: "Fee Statement Reports",
               component: FeeStatementReports  ,
+            },
+
+            {
+              path: "receipts",
+              name: "Fee Receipts",
+              component: ReceiptsReports  ,
             },
 
           ]

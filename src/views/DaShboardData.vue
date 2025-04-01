@@ -13,7 +13,7 @@ import {
   AcademicCapIcon,
   UserGroupIcon,
   CurrencyBangladeshiIcon,MapIcon,
-  PlusIcon
+  PlusIcon,NewspaperIcon
 } from "@heroicons/vue/24/outline";
 const shortcuts = ref([
   { name: "Students", link: "/students", icon: PlusCircleIcon },
@@ -23,7 +23,7 @@ const shortcuts = ref([
   { name: "Invoices", link: "/teachers", icon: CurrencyBangladeshiIcon },
   { name: "Fees", link: "/fees", icon: BanknotesIcon },
   { name: " Fee Statements", link: "/statements", icon: MapIcon },
-  { name: "Reports", link: "/library", icon: BriefcaseIcon },
+  { name: "Reports", link: "/library", icon: NewspaperIcon },
   { name: "Settings", link: "/settings", icon: CogIcon },
   { name: "Import Excels", link: "/uploads", icon: PlusIcon },
 ]);

@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex">
     <!-- Sidebar -->
-    <div :class="isSidebarCollapsed ? 'w-16' : 'w-60'" class="sidebar-content">
+    <div :class="isSidebarCollapsed ? 'w-16' : 'w-60'" class="sidebar-content bg-gray-800 text-white">
       <div class="mt-20">
         <hr class="border-0 border-t border-white"/>
       </div>
@@ -14,7 +14,11 @@
             @click="handleLinkClick(link)"
         >
           <div class="sidebar-links" :class="{ active: isLinkActive(link) }">
-            <component :is="link.icon" class="h-6 w-6 mr-4"/>
+            <component
+                :is="iconComponents[link.icon]"
+                class="h-6 w-6 mr-4"
+                v-if="iconComponents[link.icon]"
+            />
             <span v-if="!isSidebarCollapsed">{{ link.label }}</span>
             <ChevronDownIcon
                 v-if="link.children"
@@ -36,7 +40,11 @@
                 class="text-sm pl-8 py-2 hover:bg-gray-400 cursor-pointer flex items-center"
                 @click="navigateTo(child.route)"
             >
-              <component :is="child.icon" class="h-4 w-4 mr-2"/>
+              <component
+                  :is="iconComponents[child.icon]"
+                  class="h-4 w-4 mr-2"
+                  v-if="iconComponents[child.icon]"
+              />
               <span v-if="!isSidebarCollapsed">{{ child.label }}</span>
             </li>
           </ul>
@@ -58,31 +66,32 @@
         }"
       >
         <div class="container flex items-center justify-between h-full px-4">
-
           <div class="flex items-center gap-4">
             <div class="text-2xl text-black cursor-pointer" @click="toggleSidebar">
-              <Bars3Icon class="h-6 w-6 mr-8  text-black cursor-pointer"/>
+              <Bars3Icon class="h-6 w-6 mr-8 text-black cursor-pointer"/>
             </div>
-            <p class="text-xl font-bold  font-custom text-center capitalize hidden sm:block">
+            <p class="text-xl font-bold font-custom text-center capitalize hidden sm:block">
               School Name
             </p>
           </div>
           <div class="flex items-center">
-            <div class="text-black flex items-center cursor-pointer relative  mr-20"
-                 @click="toggleUserDropdown"
+            <div
+                class="text-black flex items-center cursor-pointer relative mr-20"
+                @click="toggleUserDropdown"
             >
-              <!--              <img src="../assets/user.png" alt="User avatar" class="user-profile"/>-->
-
               <p class="capitalize text-xl hidden sm:inline font-custom">Keneth Korir</p>
-              <ChevronDoubleDownIcon
+              <ChevronDownIcon
                   class="h-4 w-4 text-blue-900 cursor-pointer mr-2 text-bold font-bold ml-2"
-                  :class="{ 'rotate-180': isUserDropdownOpen }"/>
+                  :class="{ 'rotate-180': isUserDropdownOpen }"
+              />
 
               <ul
                   :class="{
-          'max-h-0 opacity-0': !isUserDropdownOpen,
-          'max-h-80 opacity-200': isUserDropdownOpen,
-        }" class="user-profile-dropdown">
+                  'max-h-0 opacity-0': !isUserDropdownOpen,
+                  'max-h-80 opacity-200': isUserDropdownOpen,
+                }"
+                  class="user-profile-dropdown"
+              >
                 <li class="profile-list" @click="navigateTo('/profile')">
                   Profile
                 </li>
@@ -98,7 +107,6 @@
                 <li class="profile-list" @click="navigateTo('/setting')">
                   Privacy and Policy
                 </li>
-
                 <li class="profile-list" @click="navigateTo('/setting')">
                   System User Manual
                 </li>
@@ -134,248 +142,230 @@
   </div>
 </template>
 
-<script lang="ts">
-import {ref, onMounted} from "vue";
-import {useRouter, useRoute, RouterView} from "vue-router";
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import {
   Bars3Icon,
   HomeIcon,
   AcademicCapIcon,
   CogIcon,
   ChevronDownIcon,
-  UserGroupIcon,
   UserCircleIcon,
-  ChevronDoubleDownIcon,
   NewspaperIcon,
-  ChevronUpDownIcon,
   BookOpenIcon,
   CreditCardIcon,
-  UserIcon,
-  PlusIcon,
-  CurrencyDollarIcon,
-  CurrencyEuroIcon,
-  CurrencyPoundIcon,
-  CurrencyYenIcon,
-  MapIcon,
-  BanknotesIcon,
+  CurrencyDollarIcon,CurrencyBangladeshiIcon,
+  MapIcon,ChartPieIcon,ClipboardDocumentListIcon,FolderMinusIcon,SignalIcon
 } from "@heroicons/vue/24/outline";
 import IconCommunity from "@/components/icons/IconCommunity.vue";
 
-export default {
-  components: {
-    Bars3Icon,
-    HomeIcon,
-    AcademicCapIcon,
-    CogIcon,
-    ChevronDownIcon,
-    UserGroupIcon,
-    UserCircleIcon,
-    ChevronDoubleDownIcon,
-    NewspaperIcon,
-    PlusIcon,
-    BookOpenIcon,
-    CreditCardIcon,
-    UserIcon,
-    CurrencyDollarIcon,
-    CurrencyEuroIcon,
-    CurrencyPoundIcon,
-    CurrencyYenIcon,
-    MapIcon,
-    IconCommunity,
-    BanknotesIcon,
+const isSidebarCollapsed = ref(false);
+const isUserDropdownOpen = ref(false);
+const isNewDropdownOpen = ref(false);
+
+// Icon component mapping
+const iconComponents = {
+  HomeIcon,
+  AcademicCapIcon,
+  CurrencyDollarIcon,
+  MapIcon,ChartPieIcon,
+  IconCommunity,
+  UserCircleIcon,
+  NewspaperIcon,
+  CogIcon,SignalIcon,
+  CreditCardIcon,CurrencyBangladeshiIcon,
+  BookOpenIcon,ClipboardDocumentListIcon,FolderMinusIcon
+};
+
+interface Link {
+  label: string;
+  icon: keyof typeof iconComponents;
+  route: string;
+  isOpen: boolean;
+  children?: Link[];
+}
+
+const links = ref<Link[]>([
+  {
+    label: "Dashboard",
+    icon: "HomeIcon",
+    route: "/",
+    isOpen: false,
   },
-  setup() {
-    const isSidebarCollapsed = ref(false);
-    const isUserDropdownOpen = ref(false);
-    const isNewDropdownOpen = ref(false);
-
-    const userLogo = ref("../assets/user.png");
-    const schoolLogo = ref("../assets/user.png");
-
-    interface Link {
-      label: string;
-      icon: string;
-      route: string;
-      isOpen: boolean;
-      children?: Link[];
-    }
-
-    const links = ref<Link[]>([
+  {
+    label: "Students",
+    icon: "AcademicCapIcon",
+    route: "/students",
+    isOpen: false,
+  },
+  {
+    label: "Fees",
+    icon: "CurrencyBangladeshiIcon",
+    route: "/fees",
+    isOpen: false,
+  },
+  {
+    label: "Accounting",
+    icon: "CurrencyDollarIcon",
+    route: "/account",
+    isOpen: false,
+  },
+  {
+    label: "Other Incomes",
+    icon: "ChartPieIcon",
+    route: "/others",
+    isOpen: false,
+  },
+  {
+    label: "Invoicing",
+    icon: "ClipboardDocumentListIcon",
+    route: "/procurements",
+    isOpen: false,
+  },
+  {
+    label: "Expenses",
+    icon: "FolderMinusIcon",
+    route: "/payments",
+    isOpen: false,
+  },
+  {
+    label: "Payroll",
+    icon: "MapIcon",
+    route: "/payroll",
+    isOpen: false,
+  },
+  {
+    label: "Messaging",
+    icon: "IconCommunity",
+    route: "/messages",
+    isOpen: false,
+  },
+  {
+    label: "PocketMoney",
+    icon: "MapIcon",
+    route: "/pocket",
+    isOpen: false,
+  },
+  {
+    label: "Users",
+    icon: "UserCircleIcon",
+    route: "/users",
+    isOpen: false,
+  },
+  {
+    label: "Reports",
+    icon: "NewspaperIcon",
+    route: "/reports",
+    isOpen: false,
+    children: [
       {
-        label: "Dashboard",
-        icon: "HomeIcon",
-        route: "/",
-        isOpen: false,
-      },
-      {
-        label: "Students",
-        icon: "AcademicCapIcon",
-        route: "/students",
-        isOpen: false,
-      },
-
-      {
-        label: "Fees",
-        icon: "CurrencyDollarIcon",
-        route: "/fees",
-        isOpen: false,
-      },
-
-      {
-        label: "Accounting",
-        icon: "CurrencyDollarIcon",
-        route: "/account",
-        isOpen: false,
-      },
-
-
-      {
-        label: "Other Incomes",
-        icon: "CurrencyDollarIcon",
-        route: "/others",
-        isOpen: false,
-      },
-
-      {
-        label: "Invoicing",
-        icon: "CurrencyDollarIcon",
-        route: "/procurements",
-        isOpen: false,
-      },
-      {
-        label: "Expenses",
-        icon: "MapIcon",
-        route: "/payments",
-        isOpen: false,
-      },
-
-      {
-        label: "Payroll",
-        icon: "MapIcon",
-        route: "/payroll",
-        isOpen: false,
-      },
-      {
-        label: "Messaging",
-        icon: "IconCommunity",
-        route: "/messages",
-        isOpen: false,
-      },
-      {
-        label: "PocketMoney",
-        icon: "MapIcon",
-        route: "/pocket",
-        isOpen: false,
-      },
-      {
-        label: "Users",
-        icon: "UserCircleIcon",
-        route: "/users",
-        isOpen: false,
-      },
-      {
-        label: "Reports",
+        label: "Class Lists",
         icon: "NewspaperIcon",
-        route: "/reports",
+        route: "/reports/classlist",
         isOpen: false,
-        children: [
-          {
-            label: "Class Lists",
-            icon: "NewspaperIcon",
-            route: "/classlist",
-            isOpen: false,
-          },
-          {
-            label: "Receipts",
-            icon: "",
-            route: "/reports/2",
-            isOpen: false,
-          },
-          {
-            label: "Fees Reports",
-            icon: "",
-            route: "/statement",
-            isOpen: false,
-          },
-          {
-            label: "Expenditure Reports",
-            icon: "",
-            route: "/reports/2",
-            isOpen: false,
-          },
-
-          {
-            label: "Financial Reports",
-            icon: "",
-            route: "/reports/2",
-            isOpen: false,
-          },
-          {
-            label: "IPSAS Reports",
-            icon: "",
-            route: "/reports/2",
-            isOpen: false,
-          },
-        ],
       },
       {
-        label: "Settings",
-        icon: "CogIcon",
-        route: "/settings",
+        label: "Receipts",
+        icon: "CreditCardIcon",
+        route: "/reports/receipts",
         isOpen: false,
       },
-    ]);
-    const router = useRouter();
-    const route = useRoute();
-    const toggleSidebar = () => {
-      isSidebarCollapsed.value = !isSidebarCollapsed.value;
-    };
-
-    const toggleUserDropdown = () => {
-      isUserDropdownOpen.value = !isUserDropdownOpen.value;
-    };
-
-    const toggleNewItemsDropdown = () => {
-      isNewDropdownOpen.value = !isNewDropdownOpen.value;
-      console.log("New items dropdown toggled");
-      //  alert("New items dropdown toggled");
-    };
-
-    const handleLinkClick = (link: Link) => {
-      if (link.children) {
-        link.isOpen = !link.isOpen;
-      } else {
-        navigateTo(link.route);
-      }
-    };
-
-    const navigateTo = (route: string) => {
-      router.push(route);
-    };
-
-    const isLinkActive = (link: Link): boolean => {
-      return route.path === link.route;
-    };
-
-    const logout = () => {
-      console.log("User logged out");
-    };
-
-    return {
-      isSidebarCollapsed,
-      isUserDropdownOpen,
-      isNewDropdownOpen,
-      userLogo,
-      schoolLogo,
-      links,
-      toggleSidebar,
-      toggleUserDropdown,
-      toggleNewItemsDropdown,
-      handleLinkClick,
-      navigateTo,
-      isLinkActive,
-      logout,
-    };
+      {
+        label: "Fees Reports",
+        icon: "CurrencyDollarIcon",
+        route: "/reports/statement",
+        isOpen: false,
+      },
+      {
+        label: "Expenditure Reports",
+        icon: "BookOpenIcon",
+        route: "/reports/expenditure",
+        isOpen: false,
+      },
+      {
+        label: "Financial Reports",
+        icon: "CurrencyDollarIcon",
+        route: "/reports/financial",
+        isOpen: false,
+      },
+      {
+        label: "IPSAS Reports",
+        icon: "BookOpenIcon",
+        route: "/reports/ipsas",
+        isOpen: false,
+      },
+    ],
   },
+  {
+    label: "Settings",
+    icon: "CogIcon",
+    route: "/settings",
+    isOpen: false,
+  },
+  {
+    label: "Updates",
+    icon: "SignalIcon",
+    route: "/updates",
+    isOpen: false,
+  },
+]);
+
+const router = useRouter();
+const route = useRoute();
+
+const toggleSidebar = () => {
+  isSidebarCollapsed.value = !isSidebarCollapsed.value;
+};
+
+const toggleUserDropdown = () => {
+  isUserDropdownOpen.value = !isUserDropdownOpen.value;
+};
+
+const toggleNewItemsDropdown = () => {
+  isNewDropdownOpen.value = !isNewDropdownOpen.value;
+};
+
+const handleLinkClick = (link: Link) => {
+  if (link.children) {
+    link.isOpen = !link.isOpen;
+    if (!link.route || link.route === "#") {
+      navigateTo(link.children[0].route);
+    }
+  } else {
+    navigateTo(link.route);
+  }
+};
+
+const navigateTo = (routePath: string) => {
+  router.push(routePath);
+};
+
+const isLinkActive = (link: Link): boolean => {
+  if (link.route === "/") {
+    return route.path === "/";
+  }
+
+  if (route.path === link.route) {
+    return true;
+  }
+
+  if (route.path.startsWith(link.route + "/")) {
+    return true;
+  }
+
+  if (link.children) {
+    return link.children.some(child =>
+        route.path === child.route ||
+        route.path.startsWith(child.route + "/")
+    );
+  }
+
+  return false;
+};
+
+const logout = () => {
+  console.log("User logged out");
+
 };
 </script>
