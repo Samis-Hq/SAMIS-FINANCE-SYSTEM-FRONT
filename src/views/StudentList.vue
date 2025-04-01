@@ -17,11 +17,11 @@
     'bg-blue-700 text-white': isAddStudentFormVisible,
   }" class="flex items-center gap-2 text-black px-4 py-2 cursor-pointer">
         <UserPlusIcon class="button-icon w-10 h-10 text-white"/>
-        <span>Add</span>
+        <span>Add Student</span>
       </button>
       <router-link to="/class" class="ml-4 my-button flex items-center gap-2 text-black px-4 py-2 cursor-pointer">
         <AcademicCapIcon class="button-icon w-10 h-10 text-white"/>
-        <span> Classes</span></router-link>
+        <span> Manage Classes</span></router-link>
     </div>
     <div v-if="isStudentListVisible" class="border rounded-sm shadow-md bg-white p-4 m-4">
       <h2 class="text-xl font-bold mb-4">Student List</h2>
@@ -43,13 +43,11 @@
                       name: 'SAMIS SAMPLE SECONDARY SCHOOL-NAKURU',
                       address: 'P.O. BOX 237-30705, Nakuru',
                       phone: '0711111111',
-                      email: 'K@gmail.com'
-                         }"
+                      email: 'K@gmail.com' }"
               :classDetails="{
-                            name: 'Form 3',
-                            year: '2025',
-                           teacher: 'KENETH'
-                          }"
+                           name: 'Form 3',
+                           year: '2025',
+                           teacher: 'KENETH'}"
               logoUrl=""
               fileName="form3_class_list"
           />

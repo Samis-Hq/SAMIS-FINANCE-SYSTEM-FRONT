@@ -261,7 +261,6 @@ export default {
         route: "/messages",
         isOpen: false,
       },
-
       {
         label: "PocketMoney",
         icon: "MapIcon",
@@ -293,7 +292,7 @@ export default {
             isOpen: false,
           },
           {
-            label: "Fees Reorts",
+            label: "Fees Reports",
             icon: "",
             route: "/statement",
             isOpen: false,

@@ -4,8 +4,9 @@
       <h1>Messages</h1>
     </div>
 
-      <div class="flex shadow-sm rounded-md justify-center items-center w-full">
-        <form @submit.prevent="handleSubmit" class="w-full md:w-2/5">
+      <div class="flex shadow-md rounded-md justify-center items-center w-3/5 m-10 bg-white ">
+
+        <form @submit.prevent="handleSubmit" class=" w-full p-4 m-4">
 
           <div class="mb-6 p-4 border rounded-lg bg-white">
             <label class="block text-sm font-medium text-gray-700 mb-2">Choose Recipient *</label>
@@ -79,6 +80,7 @@
           </div>
         </form>
       </div>
+
 
 
 

@@ -6,8 +6,9 @@
 
     <div class="container mx-auto p-4">
       <form @submit.prevent="submitForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div class="space-y-2">
+        <div class="flex flex-col lg:flex-row gap-8">
+
+          <div class="w-full lg:w-1/3 space-y-4 min-w-[300px]">
             <div>
               <label class="form-labels">Select Year</label>
               <select
@@ -46,7 +47,7 @@
             </div>
 
             <div>
-              <label class="block text-gray-700 text-sm font-bold mb-2">Enrollment</label>
+              <label class="form-labels">Enrollment</label>
               <select
                   v-model="selectedEnrollment"
                   class="form-input"
@@ -57,8 +58,8 @@
               </select>
             </div>
 
-            <div class="pt-4">
-              <label class="form-labels">
+            <div class="pt-2">
+              <label class="form-labels ">
                 <input type="checkbox" v-model="applyToAllClasses" class="rounded">
                 <span>Apply same fees to all classes</span>
               </label>
@@ -72,36 +73,40 @@
                   :required="!applyToAllClasses"
               >
                 <option value="" disabled>Select a class</option>
-                <option v-for="classItem in classes" :key="classItem.id" :value="classItem.id">{{ classItem.name }}</option>
+                <option v-for="classItem in classes" :key="classItem.id" :value="classItem.id">{{
+                    classItem.name
+                  }}
+                </option>
               </select>
             </div>
           </div>
 
-          <div v-if="selectedTerm && selectedYear && selectedClass || applyToAllClasses">
+          <div v-if="selectedTerm && selectedYear && (selectedClass || applyToAllClasses)" class="flex-1 min-w-0">
             <h2 class="text-lg font-semibold mb-4">Voteheads Fee Allocation</h2>
-            <div class="overflow-x-auto">
-              <table class="min-w-full bg-white border">
-                <thead>
-                <tr class="bg-gray-100">
-                  <th class="py-2 px-4 border">Votehead</th>
-                  <th class="py-2 px-4 border">Amount</th>
+            <div class="overflow-x-auto border rounded-lg">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                <tr>
+                  <th class="table-data border">Votehead
+                  </th>
+                  <th class="table-data border ">Amount</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white divide-y divide-gray-200">
                 <tr v-for="(votehead, index) in voteheads" :key="votehead.id">
-                  <td class="py-2 px-4 border font-medium">{{ votehead.name }}</td>
-                  <td class="py-2 px-4 border">
+                  <td class="table-data border">{{ votehead.name }}</td>
+                  <td class="table-data">
                     <input
                         v-model="votehead.amount"
                         type="number"
                         min="0"
-                        class="form-input"
+                        class="form-input "
                     >
                   </td>
                 </tr>
                 <tr class="bg-gray-50">
-                  <td class="py-2 px-4 border font-bold">Total</td>
-                  <td class="py-2 px-4 border font-bold">{{ formatCurrency(totalAmount) }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">Total</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">{{ formatCurrency(totalAmount) }}</td>
                 </tr>
                 </tbody>
               </table>
@@ -131,41 +136,41 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from 'vue';
+import {ref, computed, reactive} from 'vue';
 
 const selectedYear = ref('');
 const selectedTerm = ref('');
 const selectedReportPeriod = ref('');
 const selectedClass = ref('');
-const selectedEnrollment= ref('');
+const selectedEnrollment = ref('');
 const applyToAllClasses = ref(false);
 const savedData = reactive({});
 
 const availableYears = ['2023', '2024', '2025', '2026'];
 const reportPeriods = ['2024/2025', '2025/2026'];
-const enrollment=[
-  { id: '1', name: 'DAY' },
-  { id: '2', name: 'BOARDING' },
+const enrollment = [
+  {id: '1', name: 'DAY'},
+  {id: '2', name: 'BOARDING'},
 ]
 const classes = [
-  { id: '1', name: 'Class 1' },
-  { id: '2', name: 'Class 2' },
-  { id: '3', name: 'Class 3' },
+  {id: '1', name: 'Class 1'},
+  {id: '2', name: 'Class 2'},
+  {id: '3', name: 'Class 3'},
 ];
 
 const voteheads = reactive([
-  { id: '1', name: 'Tuition', amount: 0 },
-  { id: '2', name: 'Activity Fee', amount: 0 },
-  { id: '3', name: 'Exam Fee', amount: 0 },
-  { id: '4', name: 'Sports', amount: 0 },
+  {id: '1', name: 'Tuition', amount: 0},
+  {id: '2', name: 'Activity Fee', amount: 0},
+  {id: '3', name: 'Exam Fee', amount: 0},
+  {id: '4', name: 'Sports', amount: 0},
 ]);
 
 const generatedTerms = computed(() => {
   if (!selectedYear.value) return [];
   return [
-    { value: `${selectedYear.value}/1`, label: `Term 1 (${selectedYear.value})` },
-    { value: `${selectedYear.value}/2`, label: `Term 2 (${selectedYear.value})` },
-    { value: `${selectedYear.value}/3`, label: `Term 3 (${selectedYear.value})` },
+    {value: `${selectedYear.value}/1`, label: `Term 1 (${selectedYear.value})`},
+    {value: `${selectedYear.value}/2`, label: `Term 2 (${selectedYear.value})`},
+    {value: `${selectedYear.value}/3`, label: `Term 3 (${selectedYear.value})`},
   ];
 });
 
@@ -224,6 +229,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
 }

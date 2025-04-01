@@ -10,11 +10,10 @@
 
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Statement Term</label>
+            <label class="form-labels">Statement Term</label>
             <select
                 v-model="selectedTerm"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+                class="form-input">
               <option value="">Current Term</option>
               <option v-for="term in terms" :key="term" :value="term">
                 {{ term }}
@@ -23,11 +22,10 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Enrollment</label>
+            <label class="form-labels">Enrollment</label>
             <select
                 v-model="selectedEnrollment"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+                class="form-input">
               <option value="">All Enrollments</option>
               <option v-for="enrollment in enrollments" :key="enrollment" :value="enrollment">
                 {{ enrollment }}
@@ -36,11 +34,10 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Form</label>
+            <label class="form-labels">Form</label>
             <select
                 v-model="selectedForm"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+                class="form-input">
               <option value="">All Forms</option>
               <option v-for="form in forms" :key="form" :value="form">
                 Form {{ form }}
@@ -49,11 +46,10 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Stream</label>
+            <label class="form-labels">Stream</label>
             <select
                 v-model="selectedStream"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+                class="form-input">
               <option value="">All Streams</option>
               <option v-for="stream in streams" :key="stream" :value="stream">
                 {{ stream }}
@@ -62,11 +58,10 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Filter Using</label>
+            <label class="form-labels">Filter Using</label>
             <select
                 v-model="selectedFilterType"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+                class="form-input">
               <option value="">Select filter</option>
               <option value="budget">Budget</option>
               <option value="paid">Paid</option>
@@ -76,29 +71,27 @@
           </div>
 
           <div v-if="selectedFilterType">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Amount Range</label>
+            <label class="form-labels">Amount Range</label>
             <div class="flex gap-2">
               <input
                   v-model="minAmount"
                   type="number"
                   placeholder="Min"
-                  class="w-1/2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
+                  class="form-input">
               <input
                   v-model="maxAmount"
                   type="number"
                   placeholder="Max"
-                  class="w-1/2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
+                  class="form-input">
             </div>
           </div>
 
-          <button
-              @click="applyFilters"
-              class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
-          >
-            Apply Filters
-          </button>
+          <!--          <button-->
+          <!--              @click="applyFilters"-->
+          <!--              class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"-->
+          <!--          >-->
+          <!--            Apply Filters-->
+          <!--          </button>-->
         </div>
       </div>
 
@@ -115,26 +108,25 @@
                 :title="`Fee Statement - ${selectedForm}`"
                 :fileName="`fee_statement_${selectedForm}`"
                 :headers="{
-    admNo: 'Admission No',
-    name: 'Student Name',
-    form: 'Form'+'stream',
-    stream: 'Stream',
-    budget: 'Budget (KES)',
-    paid: 'Paid (KES)',
-    balance: 'Balance (KES)',
-    balbf: 'BALBF (KES)'
-  }"
+                        admNo: 'ADM',
+                        name: 'Name',
+                        form: 'Form',
+                        stream: 'Stream',
+                        budget: 'Budget (KES)',
+                       paid: 'Paid (KES)',
+                       balance: 'Balance (KES)',
+                       balbf: 'BALBF (KES)'
+                }"
                 :footerData="[{
-    admNo: 'TOTALS',
-    name: '',
-    form: '',
-    stream: '',
-    budget: totals.budget,
-    paid: totals.paid,
-    balance: totals.balance,
-    balbf: totals.balbf
-  }]"
-            />
+                              admNo: 'TOTALS',
+                              name: '',
+                              form: '',
+                              stream: '',
+                              budget: totals.budget,
+                              paid: totals.paid,
+                              balance: totals.balance,
+                              balbf: totals.balbf
+                               }]"/>
           </div>
         </div>
 
@@ -142,44 +134,28 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adm No</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Form</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stream</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Budget (KES)
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paid (KES)</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance (KES)
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">BALBF (KES)
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th class="table-header">Adm No</th>
+              <th class="table-header">Name</th>
+              <th class="table-header">Form</th>
+              <th class="table-header">Stream</th>
+              <th class="table-header">Budget (KES)</th>
+              <th class="table-header">Paid (KES)</th>
+              <th class="table-header">Balance (KES)</th>
+              <th class=table-header>BALBF (KES)</th>
+              <th class="table-header">Actions</th>
             </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="table-body">
             <tr v-for="student in filteredStudents" :key="student.admNo">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ student.admNo }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                {{ student.name }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Form {{ student.form }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ student.stream }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{
-                  formatCurrency(student.budget)
-                }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{
-                  formatCurrency(student.paid)
-                }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
-                {{ formatCurrency(student.balance) }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{
-                  formatCurrency(student.balbf)
-                }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="table-data">{{ student.admNo }}</td>
+              <td class="table-data">{{ student.name }}</td>
+              <td class="table-data">{{ student.form }}{{ student.stream }}</td>
+              <td class="table-data">{{ student.stream }}</td>
+              <td class="table-data">{{ student.budget }}</td>
+              <td class="table-data">{{ student.paid }}</td>
+              <td class="table-data">{{ student.balance }}</td>
+              <td class="table-data">{{ student.balbf }}</td>
+              <td class="table-data">
                 <button class="text-blue-600 hover:text-blue-900">View</button>
               </td>
             </tr>
@@ -190,16 +166,16 @@
                 Totals
               </td>
               <td class="px-6 py-3  text-xs font-medium text-gray-500 text-right">
-                {{ totals.budget }}
+                {{ formatCurrency(totals.budget) }}
               </td>
               <td class="px-6 py-3  text-xs font-medium text-gray-500 text-right">
-                {{ totals.paid }}
+                {{ formatCurrency(totals.paid) }}
               </td>
               <td class="px-6 py-3  text-xs font-medium text-gray-500 text-right">
-                {{ totals.balance}}
+                {{ formatCurrency(totals.balance) }}
               </td>
               <td class="px-6 py-3  text-xs font-medium text-gray-500 text-right">
-                {{totals.balbf}}
+                {{ formatCurrency(totals.balbf) }}
               </td>
               <td></td>
             </tr>
@@ -326,6 +302,7 @@ const filteredStudents = computed(() => {
       if (minAmount.value !== null && amount < minAmount.value) amountMatch = false;
       if (maxAmount.value !== null && amount > maxAmount.value) amountMatch = false;
     }
+
     return enrollmentMatch && formMatch && streamMatch && amountMatch;
   });
 });

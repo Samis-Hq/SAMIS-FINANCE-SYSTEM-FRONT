@@ -21,8 +21,8 @@
           <span class="ml-2">Upload Multiple Students</span>
         </label>
       </div>
-      <div v-if="error">{{ error.message }}</div>
-      <!-- Key In Form -->
+      <div v-if="error" class="required-txt my-2">{{ error.message }}</div>
+
       <form v-if="inputMethod === 'keyIn'" @submit.prevent="submitForm">
         <div class="grid grid-cols-2 gap-4">
           <div class="mb-4">
@@ -143,7 +143,7 @@
             <label for="residence" class="form-labels"> Residence </label>
             <select id="residence" v-model="form.residence" class="form-input">
               <option value="" disabled>Select Residence</option>
-              <option value="Hostel">Boarding</option>
+              <option value="Boarding">Boarding</option>
               <option value="Day">Day</option>
             </select>
           </div>
@@ -153,7 +153,6 @@
             <input type="file" @change="handleFileUpload" class="form-input" />
           </div>
         </div>
-
         <div class="mt-6">
           <button
             type="button"
