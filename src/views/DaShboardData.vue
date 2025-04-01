@@ -15,7 +15,6 @@ import {
   CurrencyBangladeshiIcon,MapIcon,
   PlusIcon
 } from "@heroicons/vue/24/outline";
-
 const shortcuts = ref([
   { name: "Students", link: "/students", icon: PlusCircleIcon },
   { name: "Classes", link: "/dashboard", icon: AcademicCapIcon },

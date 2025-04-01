@@ -63,7 +63,7 @@
             <div class="text-2xl text-black cursor-pointer" @click="toggleSidebar">
               <Bars3Icon class="h-6 w-6 mr-8  text-black cursor-pointer"/>
             </div>
-            <p class="text-xl  text-center capitalize hidden sm:block">
+            <p class="text-xl font-bold  font-custom text-center capitalize hidden sm:block">
               School Name
             </p>
           </div>
@@ -73,7 +73,7 @@
             >
               <!--              <img src="../assets/user.png" alt="User avatar" class="user-profile"/>-->
 
-              <p class="capitalize text-sm hidden sm:inline">Keneth Korir</p>
+              <p class="capitalize text-xl hidden sm:inline font-custom">Keneth Korir</p>
               <ChevronDoubleDownIcon
                   class="h-4 w-4 text-blue-900 cursor-pointer mr-2 text-bold font-bold ml-2"
                   :class="{ 'rotate-180': isUserDropdownOpen }"/>

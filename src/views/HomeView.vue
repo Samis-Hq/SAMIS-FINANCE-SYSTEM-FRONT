@@ -9,7 +9,7 @@
       }"
     >
       <div class="container mx-auto flex justify-around items-center">
-        <div class="text-3xl font-custom tracking-[.1em]">SAMIS</div>
+        <div class="text-xl font-custom ">SAMIS FINANCE</div>
         <nav class="flex gap-6">
           <button @click="scrollToSection('home')" class="text-xl capitalize hover:text-white transition-colors">
             Home

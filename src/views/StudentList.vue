@@ -38,7 +38,7 @@
           <DataExporterView
               :data="filteredStudents"
               :columns="['admissionNumber', 'name', 'stream', 'contacts', 'kcpe']"
-              title="Form 3 Class List"
+              title="Students Lists"
               :schoolDetails="{
                       name: 'SAMIS SAMPLE SECONDARY SCHOOL-NAKURU',
                       address: 'P.O. BOX 237-30705, Nakuru',
@@ -49,7 +49,7 @@
                            year: '2025',
                            teacher: 'KENETH'}"
               logoUrl=""
-              fileName="form3_class_list"
+              fileName="Students_list"
           />
 
         </div>

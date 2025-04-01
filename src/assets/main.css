@@ -3,8 +3,8 @@
 @tailwind utilities;
 @font-face {
   font-family: 'YourFont';
-  src: url('./fonts/dark.ttf') format('opentype');
-  font-weight: normal;
+  src: url('./fonts/konichiwa.ttf') format('opentype');
+  font-weight: bold;
   font-style: normal;
 }
 @layer utilities {

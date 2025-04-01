@@ -9,7 +9,7 @@
         <form @submit.prevent="handleSubmit" class=" w-full p-4 m-4">
 
           <div class="mb-6 p-4 border rounded-lg bg-white">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Choose Recipient *</label>
+            <label class="form-labels mb-4">Choose Recipient </label>
             <div class="flex space-x-4">
               <div v-for="recipient in recipients" :key="recipient.id" class="flex items-center">
                 <input
@@ -17,11 +17,11 @@
                     :id="`recipient-${recipient.id}`"
                     v-model="selectedRecipient"
                     :value="recipient"
-                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    class="h-4 w-4 me-2 text-blue-600 focus:ring-blue-500 border-gray-300"
                     required
                     @change="selectedMessageType = null"
                 >
-                <label :for="`recipient-${recipient.id}`" class="ml-2 block text-sm text-gray-700">
+                <label :for="`recipient-${recipient.id}`" class="form-labels">
                   {{ recipient.name }}
                 </label>
               </div>
@@ -29,7 +29,7 @@
           </div>
 
           <div v-if="selectedRecipient" class="mb-6 p-4 border rounded-lg bg-white">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Select Message Type *</label>
+            <label class="form-labels mb-4">Select Message Type </label>
             <div class="flex space-x-4">
               <div v-for="type in messageType" :key="type.id" class="flex items-center">
                 <input
@@ -37,7 +37,7 @@
                     :id="`type-${type.id}`"
                     v-model="selectedMessageType"
                     :value="type"
-                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    class="h-4 w-4 me-2 text-blue-600 focus:ring-blue-500 border-gray-300"
                     required
                 >
                 <label :for="`type-${type.id}`" class="ml-2 block text-sm text-gray-700">
@@ -50,30 +50,30 @@
           <div v-if="selectedMessageType" class="p-4 border rounded-lg bg-white">
             <div class="text-blue-400 m-4 text-center"><h1>Compose message</h1></div>
             <div class="mb-4">
-              <label for="subject" class="block text-sm font-medium text-gray-700">Subject *</label>
+              <label for="subject" class="form-labels">Subject *</label>
               <input
                   id="subject"
                   type="text"
                   v-model="subject"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  class="form-input"
                   required
               />
             </div>
 
             <div class="mb-4">
-              <label for="message" class="block text-sm font-medium text-gray-700">Message *</label>
+              <label for="message" class="form-labels">Message *</label>
               <textarea
                   id="message"
                   v-model="messageContent"
                   rows="4"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  class="form-input"
                   required
               ></textarea>
             </div>
 
             <button
                 type="submit"
-                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                class="my-button"
             >
               Send Message
             </button>
