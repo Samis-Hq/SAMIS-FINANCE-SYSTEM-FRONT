@@ -9,7 +9,7 @@
       }"
     >
       <div class="container mx-auto flex justify-around items-center">
-        <div class="text-3xl font-custom tracking-[.1em]">SAMIS FiNANCE</div>
+        <div class="text-3xl font-custom tracking-[.1em]">SAMIS</div>
         <nav class="flex gap-6">
           <button @click="scrollToSection('home')" class="text-xl capitalize hover:text-white transition-colors">
             Home
@@ -48,7 +48,8 @@
           <div class="flex justify-center">
             <div class="max-w-4xl">
               <p class="text-center text-lg">
-                SAMIS Finance System is a comprehensive school finance management system designed to streamline financial
+                SAMIS Finance System is a comprehensive school finance management system designed to streamline
+                financial
                 operations within educational institutions. It provides robust tools for managing students, receipts,
                 fees, and expenditures efficiently.
               </p>

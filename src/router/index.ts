@@ -19,11 +19,12 @@ import Uploads from "@/views/Uploads.vue";
 import ReportsView from "@/views/ReportsView.vue";
 import Bursary from "@/views/Bursary.vue";
 import OtherIncomes from "@/views/OtherIncomes.vue";
-import FeeStructure from "@/views/FeeStructure.vue";
 import PocketMoney from "@/views/PocketMoney.vue";
 import NotFound from "@/views/NotFound.vue";
 import Logins from "@/views/Logins.vue";
 import FessStructure from "@/views/FessStructure.vue";
+import ClassListReports from "@/views/Reports/ClassListReports.vue";
+import FeeStatementReports from "@/views/Reports/FeeStatementReports.vue";
 
 
 const router = createRouter({
@@ -143,6 +144,20 @@ const router = createRouter({
           path: "reports",
           name: "School Reports",
           component: ReportsView  ,
+          children:[
+            {
+              path: "classlist",
+              name: "Class list Reports",
+              component: ClassListReports  ,
+            },
+
+            {
+              path: "statement",
+              name: "Fee Statement Reports",
+              component: FeeStatementReports  ,
+            },
+
+          ]
         },
         {
           path: "pocket",

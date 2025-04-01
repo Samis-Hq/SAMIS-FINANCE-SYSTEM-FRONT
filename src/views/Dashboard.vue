@@ -15,9 +15,7 @@
         >
           <div class="sidebar-links" :class="{ active: isLinkActive(link) }">
             <component :is="link.icon" class="h-6 w-6 mr-4"/>
-
             <span v-if="!isSidebarCollapsed">{{ link.label }}</span>
-
             <ChevronDownIcon
                 v-if="link.children"
                 class="h-4 w-4 ml-20"
@@ -30,7 +28,7 @@
               'max-h-0 opacity-0': !link.isOpen,
               'max-h-40 opacity-100': link.isOpen,
             }"
-              class="transition-all duration-300 ease-out overflow-auto"
+              class="transition-all duration-300 ease-out overflow-auto bg-blue-100"
           >
             <li
                 v-for="child in link.children"
@@ -39,7 +37,6 @@
                 @click="navigateTo(child.route)"
             >
               <component :is="child.icon" class="h-4 w-4 mr-2"/>
-
               <span v-if="!isSidebarCollapsed">{{ child.label }}</span>
             </li>
           </ul>
@@ -95,11 +92,15 @@
                 <div class="mt-2">
                   <hr class="border-0 border-t border-gray-500"/>
                 </div>
-                <li class="profile-list" @click="navigateTo('/dash/setting')">
+                <li class="profile-list" @click="navigateTo('/setting')">
                   Terms Of Service
                 </li>
-                <li class="profile-list" @click="navigateTo('/dash/setting')">
+                <li class="profile-list" @click="navigateTo('/setting')">
                   Privacy and Policy
+                </li>
+
+                <li class="profile-list" @click="navigateTo('/setting')">
+                  System User Manual
                 </li>
                 <div class="mt-2">
                   <hr class="border-0 border-t border-gray-500"/>
@@ -280,9 +281,9 @@ export default {
         isOpen: false,
         children: [
           {
-            label: "General Reports",
+            label: "Class Lists",
             icon: "NewspaperIcon",
-            route: "/reports/1",
+            route: "/classlist",
             isOpen: false,
           },
           {
@@ -294,7 +295,7 @@ export default {
           {
             label: "Fees Reorts",
             icon: "",
-            route: "/reports/2",
+            route: "/statement",
             isOpen: false,
           },
           {

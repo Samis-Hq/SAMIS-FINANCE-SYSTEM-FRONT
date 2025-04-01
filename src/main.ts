@@ -1,6 +1,8 @@
 import './assets/main.css'
 import ToastPlugin from 'vue-toast-notification';
-
+// import vSelect from 'vue-select'
+//
+// Vue.component('v-select', vSelect)
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 

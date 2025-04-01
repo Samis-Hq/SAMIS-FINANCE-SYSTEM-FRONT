@@ -64,7 +64,7 @@
                 required
               
               >
-                <option value="School Fund" disabled>Select Votehead</option>
+                <option value="School Fund" disabled>Select account</option>
                 <option value="SchoolFund">School Fund</option>
                 <option value="Operation">Operation</option>
                 <option value="tuition">Tuition</option>
@@ -402,7 +402,7 @@
                 class="form-input"
                 required
               >
-                <option value="" disabled>Select Votehead</option>
+                <option value="" disabled>Select Account</option>
                 <option value="SchoolFund">School Fund</option>
                 <option value="Operation">Operation</option>
                 <option value="tuition">Tuition</option>
@@ -565,41 +565,32 @@ import { ref } from "vue";
 
 import type { Invoice } from "@/model/Invoices";
 import type { Clients } from "@/model/Clients";
-
     const isInvoicesListVisible = ref(true);
-
     const isLpoListVisible = ref(false);
     const isLsoFormVisible = ref(false);
-
     const showInvoicesList = () => {
       isInvoicesListVisible.value = true;
-
       isLpoListVisible.value = false;
       isLsoFormVisible.value = false;
     };
-
     const showAddClientForm = () => {
       isInvoicesListVisible.value = false;
 
       isLpoListVisible.value = false;
       isLsoFormVisible.value = false;
     };
-
     const showAddLpoForm = () => {
       isLpoListVisible.value = true;
       isLsoFormVisible.value = false;
       isInvoicesListVisible.value = false;
     };
-
     const showAddLsoForm = () => {
       isLpoListVisible.value = false;
       isLsoFormVisible.value = true;
       isInvoicesListVisible.value = false;
     };
-
     const invoices = ref<Invoice[]>([]);
     const clients = ref<Clients[]>([]);
-
     const invoice = ref<Invoice>({
       id: "",
       clientName: "keneth korir",

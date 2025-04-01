@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <div class="flex justify-between border rounded-sm shadow-md bg-blue-300 p-2 mb-4">
+    <div class="flex justify-between border rounded-sm shadow-md bg-blue-200 p-2 mb-4">
       <h1 class="text-xl font-bold mb-2 text-black">Class Term Budget Allocation</h1>
     </div>
 

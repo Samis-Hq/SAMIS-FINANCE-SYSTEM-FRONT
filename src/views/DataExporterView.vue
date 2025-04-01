@@ -169,8 +169,8 @@ const generatePDF = () => {
     startY: props.classDetails.name ? 50 : 40,
     margin: {top: 10, left: 10, right: 10},
     styles: {
-      fontSize: 10,
-      cellPadding: 3,
+      fontSize: 8,
+      cellPadding: 2,
       valign: 'middle',
       halign: 'center',
       textColor: [40, 40, 40],
@@ -184,7 +184,7 @@ const generatePDF = () => {
       halign: 'center'
     },
     bodyStyles: {
-      fontSize: 10,
+      fontSize: 8,
       halign: 'center'
     },
     alternateRowStyles: {
