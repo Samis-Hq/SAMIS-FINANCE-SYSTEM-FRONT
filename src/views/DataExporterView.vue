@@ -1,30 +1,33 @@
 <template>
   <div class="export-container">
-    <div class="export-buttons-top">
+
+    <div class=" export-buttons-top">
       <button @click="previewPDF" class="export-btn preview-btn">
         <EyeIcon class="button-icon"/>
-        <span>Preview PDF</span>
+        <span>Preview</span>
       </button>
       <button @click="exportToPDF" class="export-btn pdf-btn">
-        <PrinterIcon class="button-icon"/>
-        <span>Download PDF</span>
+        <ArrowDownTrayIcon class="button-icon"/>
+        <span> PDF</span>
       </button>
       <button @click="exportToCSV" class="export-btn csv-btn">
-        <PrinterIcon class="button-icon"/>
-        <span>Export CSV</span>
+        <DocumentArrowDownIcon class="button-icon"/>
+        <span> CSV</span>
       </button>
       <button @click="printPDF" class="export-btn print-btn">
         <PrinterIcon class="button-icon"/>
         <span>Print</span>
       </button>
     </div>
-    <div class="flex md:hidden gap-6">
+
+
+    <div class="flex md:hidden gap-4">
       <button @click="printPDF" class="export-btn print-btn">
         <PrinterIcon class="button-icon"/>
         <span>Print</span>
       </button>
       <button @click="exportToCSV" class="export-btn csv-btn">
-        <PrinterIcon class="button-icon"/>
+        <ArrowDownIcon class="button-icon"/>
         <span>Export CSV</span>
       </button>
     </div>
@@ -47,7 +50,7 @@
             <span>Print</span>
           </button>
           <button @click="exportToPDF" class="export-btn pdf-btn">
-            <PrinterIcon class="button-icon"/>
+            <DocumentArrowDownIcon class="button-icon"/>
             <span>Download</span>
           </button>
         </div>
@@ -65,7 +68,7 @@ import {
   EyeIcon,
   PrinterIcon,
   DocumentTextIcon,
-  XMarkIcon
+  XMarkIcon,ArrowDownIcon,ArrowDownTrayIcon,DocumentArrowDownIcon
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -299,71 +302,5 @@ const exportToCSV = () => {
 </script>
 
 <style scoped>
-.export-container {
-  @apply max-w-full mx-auto p-4 bg-white;
-}
 
-.export-buttons-top {
-  @apply flex flex-wrap gap-3 mb-4;
-}
-
-.export-btn {
-  @apply inline-flex items-center gap-2 px-3 py-2 rounded-md text-white font-medium transition-colors text-sm;
-}
-
-.preview-btn {
-  @apply bg-blue-600 hover:bg-blue-700;
-}
-
-.pdf-btn {
-  @apply bg-red-600 hover:bg-red-700;
-}
-
-.csv-btn {
-  @apply bg-green-600 hover:bg-green-700;
-}
-
-.print-btn {
-  @apply bg-purple-600 hover:bg-purple-700;
-}
-
-.button-icon {
-  @apply h-4 w-4;
-}
-
-.preview-modal {
-  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
-}
-
-.modal-content {
-  @apply bg-white rounded-lg shadow-xl w-full max-w-6xl h-[90vh] flex flex-col;
-}
-
-.modal-header {
-  @apply flex justify-between items-center p-4 border-b;
-}
-
-.modal-title {
-  @apply flex items-center gap-2 text-lg font-semibold;
-}
-
-.modal-icon {
-  @apply h-5 w-5 text-blue-600;
-}
-
-.modal-footer {
-  @apply flex justify-end gap-3 p-4 border-t;
-}
-
-.close-btn {
-  @apply p-1 rounded-md hover:bg-gray-100;
-}
-
-.close-icon {
-  @apply h-5 w-5 text-gray-500;
-}
-
-.pdf-iframe {
-  @apply flex-grow border-0;
-}
 </style>

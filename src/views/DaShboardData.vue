@@ -15,6 +15,7 @@ import {
   CurrencyBangladeshiIcon,MapIcon,
   PlusIcon,NewspaperIcon
 } from "@heroicons/vue/24/outline";
+import OccasionMessages from "@/views/OccasionMessages.vue";
 const shortcuts = ref([
   { name: "Students", link: "/students", icon: PlusCircleIcon },
   { name: "Classes", link: "/dashboard", icon: AcademicCapIcon },
@@ -70,6 +71,7 @@ const openBusinessOverView = () => {
     <div class="flex justify-start items-center">
       <h1 class="text-blue-400 text-xl font-bold">
         {{ greetings }}.
+        <OccasionMessages/>
       </h1>
     </div>
     <div class="flex flex-row space-x-4 border-b border-gray-300 rounded-sm shadow-sm pb-2">

@@ -17,7 +17,7 @@
   }
 }
 .modal-overlay {
-    @apply fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 w-full;
+    @apply fixed inset-0 flex justify-center items-center bg-black/60 bg-opacity-50 w-full;
   }
   .my-button {
     @apply text-white px-4 py-2 rounded hover:bg-blue-700 bg-blue-500  cursor-pointer;
@@ -127,14 +127,14 @@
 }
 
 .button-icon {
-  @apply h-5 w-5;
+  @apply h-8 w-8;
 }
 
 .export-container {
   @apply max-w-full mx-auto p-6 bg-white ;
 }
 .export-buttons-top {
-  @apply flex-wrap gap-3 mb-6 justify-end hidden md:flex;
+  @apply gap-6  mb-6 justify-end hidden md:flex ;
 }
 .table-wrapper {
   @apply overflow-x-auto border rounded-lg;

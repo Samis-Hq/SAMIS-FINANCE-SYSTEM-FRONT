@@ -40,9 +40,9 @@ const handleSchoolCode = () => {
     });
     return;
   }
-
   localStorage.setItem('schoolCode', user.value.schoolCode);
   localStorage.setItem('schoolName', "SAMIS SAMPLE SCHOOL");
+  localStorage.setItem('userRegion', "Mombasa");
   schoolName.value = "SAMIS SAMPLE SCHOOL";
   showUserPassForm.value = true;
 };

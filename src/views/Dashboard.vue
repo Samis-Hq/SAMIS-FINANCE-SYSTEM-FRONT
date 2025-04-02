@@ -79,9 +79,9 @@
                 class="text-black flex items-center cursor-pointer relative mr-20"
                 @click="toggleUserDropdown"
             >
-              <p class="capitalize text-xl hidden sm:inline font-custom">Keneth Korir</p>
+              <p class="capitalize text-xl   font-custom">Keneth Korir</p>
               <ChevronDownIcon
-                  class="h-4 w-4 text-blue-900 cursor-pointer mr-2 text-bold font-bold ml-2"
+                  class="h-4 w-4 text-blue-900 cursor-pointer text-bold font-bold md:ml-4"
                   :class="{ 'rotate-180': isUserDropdownOpen }"
               />
 
@@ -141,7 +141,7 @@
     </div>
   </div>
 </template>
-
+f2p3tfbk
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -154,7 +154,7 @@ import {
   UserCircleIcon,
   NewspaperIcon,
   BookOpenIcon,
-  CreditCardIcon,
+  CreditCardIcon,XMarkIcon,
   CurrencyDollarIcon,CurrencyBangladeshiIcon,
   MapIcon,ChartPieIcon,ClipboardDocumentListIcon,FolderMinusIcon,SignalIcon
 } from "@heroicons/vue/24/outline";

@@ -348,10 +348,7 @@ const submitForm = async () => {
   margin-left: 0.5rem;
 }
 
-.button-icon {
-  width: 1rem;
-  height: 1rem;
-}
+
 
 .my-button {
   padding: 0.5rem 1rem;
