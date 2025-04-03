@@ -3,8 +3,8 @@
     <div class="card-header mb-6">
       <h1 class="text-2xl font-bold">Class List Reports</h1>
     </div>
-    <div class="flex gap-6">
-      <div class="w-1/4 bg-white p-4 rounded-lg shadow">
+    <div class="flex gap-6 m-4">
+      <div class="w-1/4 bg-white p-4 rounded-md shadow-md ">
         <h2 class="text-lg font-semibold mb-4">Filter Students</h2>
         <div class="space-y-4">
           <div>
@@ -32,17 +32,11 @@
               </option>
             </select>
           </div>
-
-          <button
-              @click="applyFilters"
-              class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
-            Apply Filters
-          </button>
         </div>
       </div>
 
       <!-- Students Table -->
-      <div class="flex-1 bg-white p-4 rounded-lg shadow">
+      <div class="flex-1 bg-white p-4 rounded-md shadow-md">
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-lg font-semibold">Students List</h2>
           <div class="text-sm text-gray-500">
@@ -51,25 +45,23 @@
         </div>
 
         <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
+          <table class="my-table">
             <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adm No.</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Form</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stream</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th class="table-header">Adm No.</th>
+              <th class="table-header">Name</th>
+              <th class="table-header">Form</th>
+              <th class="table-header">Stream</th>
+              <th class="table-header">Actions</th>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
             <tr v-for="student in filteredStudents" :key="student.admNo">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ student.admNo }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                {{ student.name }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Form {{ student.form }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ student.stream }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="table-data">{{ student.admNo }}</td>
+              <td class="table-data">{{ student.name }} {{ student.name }}</td>
+              <td class="table-data">Form{{ student.form }}</td>
+              <td class="table-data">{{ student.stream }}</td>
+              <td class="table-data">
                 <button class="text-blue-600 hover:text-blue-900">View</button>
               </td>
             </tr>
@@ -109,14 +101,6 @@ const filteredStudents = computed(() => {
     return formMatch && streamMatch;
   });
 });
-
-function applyFilters() {
-  // The computed property will automatically update
-  console.log('Filters applied:', {
-    form: selectedForm.value,
-    stream: selectedStream.value
-  });
-}
 </script>
 
 <style scoped>

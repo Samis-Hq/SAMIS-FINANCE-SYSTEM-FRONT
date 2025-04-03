@@ -22,10 +22,11 @@ import OtherIncomes from "@/views/OtherIncomes.vue";
 import PocketMoney from "@/views/PocketMoney.vue";
 import NotFound from "@/views/NotFound.vue";
 import Logins from "@/views/Logins.vue";
-import FessStructure from "@/views/FessStructure.vue";
 import ClassListReports from "@/views/Reports/ClassListReports.vue";
 import FeeStatementReports from "@/views/Reports/FeeStatementReports.vue";
 import ReceiptsReports from "@/views/Reports/ReceiptsReports.vue";
+import ProductsView from "@/views/ProductsView.vue";
+import FessStructure from "@/views/FessStructure.vue";
 
 
 const router = createRouter({
@@ -40,6 +41,12 @@ const router = createRouter({
       path: "/test",
       name: "Test",
       component: Test,
+    },
+
+    {
+      path: "/products",
+      name: "products",
+      component: ProductsView,
     },
     {
       path: "/auth",

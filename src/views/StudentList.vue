@@ -132,8 +132,6 @@
         </div>
       </div>
     </div>
-
-
     <Transition name="slide-down" mode="out-in">
       <AddStudentForm
           v-if="showAddStudentForm"
@@ -151,8 +149,9 @@ import {storeToRefs} from "pinia";
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-  EyeIcon, UserPlusIcon,
-  PrinterIcon, PlusIcon, AcademicCapIcon
+  EyeIcon,
+  UserPlusIcon,
+  AcademicCapIcon
 } from "@heroicons/vue/24/outline";
 import AddStudentForm from "./AddStudentForm.vue";
 import DataExporterView from "@/views/DataExporterView.vue";
@@ -194,9 +193,7 @@ const filteredStudents = computed(() => {
   if (!searchQuery.value) {
     return students.value;
   }
-
   const query = searchQuery.value.toLowerCase();
-
   return students.value.filter((student) => {
     return (
         student.admissionNumber.toLowerCase().includes(query) ||
@@ -230,10 +227,6 @@ const form = ref({
 
 const viewStudent = (student: any) => {
   console.log("View student:", student);
-};
-
-const printPDF = () => {
-  window.print();
 };
 
 const submitForm = async () => {
@@ -275,86 +268,4 @@ const submitForm = async () => {
   opacity: 1;
 }
 
-.card-header {
-  display: flex;
-  padding: 1rem;
-  background-color: #f3f4f6;
-  align-items: center;
-}
-
-.search-input {
-  padding: 0.5rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.25rem;
-  width: 100%;
-}
-
-.my-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table-header {
-  padding: 0.75rem;
-  text-align: left;
-  font-weight: 500;
-  color: #6b7280;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.table-data {
-  padding: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.table-body tr:hover {
-  background-color: #f9fafb;
-}
-
-.disabled-button {
-  background-color: #3b82f6;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  margin: 0 0.25rem;
-}
-
-.disabled-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.action-btn {
-  padding: 0.25rem;
-  margin: 0 0.25rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-}
-
-.action-btn:hover {
-  background-color: #e5e7eb;
-}
-
-.export-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #3b82f6;
-  color: white;
-  border-radius: 0.25rem;
-  margin-left: 0.5rem;
-}
-
-
-
-.my-button {
-  padding: 0.5rem 1rem;
-  background-color: #3b82f6;
-  color: white;
-  border-radius: 0.25rem;
-  text-decoration: none;
-}
 </style>

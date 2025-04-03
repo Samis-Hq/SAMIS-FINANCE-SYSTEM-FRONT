@@ -21,7 +21,7 @@
           <span class="ml-2">Distribute Bursary</span>
         </label>
       </div>
-      <div v-if="inputMethod === 'keyIn'" class="bg-white p-6 rounded-sm shadow-sm w-2/3 md:w-full">
+      <div v-if="inputMethod === 'keyIn'" class="bg-white p-6 m-4 rounded-sm shadow-sm w-2/3 md:w-full">
         <h2 class="text-xl font-bold mb-4">Receive Bursary</h2>
         <form @submit.prevent="submitCashForm">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

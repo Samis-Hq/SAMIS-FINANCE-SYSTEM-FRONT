@@ -9,9 +9,6 @@
     <div class="p-4 mx-auto">
       <h1 class="text-blue-600 font-bold">School Incomes</h1>
     </div>
-
-    <!-- Main Content -->
-    <div class="flex flex-col md:flex-row gap-4   p-4">
       <div class="bg-white p-6 rounded-sm shadow-md w-full md:w-2/3 m-4">
         <h2 class="text-xl font-bold mb-4">Other Receipts</h2>
         <form @submit.prevent="submitCashForm">
@@ -204,11 +201,16 @@
           <button type="submit" class="my-button">Save</button>
         </div>
       </div>
-    </div>
 
-    <!-- Popup Components -->
+    <Transition name="slide-down" mode="out-in">
     <AddBursary v-if="showAddBursaryPopup" @close="closeBursary"/>
+    </Transition>
+      <Transition name="slide-down" mode="out-in">
     <Banking v-if="showBAnkingPopup" @close="closeBanking"/>
+
+      </Transition>
+
+
   </div>
 </template>
 
@@ -340,5 +342,23 @@ const submitCashForm = () => {
 
 :deep(.multiselect-custom .multiselect__select:before) {
   @apply border-t-blue-500;
+}
+
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-down-enter-from,
+.slide-down-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.slide-down-enter-to,
+.slide-down-leave-from {
+  transform: translateY(0);
+  opacity: 1;
 }
 </style>

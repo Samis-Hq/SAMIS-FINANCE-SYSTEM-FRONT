@@ -14,14 +14,13 @@
               class="form-input"
               required
             >
-              <option value="" disabled>Select Votehead</option>
+              <option value="" disabled>Select Account</option>
               <option value="SchoolFund">School Fund</option>
               <option value="Operation">Operation</option>
               <option value="tuition">Tuition</option>
             </select>
           </div>
 
-          <!-- Transaction Type -->
           <div class="mb-4">
             <label for="transactionType" class="form-labels"
               >Transaction Type *</label
@@ -38,7 +37,6 @@
             </select>
           </div>
 
-          <!-- Bank Account -->
           <div class="mb-4">
             <label for="bankAccount" class="form-labels">Bank Account *</label>
             <select
@@ -141,13 +139,6 @@ const voucher = ref<Vouchers>({
   chequeNo: "00001",
   client: "",
   bankName: "",
-});
-
-const client = ref<Clients>({
-  id: "",
-  name: "kk",
-  phone: "0700000000",
-  address: "28, Lagos Street",
 });
 
 const saveClient = () => {
