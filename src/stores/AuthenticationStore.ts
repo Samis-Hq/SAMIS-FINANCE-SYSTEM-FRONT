@@ -1,63 +1,93 @@
-import {defineStore} from "pinia";
-import type {Users} from "@/model/User.ts";
+import { defineStore } from "pinia";
+import type { LoginRequest, LoginResponse } from "@/model/Login.ts";
 import apiClient from "@/services/api.ts";
+import router from "@/router";
+
+interface AuthState {
+    currentUser: LoginResponse | null;
+    error: string | null;
+    isLoading: boolean;
+    isAuthenticated: boolean;
+}
 
 export const useAuthenticationStore = defineStore('authenticationStore', {
-    state: () => ({
-        currentUser: null as Users | null,
-        error: null as Error | null,
+    state: (): AuthState => ({
+        currentUser: JSON.parse(localStorage.getItem('user') || 'null'),
+        error: null,
         isLoading: false,
-        isAuthenticated: false
+        isAuthenticated: !!localStorage.getItem('authToken')
     }),
+
     actions: {
-        async login(credentials: { username: string; password: string, schoolCode: string }) {
+        async login(loginRequest: LoginRequest) {
             this.isLoading = true;
             this.error = null;
+
             try {
-                const response = await apiClient.post<{
-                    user: Users;
-                    token: string;
-                }>('/login', credentials);
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('user');
-                const {user, token} = response.data;
-                localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem('authToken', token);
-                this.currentUser = user;
+                const response = await apiClient.post<LoginResponse>(
+                    '/auth/signin',
+                    loginRequest
+                );
+
+                // Save user data
+                localStorage.setItem('user', JSON.stringify(response.data));
+                this.currentUser = response.data;
                 this.isAuthenticated = true;
+
                 return true;
             } catch (error: unknown) {
-                this.clearAuthData();
-                if (error instanceof Error) {
-                    this.error = error;
-                    console.error('Login failed:', error.message);
-                } else {
-                    this.error = new Error('An unknown error occurred during login');
-                    console.error('Unknown login error:', error);
-                }
-                this.isAuthenticated = false;
+                this.logout(); // Clear all auth data on failure
+                this.error = error instanceof Error
+                    ? error.message
+                    : 'Login failed. Please try again.';
                 return false;
             } finally {
                 this.isLoading = false;
             }
         },
 
-        clearAuthData() {
-            localStorage.removeItem('authToken');
+        logout() {
+            // Clear local storage
             localStorage.removeItem('user');
-            localStorage.removeItem('tokenExpiration');
+            localStorage.removeItem('authToken');
+            // Reset store state
             this.currentUser = null;
             this.isAuthenticated = false;
+            this.error = null;
+
+            router.push('/auth');
         },
-        logout() {
-            this.clearAuthData()
-        },
+
+        initialize() {
+            // Check for existing session on app startup
+            const token = localStorage.getItem('authToken');
+            const user = localStorage.getItem('user');
+
+            if (token && user) {
+                try {
+                    this.currentUser = JSON.parse(user);
+                    this.isAuthenticated = true;
+                } catch (error) {
+                    this.logout();
+                }
+            }
+        }
     },
+
     getters: {
-        userName(): string | null {
-            return this.currentUser
-                ? `${this.currentUser.username} ${this.currentUser.username}`
-                : null;
+        userInfo(state): Omit<LoginResponse, 'token'> | null {
+            if (!state.currentUser) return null;
+            const { token, ...userInfo } = state.currentUser;
+            return userInfo;
+        },
+
+        isAdmin(state): boolean {
+            return state.currentUser?.roles?.includes('ADMIN') ?? false;
+        },
+
+        // New getter for checking auth state
+        isAuthenticatedWithCheck(state): boolean {
+            return state.isAuthenticated && !!localStorage.getItem('authToken');
         }
     }
 });
