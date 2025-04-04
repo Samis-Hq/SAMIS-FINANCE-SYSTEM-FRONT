@@ -26,8 +26,8 @@ import {
 const occasions = [
   {
     name: "Idd-ul-Fitr",
-    message: "Happy Easter Holidays!",
-    // message: "Eid Mubarak to our Muslim community!",
+    // message: "SAMIS Wishes You Happy Easter Holidays!",
+    message: "Eid Mubarak to our Muslim community!",
     startDate: "2023-04-21",
     endDate: "2026-04-23",
     regions: ["Mombasa", "Kwale", "Kilifi", "Lamu", "Garissa", "Wajir"]
@@ -86,32 +86,5 @@ onMounted(() => {
 </script>
 
 <style>
-.regional-message {
-  position: fixed;
-  top: 50%;
-  letter-spacing: 4px;
-  justify-content: center;
-  background: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
 
-.message-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-}
-
-.regional-message button {
-  padding: 5px 10px;
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
 </style>

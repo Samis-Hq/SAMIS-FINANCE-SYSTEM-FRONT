@@ -1,29 +1,38 @@
 <script setup lang="ts">
-import {ref, onMounted} from "vue";
-import type {Users} from "@/model/User.ts";
+import { ref, onMounted } from "vue";
 import 'vue-toast-notification/dist/theme-sugar.css';
-import {EyeIcon, EyeSlashIcon} from '@heroicons/vue/24/outline';
-import {useToast} from "vue-toast-notification";
-import {useAuthenticationStore} from "@/stores/AuthenticationStore.ts";
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline';
+import { useToast } from "vue-toast-notification";
+import { useAuthenticationStore } from "@/stores/AuthenticationStore.ts";
+
 import router from "@/router";
+import type { LoginRequest } from "@/model/Login.ts";
+import type { RegisterSchoolModuleRequest } from "@/model/SchoolModuleRegister.ts";
+import {SchoolModuleService} from "@/services/SchoolRegister.ts";
 
 const showPassword = ref(false);
 const $toast = useToast();
 const authStore = useAuthenticationStore();
+const schoolService = SchoolModuleService; // Initialize service
 const showUserPassForm = ref(false);
 const schoolName = ref("Welcome To SAMIS Finance");
-const user = ref<Users>({
-  id: "",
-  username: "",
-  password: "",
+const isLoading = ref(false);
+
+const school = ref<RegisterSchoolModuleRequest>({
   schoolCode: "",
+  moduleName: "FINANCE", // Default module
+});
+
+const user = ref<LoginRequest>({
+  phoneNo: "",
+  password: "",
 });
 
 onMounted(() => {
   const savedSchoolCode = localStorage.getItem('schoolCode');
   const savedSchoolName = localStorage.getItem('schoolName');
   if (savedSchoolCode) {
-    user.value.schoolCode = savedSchoolCode;
+    school.value.schoolCode = savedSchoolCode;
     showUserPassForm.value = true;
   }
   if (savedSchoolName) {
@@ -31,8 +40,8 @@ onMounted(() => {
   }
 });
 
-const RegisterSchool = () => {
-  if (!user.value.schoolCode) {
+const RegisterSchool = async () => {
+  if (!school.value.schoolCode) {
     $toast.warning('School code is required!', {
       position: 'top',
       type: 'warning',
@@ -40,24 +49,46 @@ const RegisterSchool = () => {
     });
     return;
   }
-  localStorage.setItem('schoolCode', user.value.schoolCode);
-  localStorage.setItem('schoolName', "SAMIS SAMPLE SCHOOL");
-  localStorage.setItem('userRegion', "Mombasa");
-  schoolName.value = "SAMIS SAMPLE SCHOOL";
-  showUserPassForm.value = true;
+
+  try {
+    isLoading.value = true;
+    const response = await schoolService.registerSchoolModule({
+      schoolCode: school.value.schoolCode,
+      moduleName: school.value.moduleName
+    });
+
+
+    localStorage.setItem('schoolName', response.school.schoolName || '');
+    schoolName.value = response.school.schoolName || schoolName.value;
+
+    $toast.success('School module registered successfully!', {
+      position: 'top',
+      duration: 3000,
+      type: 'success'
+    });
+
+    showUserPassForm.value = true;
+  } catch (error) {
+    $toast.error(error instanceof Error ? error.message : 'Failed to register school module', {
+      position: 'top',
+      duration: 3000
+    });
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 const resetSchoolCode = () => {
   localStorage.removeItem('schoolCode');
   localStorage.removeItem('schoolName');
-  user.value.schoolCode = '';
+  school.value.schoolCode = '';
   schoolName.value = "Welcome To SAMIS Finance";
   showUserPassForm.value = false;
 };
 
 const LoginForm = async () => {
-  if (!user.value.username || !user.value.password) {
-    $toast.warning('Username and password are required!', {
+  if (!user.value.phoneNo || !user.value.password) {
+    $toast.warning('Phone number and password are required!', {
       position: 'top',
       type: 'warning',
       duration: 3000
@@ -65,36 +96,32 @@ const LoginForm = async () => {
     return;
   }
 
-  if (!user.value.schoolCode) {
-    const savedSchoolCode = localStorage.getItem('schoolCode');
-    if (savedSchoolCode) {
-      user.value.schoolCode = savedSchoolCode;
+  try {
+    isLoading.value = true;
+    const success = await authStore.login({
+      phoneNo: user.value.phoneNo,
+      password: user.value.password,
+    });
+
+    if (success) {
+      $toast.success('Login successful!', {
+        position: 'top',
+        duration: 3000,
+        type: 'success',
+        pauseOnHover: true,
+      });
+      await router.push('/');
     }
-  }
-
-  const success = await authStore.login({
-    username: user.value.username,
-    password: user.value.password,
-    schoolCode: user.value.schoolCode
-  });
-
-  if (success) {
-    $toast.success('Login successful!', {
-      position: 'top',
-      duration: 3000,
-      type: 'success',
-      pauseOnHover: true,
-    });
-    await router.push('/');
-  } else {
-    $toast.error(authStore.error?.message || 'Login failed', {
+  } catch (error) {
+    $toast.error(authStore.error || 'Login failed', {
       position: 'top',
       duration: 3000,
     });
+  } finally {
+    isLoading.value = false;
   }
-}
+};
 </script>
-
 <template>
   <div class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
     <div class="fixed top-0 left-0 container mx-auto right-0 z-30 flex
@@ -114,7 +141,6 @@ const LoginForm = async () => {
             <h1 class="font-serif font-bold text-xl mb-8 text-center text-black capitalize">
               {{ schoolName }}
             </h1>
-
             <Transition name="fade" mode="out-in">
               <div v-if="!showUserPassForm" key="schoolCode">
                 <div class="mb-4">
@@ -124,10 +150,10 @@ const LoginForm = async () => {
                   <input
                       type="text"
                       id="schoolCode"
-                      v-model="user.schoolCode"
+                      v-model="school.schoolCode"
                       class="form-input"
                   />
-                  <p v-if="!user.schoolCode" class="required-txt">
+                  <p v-if="!school.schoolCode" class="required-txt">
                     School Code is required
                   </p>
                 </div>
@@ -139,10 +165,10 @@ const LoginForm = async () => {
                   <input
                       type="text"
                       id="schoolCode"
-                      v-model="user.schoolCode"
+                      v-model="school.moduleName"
                       class="form-input"
                   />
-                  <p v-if="!user.schoolCode" class="required-txt">
+                  <p v-if="!school.moduleName" class="required-txt">
                     Module is required
                   </p>
                 </div>
@@ -166,10 +192,10 @@ const LoginForm = async () => {
                   <input
                       type="text"
                       id="accountName"
-                      v-model="user.username"
+                      v-model="user.phoneNo"
                       class="form-input"
                   />
-                  <p v-if="!user.username" class="required-txt">
+                  <p v-if="!user.phoneNo" class="required-txt">
                     User Name is required
                   </p>
                 </div>
