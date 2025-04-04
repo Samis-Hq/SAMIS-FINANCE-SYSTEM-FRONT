@@ -14,3 +14,4 @@ This is a school management information System that  is used to manage school fi
 
 
 
+"# SAMIS-FINANCE-SYSTEM-F" 
