@@ -1,7 +1,5 @@
-
-
-import apiClient from '@/api/apiClient';  
-import type { Account } from '@/types/account';
+import apiClient from "@/services/api.ts";
+import type {Account} from "@/model/Accounts.ts";
 
 interface CreateAccountParams {
   accountName: string;

@@ -203,13 +203,13 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Accounts } from "@/model/Accounts";
+import type { Account } from "@/model/Accounts";
 import { XMarkIcon, CheckIcon  } from '@heroicons/vue/24/outline';
 const isAccountListVisible = ref(true);
 const isAddAccountFormVisible = ref(false);
 const inputMethod = ref("votes");
 
-const form = ref<Accounts>({
+const form = ref<Account>({
   id: "",
   name: "",
   noteP: 3,

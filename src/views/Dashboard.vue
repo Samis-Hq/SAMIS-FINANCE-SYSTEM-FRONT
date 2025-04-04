@@ -70,13 +70,15 @@
             <div class="text-2xl text-black cursor-pointer" @click="toggleSidebar">
               <Bars3Icon class="h-6 w-6 mr-8 text-black cursor-pointer"/>
             </div>
+            <p class="text-xl font-bold font-serif text-center capitalize hidden sm:block">
+              {{SchoolName}}
             </p>
           </div>
           <div class="flex items-center">
             <div
                 class="text-black flex items-center cursor-pointer relative mr-20"
                 @click="toggleUserDropdown"
-            >
+            >  <p class="capitalize text-xl   font-custom">{{userName}}</p>
               <ChevronDownIcon
                   class="h-4 w-4 text-blue-900 cursor-pointer text-bold font-bold md:ml-4"
                   :class="{ 'rotate-180': isUserDropdownOpen }"
@@ -110,6 +112,7 @@
                 <div class="mt-2">
                   <hr class="border-0 border-t border-gray-500"/>
                 </div>
+                <li class="profile-list" @click="handleLogout">
                   Logout
                 </li>
               </ul>
@@ -154,6 +157,7 @@ import {
   MapIcon,ChartPieIcon,ClipboardDocumentListIcon,FolderMinusIcon,SignalIcon
 } from "@heroicons/vue/24/outline";
 import IconCommunity from "@/components/icons/IconCommunity.vue";
+import {useAuthenticationStore} from "@/stores/AuthenticationStore.ts";
 
 const isSidebarCollapsed = ref(false);
 const isUserDropdownOpen = ref(false);
@@ -171,6 +175,12 @@ const iconComponents = {
   CogIcon,SignalIcon,
   CreditCardIcon,CurrencyBangladeshiIcon,
   BookOpenIcon,ClipboardDocumentListIcon,FolderMinusIcon
+};
+const store = useAuthenticationStore();
+const userName = store.currentUser?.username || 'Guest';
+const SchoolName= localStorage.getItem("schoolName");
+const handleLogout = () => {
+  store.logout();
 };
 
 interface Link {
@@ -359,8 +369,4 @@ const isLinkActive = (link: Link): boolean => {
   return false;
 };
 
-const logout = () => {
-  console.log("User logged out");
-
-};
 </script>
