@@ -1,4 +1,3 @@
-
 export interface School {
     schoolCode: string;
     schoolName: string | null;

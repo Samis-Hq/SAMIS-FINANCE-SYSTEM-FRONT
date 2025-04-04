@@ -26,8 +26,6 @@ import {
 const occasions = [
   {
     name: "Idd-ul-Fitr",
-    // message: "SAMIS Wishes You Happy Easter Holidays!",
-    message: "Eid Mubarak to our Muslim community!",
     startDate: "2023-04-21",
     endDate: "2026-04-23",
     regions: ["Mombasa", "Kwale", "Kilifi", "Lamu", "Garissa", "Wajir"]
