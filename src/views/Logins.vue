@@ -31,7 +31,7 @@ onMounted(() => {
   }
 });
 
-const handleSchoolCode = () => {
+const RegisterSchool = () => {
   if (!user.value.schoolCode) {
     $toast.warning('School code is required!', {
       position: 'top',
@@ -109,7 +109,7 @@ const LoginForm = async () => {
     <div class="w-full max-w-md px-4 z-20 relative font-serif">
 
       <div class="bg-blue-300 p-8 rounded-md shadow-lg w-full border border-blue-800 backdrop-blur-sm">
-        <form @submit.prevent="showUserPassForm ? LoginForm() : handleSchoolCode()">
+        <form @submit.prevent="showUserPassForm ? LoginForm() : RegisterSchool()">
           <div class="grid grid-cols-1 gap-4">
             <h1 class="font-serif font-bold text-xl mb-8 text-center text-black capitalize">
               {{ schoolName }}
