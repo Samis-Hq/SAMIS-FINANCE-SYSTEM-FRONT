@@ -131,6 +131,21 @@ const LoginForm = async () => {
                     School Code is required
                   </p>
                 </div>
+
+                <div class="mb-4">
+                  <label for="moduleNAme" class="form-labels">
+                    System Module*
+                  </label>
+                  <input
+                      type="text"
+                      id="schoolCode"
+                      v-model="user.schoolCode"
+                      class="form-input"
+                  />
+                  <p v-if="!user.schoolCode" class="required-txt">
+                    Module is required
+                  </p>
+                </div>
               </div>
 
               <div v-else key="loginForm">
