@@ -9,13 +9,12 @@ const apiClient = axios.create({
 
 // Endpoint configuration
 const NO_HEADERS_ENDPOINTS = [
-    '/auth/register',
     '/schools/register'
 ];
 
 const SCHOOL_ONLY_ENDPOINTS = [
     '/auth/signin',
-    '/auth/login'
+
 ];
 
 // Request interceptor
@@ -75,7 +74,7 @@ apiClient.interceptors.response.use(
 
 
             if (typeof window !== 'undefined') {
-                window.location.href = '/login';
+                window.location.href = '/home';
             }
         }
         return Promise.reject(error);
