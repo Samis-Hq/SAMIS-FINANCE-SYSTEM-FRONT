@@ -7,8 +7,9 @@
           'bg-blue-700 text-white': isStudentListVisible,
           'bg-blue-300': !isStudentListVisible && loading && isAddStudentFormVisible,
         }"
-          class="text-black px-4 py-2 mr-2 cursor-pointer">
-        Student List
+          class="flex items-center gap-2 text-black px-4 py-2 cursor-pointer">
+        <UserGroupIcon class="button-icon w-10 h-10 text-white"/>
+       <span> Student List</span>
       </h1>
       <button
           @click="openAddStudentForm"
@@ -150,7 +151,7 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   EyeIcon,
-  UserPlusIcon,
+  UserPlusIcon,UserGroupIcon,
   AcademicCapIcon
 } from "@heroicons/vue/24/outline";
 import AddStudentForm from "./AddStudentForm.vue";

@@ -55,7 +55,11 @@ export const useAuthenticationStore = defineStore('authenticationStore', {
             this.isAuthenticated = false;
             this.error = null;
 
-            router.push('/auth');
+
+            setTimeout(() => {
+                router.push('/auth');
+            }, 3000)
+
         },
 
         initialize() {
