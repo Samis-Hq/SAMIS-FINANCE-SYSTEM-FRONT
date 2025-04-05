@@ -142,9 +142,20 @@ const LoginForm = async () => {
       <div class="bg-blue-300 p-8 rounded-md shadow-lg w-full border border-blue-800 backdrop-blur-sm">
         <form @submit.prevent="showUserPassForm ? LoginForm() : RegisterSchool()">
           <div class="grid grid-cols-1 gap-4">
-            <h1 class="font-serif font-bold text-xl mb-8 text-center text-black capitalize">
-              {{ schoolName }}
-            </h1>
+           <div>
+             <h1 class="font-serif font-bold text-xl  text-center text-black capitalize">
+               {{ schoolName }}
+             </h1>
+             <h1 class="font-serif font-bold text-sm  text-center text-black capitalize">
+               P.o Box 200 ,Nakuru
+             </h1>
+             <h1 class="font-serif font-bold text-sm  text-center text-black capitalize">
+               chris@gmail.com
+             </h1>
+             <h1 class="font-serif font-bold text-sm mb-8 text-center text-black capitalize">
+               0711766223
+             </h1>
+           </div>
             <Transition name="fade" mode="out-in">
               <div v-if="!showUserPassForm" key="schoolCode">
                 <div class="mb-4">

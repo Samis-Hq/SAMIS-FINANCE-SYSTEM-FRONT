@@ -14,6 +14,9 @@ export const SchoolModuleService = {
 
             console.log(response);
             const schoolCode = response.data.school.schoolCode;
+            const schoolDetails = response.data.school;
+
+            localStorage.setItem("schoolDetails",  JSON.stringify(schoolDetails));
             localStorage.setItem("schoolCode", schoolCode);
             apiClient.defaults.headers.common['X-School'] = schoolCode;
             return response.data;
