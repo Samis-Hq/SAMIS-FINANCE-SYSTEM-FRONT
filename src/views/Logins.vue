@@ -131,7 +131,7 @@ const LoginForm = async () => {
     <div class="fixed top-0 left-0 container mx-auto right-0 z-30 flex
     justify-around items-center p-4 bg-gradient-to-b from-black/90 to-transparent backdrop-blur-sm">
       <span class="text-white font-serif font-bold text-3xl">SAMIS FINANCE</span>
-      <router-link to="/home" class=" text-white hover:bg-blue-400  p-2 rounded-md
+      <router-link to="/" class=" text-white hover:bg-blue-400  p-2 rounded-md
       shadow-md transition-colors font-serif"> Go Back
       </router-link>
     </div>
