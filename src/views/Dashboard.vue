@@ -71,14 +71,14 @@
               <Bars3Icon class="h-6 w-6 mr-8 text-black cursor-pointer"/>
             </div>
             <p class="text-xl font-bold font-serif text-center capitalize hidden sm:block">
-              {{SchoolName}}
+              {{ SchoolName }}
             </p>
           </div>
           <div class="flex items-center">
             <div
                 class="text-black flex items-center cursor-pointer relative mr-20"
                 @click="toggleUserDropdown"
-            >  <p class="capitalize text-xl   font-custom">{{userName}}</p>
+            ><p class="capitalize text-xl   font-custom">{{ userName }}</p>
               <ChevronDownIcon
                   class="h-4 w-4 text-blue-900 cursor-pointer text-bold font-bold md:ml-4"
                   :class="{ 'rotate-180': isUserDropdownOpen }"
@@ -113,7 +113,7 @@
                   <hr class="border-0 border-t border-gray-500"/>
                 </div>
                 <li class="profile-list" @click="handleLogout">
-                  Logout
+                  {{ authStore.isLoading ? 'Logging out...' : 'Logout' }}
                 </li>
               </ul>
             </div>
@@ -141,8 +141,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import {ref} from "vue";
+import {useRouter, useRoute} from "vue-router";
 import {
   Bars3Icon,
   HomeIcon,
@@ -152,12 +152,14 @@ import {
   UserCircleIcon,
   NewspaperIcon,
   BookOpenIcon,
-  CreditCardIcon,XMarkIcon,
-  CurrencyDollarIcon,CurrencyBangladeshiIcon,
-  MapIcon,ChartPieIcon,ClipboardDocumentListIcon,FolderMinusIcon,SignalIcon
+  CreditCardIcon, XMarkIcon,
+  CurrencyDollarIcon, CurrencyBangladeshiIcon,
+  MapIcon, ChartPieIcon, ClipboardDocumentListIcon, FolderMinusIcon, SignalIcon
 } from "@heroicons/vue/24/outline";
 import IconCommunity from "@/components/icons/IconCommunity.vue";
 import {useAuthenticationStore} from "@/stores/AuthenticationStore.ts";
+import 'vue-toast-notification/dist/theme-sugar.css';
+import {useToast} from "vue-toast-notification";
 
 const isSidebarCollapsed = ref(false);
 const isUserDropdownOpen = ref(false);
@@ -168,20 +170,31 @@ const iconComponents = {
   HomeIcon,
   AcademicCapIcon,
   CurrencyDollarIcon,
-  MapIcon,ChartPieIcon,
+  MapIcon, ChartPieIcon,
   IconCommunity,
   UserCircleIcon,
   NewspaperIcon,
-  CogIcon,SignalIcon,
-  CreditCardIcon,CurrencyBangladeshiIcon,
-  BookOpenIcon,ClipboardDocumentListIcon,FolderMinusIcon
+  CogIcon, SignalIcon,
+  CreditCardIcon, CurrencyBangladeshiIcon,
+  BookOpenIcon, ClipboardDocumentListIcon, FolderMinusIcon
 };
-const store = useAuthenticationStore();
-const userName = store.currentUser?.username || 'Guest';
-const SchoolName= localStorage.getItem("schoolName");
+const authStore = useAuthenticationStore();
+const userName = authStore.currentUser?.username || 'Guest';
+const SchoolName = localStorage.getItem("schoolName");
+
+const $toast = useToast();
 const handleLogout = () => {
-  store.logout();
+
+
+  $toast.success('Logout successful!.Redirecting......', {
+    position: 'top',
+    duration: 3000,
+    type: 'success'
+  });
+  authStore.logout()
+
 };
+
 
 interface Link {
   label: string;

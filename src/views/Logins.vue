@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import {ref, onMounted} from "vue";
 import 'vue-toast-notification/dist/theme-sugar.css';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline';
-import { useToast } from "vue-toast-notification";
-import { useAuthenticationStore } from "@/stores/AuthenticationStore.ts";
+import {EyeIcon, EyeSlashIcon} from '@heroicons/vue/24/outline';
+import {useToast} from "vue-toast-notification";
+import {useAuthenticationStore} from "@/stores/AuthenticationStore.ts";
 
 import router from "@/router";
-import type { LoginRequest } from "@/model/Login.ts";
-import type { RegisterSchoolModuleRequest } from "@/model/SchoolModuleRegister.ts";
+import type {LoginRequest} from "@/model/Login.ts";
+import type {RegisterSchoolModuleRequest} from "@/model/SchoolModuleRegister.ts";
 import {SchoolModuleService} from "@/services/SchoolRegister.ts";
 
 const showPassword = ref(false);
@@ -104,13 +104,17 @@ const LoginForm = async () => {
     });
 
     if (success) {
-      $toast.success('Login successful!', {
+      $toast.success('Login successful!,Redirecting....', {
         position: 'top',
         duration: 3000,
         type: 'success',
         pauseOnHover: true,
       });
-      await router.push('/');
+
+      setTimeout(() => {
+        router.push('/');
+      }, 3000)
+
     }
   } catch (error) {
     $toast.error(authStore.error || 'Login failed', {
@@ -187,7 +191,7 @@ const LoginForm = async () => {
 
                 <div class="mb-4">
                   <label for="accountName" class="form-labels">
-                    User Name *
+                    Phone No *
                   </label>
                   <input
                       type="text"
