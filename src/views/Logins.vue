@@ -13,7 +13,7 @@ import {SchoolModuleService} from "@/services/SchoolRegister.ts";
 const showPassword = ref(false);
 const $toast = useToast();
 const authStore = useAuthenticationStore();
-const schoolService = SchoolModuleService; // Initialize service
+const schoolService = SchoolModuleService;
 const showUserPassForm = ref(false);
 const schoolName = ref("Welcome To SAMIS Finance");
 const isLoading = ref(false);
