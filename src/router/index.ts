@@ -1,188 +1,184 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import Dashboard from "@/views/Dashboard.vue";
-import StudentList from "@/views/StudentList.vue";
-import Classes from "@/views/Classes.vue";
-import Accounts from "@/views/Accounts.vue";
-import SchoolSettings from "@/views/SchoolSettings.vue";
-import SchoolExpenses from "@/views/SchoolExpenses.vue";
-import SchoolInvoices from "@/views/SchoolInvoices.vue";
-import DaShboarddata from "@/views/DaShboardData.vue";
-import StudentFees from "@/views/StudentFees.vue";
-import Messages from "@/views/Messages.vue";
-import UsersList from "@/views/UsersList.vue";
-import Clients from "@/views/Clients.vue";
-import UserProfile from "@/views/UserProfile.vue";
-import Banks from "@/views/Banks.vue";
-import Test from "@/views/Test.vue";
-import Uploads from "@/views/Uploads.vue";
-import ReportsView from "@/views/ReportsView.vue";
-import Bursary from "@/views/Bursary.vue";
-import OtherIncomes from "@/views/OtherIncomes.vue";
-import PocketMoney from "@/views/PocketMoney.vue";
-import NotFound from "@/views/NotFound.vue";
-import Logins from "@/views/Logins.vue";
-import ClassListReports from "@/views/Reports/ClassListReports.vue";
-import FeeStatementReports from "@/views/Reports/FeeStatementReports.vue";
-import ReceiptsReports from "@/views/Reports/ReceiptsReports.vue";
-import ProductsView from "@/views/ProductsView.vue";
-import FessStructure from "@/views/FessStructure.vue";
-
+import { useAuthenticationStore } from "@/stores/AuthenticationStore";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/home",
+      path: "/",
       name: "home",
-      component: HomeView,
+      component: () => import("@/views/HomeView.vue"),
+      meta: { guestOnly: true }
     },
     {
       path: "/test",
       name: "Test",
-      component: Test,
+      component: () => import("@/views/Test.vue")
     },
-
     {
       path: "/products",
       name: "products",
-      component: ProductsView,
+      component: () => import("@/views/ProductsView.vue")
     },
     {
       path: "/auth",
       name: "Authenticate",
-      component: Logins  ,
+      component: () => import("@/views/Logins.vue"),
+      meta: { guestOnly: true }
     },
     {
       path: "/about",
       name: "about",
-      component: () => import("../views/AboutView.vue"),
+      component: () => import("@/views/AboutView.vue")
     },
     {
-      path: "/",
+      path: "/dash",
       name: "dashboard",
-      component: ()=>import("../views/Dashboard.vue"),
+      component: () => import("@/views/Dashboard.vue"),
+       meta: { requiresAuth: true },
       children: [
         {
           path: "",
           name: "Dashboard",
-          component: DaShboarddata,
+          component: () => import("@/views/DaShboardData.vue")
         },
+
         {
           path: "students",
           name: "Students",
-          component: StudentList,
-        },
-        {
-          path: "account",
-          name: "Accounts",
-          component: Accounts,
+          component: () => import("@/views/StudentList.vue")
         },
         {
           path: "fees",
-          name: "Fees",
-          component: StudentFees,
+          name: "StudentFees",
+          component: () => import("@/views/StudentFees.vue")
         },
         {
-          path: "class",
+          path: "pocket-money",
+          name: "PocketMoney",
+          component: () => import("@/views/PocketMoney.vue")
+        },
+        {
+          path: "classes",
           name: "Classes",
-          component: Classes,
+          component: () => import("@/views/Classes.vue")
+        },
+        {
+          path: "fee-structure",
+          name: "FeeStructure",
+          component: () => import("@/views/SchoolFeeStructure.vue")
+        },
+        {
+          path: "bursary",
+          name: "Bursary",
+          component: () => import("@/views/Bursary.vue")
+        },
+        {
+          path: "accounts",
+          name: "Accounts",
+          component: () => import("@/views/Accounts.vue")
+        },
+        {
+          path: "expenses",
+          name: "SchoolExpenses",
+          component: () => import("@/views/SchoolExpenses.vue")
+        },
+        {
+          path: "invoices",
+          name: "Invoices",
+          component: () => import("@/views/SchoolInvoices.vue")
+        },
+        {
+          path: "other-incomes",
+          name: "SchoolIncomes",
+          component: () => import("@/views/OtherIncomes.vue")
+        },
+        {
+          path: "banks",
+          name: "ManageBanks",
+          component: () => import("@/views/Banks.vue")
         },
         {
           path: "users",
           name: "Users",
-          component: UsersList,
+          component: () => import("@/views/UsersList.vue")
         },
         {
-          path: "messages",
-          name: "Message",
-          component: Messages,
-        },
-        {
-          path: "settings",
-          name: "Settings",
-          component: SchoolSettings,
-        },
-        {
-          path: "payments",
-          name: "SchoolExpenses",
-          component: SchoolExpenses,
-        },
-        {
-          path: "procurements",
-          name: "SchoolInvoices",
-          component: SchoolInvoices,
+          path: "profile",
+          name: "UserProfile",
+          component: () => import("@/views/UserProfile.vue")
         },
         {
           path: "clients",
           name: "Clients",
-          component: Clients,
+          component: () => import("@/views/Clients.vue")
         },
         {
-          path: "profile",
-          name: "User Profile",
-          component: UserProfile,
+          path: "payroll",
+          name: "Payroll",
+          component: () => import("@/views/Clients.vue")
         },
         {
-          path: "others",
-          name: "School Incomes",
-          component: OtherIncomes,
-        },
-        {
-          path: "banks",
-          name: "Manage Banks",
-          component: Banks,
-        },
-        {
-          path: "uploads",
-          name: "Upload External Data",
-          component: Uploads,
-        },
-        {
-          path: "bursary",
-          name: "Manage Bursaries",
-          component: Bursary,
-        },
-        {
-          path: "structure",
-          name: "Fee structure",
-          component: FessStructure,
+          path: "messages",
+          name: "Messages",
+          component: () => import("@/views/Messages.vue")
         },
         {
           path: "reports",
-          name: "School Reports",
-          component: ReportsView  ,
-          children:[
+          name: "Reports",
+          component: () => import("@/views/ReportsView.vue"),
+          children: [
             {
-              path: "classlist",
-              name: "Class list Reports",
-              component: ClassListReports  ,
+              path: "class-list",
+              name: "ClassListReports",
+              component: () => import("@/views/Reports/ClassListReports.vue")
             },
-
             {
-              path: "statement",
-              name: "Fee Statement Reports",
-              component: FeeStatementReports  ,
+              path: "fee-statements",
+              name: "FeeStatementReports",
+              component: () => import("@/views/Reports/FeeStatementReports.vue")
             },
-
             {
               path: "receipts",
-              name: "Fee Receipts",
-              component: ReceiptsReports  ,
-            },
-
+              name: "ReceiptsReports",
+              component: () => import("@/views/Reports/ReceiptsReports.vue")
+            }
           ]
         },
         {
-          path: "pocket",
-          name: "Students Pocket Money",
-          component: PocketMoney  ,
+          path: "settings",
+          name: "SchoolSettings",
+          component: () => import("@/views/SchoolSettings.vue")
         },
-      
-      ],
+        {
+          path: "uploads",
+          name: "Uploads",
+          component: () => import("@/views/Uploads.vue")
+        }
+      ]
     },
-
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
-  ],
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("@/views/NotFound.vue")
+    }
+  ]
 });
+router.beforeEach((to) => {
+  const authStore = useAuthenticationStore();
+
+  // Check if route requires authentication
+  if (to.meta.requiresAuth && !authStore.isAuthenticatedWithCheck) {
+    return { name: "home" };
+  }
+
+  // Check if route is for guests only
+  if (to.meta.guestOnly && authStore.isAuthenticatedWithCheck) {
+    return { name: "dashboard" };
+  }
+
+  // Continue with navigation
+  return true;
+});
+
 export default router;

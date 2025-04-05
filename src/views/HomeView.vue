@@ -36,7 +36,7 @@
           <h1 class="text-4xl font-bold mb-4 text-white">SAMIS FINANCE SYSTEM</h1>
           <p class="text-xl">Manage financial activities easily.</p>
           <div class="mt-10">
-            <router-link to="/" class="my-button">LOGIN HERE</router-link>
+            <router-link to="/auth" class="my-button">LOGIN HERE</router-link>
           </div>
         </div>
       </section>
