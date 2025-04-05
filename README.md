@@ -1,19 +1,46 @@
-# SAMIS FINANCE SYSTEM
-# Description
-This is a school management information System that  is used to manage school financial activities. 
+# SAMIS Finance System
 
+## Description
+A comprehensive School Management Information System designed to streamline financial operations in educational institutions.
 
-# Features
-1.Manage Students.
-2.Schoool Account.
-3.Classes.
-4.Payments.
-5.Banking.
-6.Procurements.
-7.Fee Collection.
+## Key Features
+- **Student Management** - Track and manage student information
+- **School Accounts** - Monitor institutional financial accounts
+- **Class Management** - Organize classes and streams
+- **Payment Processing** - Handle all school payments
+- **Banking Integration** - Connect with banking systems
+- **Procurement** - Manage school purchases and supplies
+- **Fee Collection** - Efficient student fee management
 
+## System Modules
+1. **Student Module**  
+   - Enrollment tracking  
+   - Demographic management  
+   - Academic records
 
+2. **Financial Module**  
+   - Accounts receivable/payable  
+   - Budget management  
+   - Financial reporting
 
-"# SAMIS-FINANCE-SYSTEM-F" 
-"# SAMIS-FINANCE-SYSTEM-F" 
-"# SAMIS-FINANCE-SYSTEM-FRONT" 
+3. **Administration Module**  
+   - User management  
+   - System configuration  
+   - Audit trails
+
+## Technology Stack
+- Frontend: Vue.js 3, Tailwind CSS
+- Backend: Node.js, Express
+- Database: MongoDB/PostgreSQL
+- Authentication: JWT
+
+## Getting Started
+```bash
+# Clone repository
+git clone https://github.com/your-repo/SAMIS-FINANCE-SYSTEM-FRONT.git
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
